@@ -4,6 +4,12 @@ function New-PasswordStateRandomPassword {
             Generate a random password from PasswordState.
         .DESCRIPTION
             Generate a random password from PasswordState.
+        .PARAMETER ApiKey
+            The password generator API key.
+        .PARAMETER UseV6Api
+            PasswordState versions prior to v7 did not support passing the API key in a HTTP header
+            but instead expected the API key to be passed as a query parameter. This switch is used for 
+            backwards compatibility with older PasswordState versions.
         .PARAMETER Quantity
             The quantity of passwords to generate.
         .PARAMETER AlphaSpecial
@@ -57,6 +63,11 @@ function New-PasswordStateRandomPassword {
     #>
     [cmdletbinding()]
     param (
+        [parameter(Mandatory = $true)]
+        [pscredential]$ApiKey,
+
+        [switch]$UseV6Api,
+
         [string]$Endpoint = (_GetDefault -Option 'api_endpoint'),
 
         [Parameter(ParameterSetName='NoGenerator')]
@@ -121,7 +132,7 @@ function New-PasswordStateRandomPassword {
     )
 
     $headers = @{}
-    $headers['Accept'] = "application/$Format"
+    #$headers['Accept'] = "application/$Format"
     $params = "?Qty=$Quantity"
     if (-not $PsBoundParameters.ContainsKey('GeneratorId')) {
         $params += "&IncludeAlphaSpecial=$AlphaSpecial&IncludeWordPhrases=$WordPhrases&minLength=$MinLength&maxLength=$MaxLength"
@@ -132,8 +143,14 @@ function New-PasswordStateRandomPassword {
         $params += "&PasswordGeneratorID=$GeneratorId"
     }
 
-    $uri = "$Endpoint/generatepassword/$params"
-    $result = Invoke-RestMethod -Uri $uri -Method Get -ContentType "application/$Format" -Headers $headers
+    if (-Not $PSBoundParameters.ContainsKey('UseV6Api')) {
+        $headers['APIKey'] = $ApiKey.GetNetworkCredential().password    
+        $uri = "$Endpoint/generatepassword/$params"
+    } else {
+        $uri = "$Endpoint/generatepassword/$params" + "&apikey=$($ApiKey.GetNetworkCredential().password)"
+    }  
+
+    $result = Invoke-RestMethod -Uri $uri -Method Get -ContentType "application/json" -Headers $headers
     return $result
         
 }

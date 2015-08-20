@@ -15,7 +15,9 @@ function Get-PasswordStateApiKey {
     #>
     [cmdletbinding()]
     param(
-        [string]$Repository = (_GetDefault -Option 'credential_repository')
+        [string]$Repository = (_GetDefault -Option 'credential_repository'),
+
+        [string]$Name
     )
 
     if (-not (Test-Path -Path $Repository -Verbose:$false)) {
@@ -23,6 +25,11 @@ function Get-PasswordStateApiKey {
         break
     }
 
-    $items = Get-ChildItem -Path $Repository -Filter '*.cred'
+    if ([string]::IsNullOrEmpty($Name)) {
+        $items = Get-ChildItem -Path $Repository -Filter '*.cred'
+    } else {
+        $items = Get-ChildItem -Path $Repository -Filter "*$Name*.cred"
+    }
+
     return $items
 }

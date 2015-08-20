@@ -12,6 +12,10 @@ function Get-PasswordStateListPasswords {
             The Uri of your PasswordState site. (i.e. https://passwordstate.local)
         .PARAMETER Format
             The response format from PasswordState. Choose either json or xml.
+        .PARAMETER UseV6Api
+            PasswordState versions prior to v7 did not support passing the API key in a HTTP header
+            but instead expected the API key to be passed as a query parameter. This switch is used for 
+            backwards compatibility with older PasswordState versions.
         .EXAMPLE
             $passwords = Get-PasswordStateListPasswords -ApiKey $key -PasswordListId 1234 -Endpoint 'https://passwordstate.local'
         .EXAMPLE
@@ -30,12 +34,21 @@ function Get-PasswordStateListPasswords {
         [string]$Endpoint = (_GetDefault -Option 'api_endpoint'),
 
 		[ValidateSet('json','xml')]
-        [string]$Format = 'json'
+        [string]$Format = 'json',
+
+        [switch]$UseV6Api
     )
 
     $headers = @{}
     $headers['Accept'] = "application/$Format"
-    $uri = ("$Endpoint/passwords/$PasswordListId" + "?apikey=$($ApiKey.GetNetworkCredential().password)&format=$Format&QueryAll")
+
+    if (-Not $PSBoundParameters.ContainsKey('UseV6Api')) {
+        $headers['APIKey'] = $ApiKey.GetNetworkCredential().password    
+        $uri = "$Endpoint/passwords/$PasswordListId" + "?format=$Format&QueryAll"
+    } else {
+        $uri = "$Endpoint/passwords/$PasswordListId" + "?apikey=$($ApiKey.GetNetworkCredential().password)&format=$Format&QueryAll"
+    }  
+
     $result = Invoke-RestMethod -Uri $uri -Method Get -ContentType "application/$Format" -Headers $headers
     return $result
 }

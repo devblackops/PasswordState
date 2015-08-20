@@ -12,6 +12,10 @@ function Find-PasswordStatePassword {
             The Uri of your PasswordState site. (i.e. https://passwordstate.local)
         .PARAMETER Format
             The response format from PasswordState. Choose either json or xml.
+        .PARAMETER UseV6Api
+            PasswordState versions prior to v7 did not support passing the API key in a HTTP header
+            but instead expected the API key to be passed as a query parameter. This switch is used for 
+            backwards compatibility with older PasswordState versions.
         .EXAMPLE
             $allPasswords = Get-PasswordStateAllPasswords -SystemApiKey $sysKey -Endpoint 'https://passwordstate.local'
         .EXAMPLE
@@ -19,7 +23,7 @@ function Find-PasswordStatePassword {
         .EXAMPLE
             Get-PasswordStateAllPasswords -SystemApiKey $key -Endpoint 'https://passwordstate.local' | fl
     #>
-    [cmdletbinding()]
+    [cmdletbinding(DefaultParameterSetName='ListSearch')]
     param(
         [Parameter(ParameterSetName='ListSearch', Mandatory=$true)]
         #[Parameter(ParameterSetName='GeneralSearch', Mandatory=$true)]
@@ -110,7 +114,9 @@ function Find-PasswordStatePassword {
         [Parameter(ParameterSetName='ListSearch')]
         [Parameter(ParameterSetName='GlobalSearch')]
         [ValidateSet('json','xml')]
-        [string]$Format = 'json'
+        [string]$Format = 'json',
+
+        [switch]$UseV6Api
     )
 
     $headers = @{}
@@ -160,11 +166,22 @@ function Find-PasswordStatePassword {
     if ($PSBoundParameters.ContainsKey('Url')) {
         $params += "&Url=$Url"
     }      
-    if ($PSBoundParameters.ContainsKey('SystemApiKey')) {        
-        $uri = "$Endpoint/searchpasswords" + "$params&apikey=$($SystemApiKey.GetNetworkCredential().password)"
+    if ($PSBoundParameters.ContainsKey('SystemApiKey')) {     
+        if (-Not $PSBoundParameters.ContainsKey('UseV6Api')) {
+            $headers['APIKey'] = $SystemApiKey.GetNetworkCredential().password
+            $uri = "$Endpoint/searchpasswords" + "$params"
+        } else {
+            $uri = "$Endpoint/searchpasswords" + "$params&apikey=$($SystemApiKey.GetNetworkCredential().password)"
+        }
     } else {
-        $uri = "$Endpoint/searchpasswords/$PasswordListId" + "$params&apikey=$($ApiKey.GetNetworkCredential().password)"
+        if (-Not $PSBoundParameters.ContainsKey('UseV6Api')) {
+            $headers['APIKey'] = $ApiKey.GetNetworkCredential().password
+            $uri = "$Endpoint/searchpasswords/$PasswordListId" + "$params"
+        } else {
+            $uri = "$Endpoint/searchpasswords/$PasswordListId" + "$params&apikey=$($ApiKey.GetNetworkCredential().password)"
+        }  
     }
+
     $result = Invoke-RestMethod -Uri $uri -Method Get -ContentType "application/$Format" -Headers $headers
     return $result    
 }

@@ -10,6 +10,10 @@ function New-PasswordStatePassword {
             The Uri of your PasswordState site. (i.e. https://passwordstate.local)
         .PARAMETER Format
             The response format from PasswordState. Choose either json or xml.
+        .PARAMETER UseV6Api
+            PasswordState versions prior to v7 did not support passing the API key in a HTTP header
+            but instead expected the API key to be passed as a query parameter. This switch is used for 
+            backwards compatibility with older PasswordState versions.
         .PARAMETER Title
             The title field for the password entry.
         .PARAMETER Password
@@ -51,8 +55,8 @@ function New-PasswordStatePassword {
         .PARAMETER GenerateGenFieldPassword
             If set to true, any 'Generic Fields' which you have set to be of type 'Password' will have a newly generated random password assigned to it. If the Password List or Generic Field is set to use the user's Password Generator options, the Default Password Generator options will be used instead.
         .EXAMPLE
-            
-        
+
+
     #>
     [cmdletbinding()]
     param(
@@ -108,7 +112,9 @@ function New-PasswordStatePassword {
         [Parameter(ParameterSetName='GenPassword')]
         [switch]$GeneratePassword,
 
-        [switch]$GenerateGenFieldPassword
+        [switch]$GenerateGenFieldPassword,
+
+        [switch]$UseV6Api
     )
 
     $headers = @{}
@@ -122,60 +128,65 @@ function New-PasswordStatePassword {
     if ($Password -ne [string]::Empty) {
         $request | Add-Member -MemberType NoteProperty -Name Password -Value $Password
     }
-    if ($Userame -ne [string]::Empty) { 
+
+    if ([string]::IsNullOrEmpty($Username)) {
         $request | Add-Member -MemberType NoteProperty -Name UserName -Value $Username
     }    
-    if ($Description -ne [string]::Empty) {
+    if ([string]::IsNullOrEmpty($Description)) {
         $request | Add-Member -MemberType NoteProperty -Name Description -Value $Description
     }
-    if ($GenericField1 -ne [string]::Empty) {
+    if ([string]::IsNullOrEmpty($GenericField1)) {
         $request | Add-Member -MemberType NoteProperty -Name GenericField1 -Value $GenericField1
     }
-    if ($GenericField2 -ne [string]::Empty) {
+    if ([string]::IsNullOrEmpty($GenericField2)) {
         $request | Add-Member -MemberType NoteProperty -Name GenericField2 -Value $GenericField2
     }
-    if ($GenericField3 -ne [string]::Empty) {
+    if ([string]::IsNullOrEmpty($GenericField3)) {
         $request | Add-Member -MemberType NoteProperty -Name GenericField3 -Value $GenericField3
     }
-    if ($GenericField4 -ne [string]::Empty) {
+    if ([string]::IsNullOrEmpty($GenericField4)) {
         $request | Add-Member -MemberType NoteProperty -Name GenericField4 -Value $GenericField4
     }
-    if ($GenericField5 -ne [string]::Empty) {
+    if ([string]::IsNullOrEmpty($GenericField5)) {
         $request | Add-Member -MemberType NoteProperty -Name GenericField5 -Value $GenericField5
     }
-    if ($GenericField6 -ne [string]::Empty) {
+    if ([string]::IsNullOrEmpty($GenericField6)) {
         $request | Add-Member -MemberType NoteProperty -Name GenericField6 -Value $GenericField6
     }
-    if ($GenericField7 -ne [string]::Empty) {
+    if ([string]::IsNullOrEmpty($GenericField7)) {
         $request | Add-Member -MemberType NoteProperty -Name GenericField7 -Value $GenericField7
     }
-    if ($GenericField8 -ne [string]::Empty) {
+    if ([string]::IsNullOrEmpty($GenericField8)) {
         $request | Add-Member -MemberType NoteProperty -Name GenericField8 -Value $GenericField8
     }
-    if ($GenericField9 -ne [string]::Empty) {
+    if ([string]::IsNullOrEmpty($GenericField9)) {
         $request | Add-Member -MemberType NoteProperty -Name GenericField9 -Value $GenericField9
     }
-    if ($GenericField10 -ne [string]::Empty) {
+    if ([string]::IsNullOrEmpty($GenericField10)) {
         $request | Add-Member -MemberType NoteProperty -Name GenericField10 -Value $GenericField10
     }
-    if ($Notes -ne [string]::Empty) {
+    if ([string]::IsNullOrEmpty($Notes)) {
         $request | Add-Member -MemberType NoteProperty -Name Notes -Value $Notes
     }
-    if ($Url -ne [string]::Empty) {
+    if ([string]::IsNullOrEmpty($Url)) {
         $request | Add-Member -MemberType NoteProperty -Name Url -Value $Url
     }
-    if ($GeneratePassword -ne $null) {
+    if ($null -ne $GeneratePassword) {
         $request | Add-Member -MemberType NoteProperty -Name GeneratePassword -Value $true
     }
-    if ($GenerateGenFieldPassword -ne $null) {
+    if ($null -ne $GenerateGenFieldPassword) {
         $request | Add-Member -MemberType NoteProperty -Name GenerateGenFieldPassword -Value $true
     }
 
     $uri = "$Endpoint/passwords"
 
+    if (-Not $PSBoundParameters.ContainsKey('UseV6Api')) {
+        $headers['APIKey'] = $ApiKey.GetNetworkCredential().password    
+    } else {
+        $uri += "?apikey=$($ApiKey.GetNetworkCredential().password)"
+    }  
+
     $json = ConvertTo-Json -InputObject $request
-    #write-verbose $json
-    #write-verbose $uri
 
     $result = Invoke-RestMethod -Uri $uri -Method Post -ContentType "application/$Format" -Headers $headers -Body $json
     return $result

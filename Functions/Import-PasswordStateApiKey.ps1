@@ -30,7 +30,6 @@ function Import-PasswordStateApiKey {
 
     process {
         foreach ($item in $Name) {
-
             if ($Name -like "*.cred") {
                 $keyPath = Join-Path -Path $Repository -ChildPath "$Name"
             } else {
