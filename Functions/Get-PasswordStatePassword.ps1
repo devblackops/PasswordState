@@ -31,7 +31,7 @@ function Get-PasswordStatePassword {
 
         [string]$Endpoint = (_GetDefault -Option 'api_endpoint'),
 
-		[ValidateSet('json','xml')]
+        [ValidateSet('json','xml')]
         [string]$Format = 'json',
 
         [switch]$UseV6Api

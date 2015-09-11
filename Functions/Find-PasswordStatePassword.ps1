@@ -183,5 +183,5 @@ function Find-PasswordStatePassword {
     }
 
     $result = Invoke-RestMethod -Uri $uri -Method Get -ContentType "application/$Format" -Headers $headers
-    return $result    
+    return $result
 }

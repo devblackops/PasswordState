@@ -148,9 +148,9 @@ function New-PasswordStateRandomPassword {
         $uri = "$Endpoint/generatepassword/$params"
     } else {
         $uri = "$Endpoint/generatepassword/$params" + "&apikey=$($ApiKey.GetNetworkCredential().password)"
-    }  
+    }
 
     $result = Invoke-RestMethod -Uri $uri -Method Get -ContentType "application/json" -Headers $headers
     return $result
-        
+
 }

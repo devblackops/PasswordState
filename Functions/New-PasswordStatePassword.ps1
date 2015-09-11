@@ -55,7 +55,7 @@ function New-PasswordStatePassword {
         .PARAMETER GenerateGenFieldPassword
             If set to true, any 'Generic Fields' which you have set to be of type 'Password' will have a newly generated random password assigned to it. If the Password List or Generic Field is set to use the user's Password Generator options, the Default Password Generator options will be used instead.
         .EXAMPLE
-
+            New-PasswordStatePassword -ApiKey $key -PasswordListId 1 -Title 'testPassword' -Username 'testPassword' -Description 'this is a test' -GeneratePassword
 
     #>
     [cmdletbinding()]
@@ -68,7 +68,7 @@ function New-PasswordStatePassword {
 
         [string]$Endpoint = (_GetDefault -Option 'api_endpoint'),
 
-		[ValidateSet('json','xml')]
+        [ValidateSet('json','xml')]
         [string]$Format = 'json',
 
         [Parameter(Mandatory = $true)]
@@ -131,7 +131,7 @@ function New-PasswordStatePassword {
 
     if ([string]::IsNullOrEmpty($Username)) {
         $request | Add-Member -MemberType NoteProperty -Name UserName -Value $Username
-    }    
+    }
     if ([string]::IsNullOrEmpty($Description)) {
         $request | Add-Member -MemberType NoteProperty -Name Description -Value $Description
     }
@@ -184,7 +184,7 @@ function New-PasswordStatePassword {
         $headers['APIKey'] = $ApiKey.GetNetworkCredential().password    
     } else {
         $uri += "?apikey=$($ApiKey.GetNetworkCredential().password)"
-    }  
+    }
 
     $json = ConvertTo-Json -InputObject $request
 

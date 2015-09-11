@@ -25,7 +25,7 @@ function Import-PasswordStateApiKey {
         if (-not (Test-Path -Path $Repository -Verbose:$false)) {
             write-error "PasswordState key repository does not exist!"
             break
-        }        
+        }
     }
 
     process {
@@ -46,5 +46,5 @@ function Import-PasswordStateApiKey {
 
             return $cred
         }
-    }        
+    }
 }

@@ -1,9 +1,9 @@
 function Get-PasswordStateAllLists {
     <#
         .SYNOPSIS
-            Get all shared password lists in a PasswordState.
+            Get all shared password lists in PasswordState.
         .DESCRIPTION
-            Get all shared password lists in a PasswordState.
+            Get all shared password lists in PasswordState.
         .PARAMETER SystemApiKey
             The system API key for PasswordState.
         .PARAMETER Endpoint
@@ -28,7 +28,7 @@ function Get-PasswordStateAllLists {
 
         [string]$Endpoint = (_GetDefault -Option 'api_endpoint'),
 
-		[ValidateSet('json','xml')]
+        [ValidateSet('json','xml')]
         [string]$Format = 'json',
 
         [switch]$UseV6Api

@@ -60,7 +60,7 @@ function Set-PasswordStatePassword {
             Set-PasswordStatePassword -ApiKey $key -PasswordId 1234 -Username 'mypassword'
 
             Change the username for entry 1234 to mypassword
-            
+
     #>
     [cmdletbinding()]
     param(
@@ -72,7 +72,7 @@ function Set-PasswordStatePassword {
 
         [string]$Endpoint = (_GetDefault -Option 'api_endpoint'),
 
-		[ValidateSet('json','xml')]
+        [ValidateSet('json','xml')]
         [string]$Format = 'json',
 
         [Parameter(ParameterSetName='fields')]
@@ -208,9 +208,9 @@ function Set-PasswordStatePassword {
         }
 
         $uri = "$Endpoint/passwords"
-        
+
         $json = ConvertTo-Json -InputObject $request
-    
+
         $result = Invoke-RestMethod -Uri $uri -Method Put -ContentType "application/$Format" -Headers $headers -Body $json
         return $result
     }

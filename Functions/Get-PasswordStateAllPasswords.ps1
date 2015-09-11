@@ -30,7 +30,7 @@ function Get-PasswordStateAllPasswords {
 
         [switch]$PreventAuditing,
 
-		[ValidateSet('json','xml')]
+        [ValidateSet('json','xml')]
         [string]$Format = 'json',
 
         [switch]$UseV6Api
