@@ -44,3 +44,6 @@ Temporary Items
 
 # Visual Studio
 .vs
+*.suo
+*.user
+*.sln.docstates
