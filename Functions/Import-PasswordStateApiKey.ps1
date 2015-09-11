@@ -31,7 +31,7 @@ function Import-PasswordStateApiKey {
     #>
     [cmdletbinding()]
     param(
-        [parameter(Mandatory = $true, ValueFromPipeline = $true, ValueFromPipelineByPropertyName)]
+        [parameter(Mandatory, ValueFromPipeline, ValueFromPipelineByPropertyName)]
         [string[]]$Name,
 
         [string]$Repository = (_GetDefault -Option 'credential_repository')
@@ -39,7 +39,7 @@ function Import-PasswordStateApiKey {
 
     begin {
         if (-not (Test-Path -Path $Repository -Verbose:$false)) {
-            write-error "PasswordState key repository does not exist!"
+            Write-Error -Message "PasswordState key repository does not exist!"
             break
         }
     }
@@ -53,12 +53,12 @@ function Import-PasswordStateApiKey {
             }
             
             if (-not (Test-Path -Path $keyPath)) {
-                write-error "Key file $keyPath not found!"
+                Write-Error -Message "Key file $keyPath not found!"
                 break
             }
 
-            $secPass = Get-Content -Path $keyPath | convertto-securestring
-            $cred = New-Object System.Management.Automation.PSCredential($Name, $secPass)
+            $secPass = Get-Content -Path $keyPath | ConvertTo-SecureString
+            $cred = New-Object -TypeName System.Management.Automation.PSCredential -ArgumentList $Name, $secPass
 
             return $cred
         }

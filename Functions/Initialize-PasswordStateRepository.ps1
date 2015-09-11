@@ -38,12 +38,12 @@ function Initialize-PasswordStateRepository {
     )
 
     # If necessary, create our repository under $env:USERNAME\.passwordstate
-    $repo = (Join-Path -path $env:USERPROFILE -ChildPath '.passwordstate')
+    $repo = (Join-Path -Path $env:USERPROFILE -ChildPath '.passwordstate')
     if (-not (Test-Path -Path $repo -Verbose:$false)) {
-        Write-Debug "Creating PasswordState configuration repository: $repo"
-        New-Item -ItemType Directory -Path $repo -Verbose:$false | out-null
+        Write-Debug -Message "Creating PasswordState configuration repository: $repo"
+        New-Item -ItemType Directory -Path $repo -Verbose:$false | Out-Null
     } else {
-        Write-Debug "PasswordState configuration repository appears to already be created at [$repo]"
+        Write-Debug -Message "PasswordState configuration repository appears to already be created at [$repo]"
     }
 
     $options = @{
@@ -52,6 +52,6 @@ function Initialize-PasswordStateRepository {
     }
 
     $json = $options | ConvertTo-Json -Verbose:$false
-    Write-Debug -message $json
-    $json | Out-File -FilePath (Join-Path -Path $repo -ChildPath 'options.json') -Force -Confirm:$false -Verbose:$false    
+    Write-Debug -Message $json
+    $json | Out-File -FilePath (Join-Path -Path $repo -ChildPath 'options.json') -Force -Confirm:$false -Verbose:$false
 }

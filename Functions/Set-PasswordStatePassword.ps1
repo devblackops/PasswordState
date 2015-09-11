@@ -76,9 +76,8 @@ function Set-PasswordStatePassword {
             Set-PasswordStatePassword -ApiKey $key -PasswordId 1234 -Username 'mypassword'
 
             Change the username for entry 1234 to mypassword
-
     #>
-    [cmdletbinding()]
+    [cmdletbinding(SupportsShouldProcess = $true)]
     param(
         [parameter(Mandatory = $true)]
         [pscredential]$ApiKey,
@@ -95,7 +94,7 @@ function Set-PasswordStatePassword {
         [string]$Title,
 
         [Parameter(ParameterSetName='fields')]
-        [string]$Password,
+        [securestring]$Password,
 
         [Parameter(ParameterSetName='fields')]
         [string]$Username,
@@ -157,7 +156,7 @@ function Set-PasswordStatePassword {
     }
 
     process {
-        $request = "" | select PasswordId, apikey  
+        $request = "" | Select-Object -Property PasswordId, apikey
         $request.PasswordId = $PasswordId
         $request.apikey = $ApiKey.GetNetworkCredential().Password
 
@@ -165,7 +164,9 @@ function Set-PasswordStatePassword {
             $request | Add-Member -MemberType NoteProperty -Name Title -Value $Title
         }
         if ($PSBoundParameters.ContainsKey('Password')) {
-            $request | Add-Member -MemberType NoteProperty -Name Password -Value $Password
+            $BSTR = [System.Runtime.InteropServices.Marshal]::SecureStringToBSTR($Password)
+            $UnsecurePassword = [System.Runtime.InteropServices.Marshal]::PtrToStringAuto($BSTR)
+            $request | Add-Member -MemberType NoteProperty -Name Password -Value $UnsecurePassword
         }
         if ($PSBoundParameters.ContainsKey('Username')) {
             $request | Add-Member -MemberType NoteProperty -Name Username -Value $Username
@@ -215,7 +216,6 @@ function Set-PasswordStatePassword {
         if ($PSBoundParameters.ContainsKey('AllowExport')) {
             $request | Add-Member -MemberType NoteProperty -Name AllowExport -Value $AllowExport
         }
-
         if ($PSBoundParameters.ContainsKey('GeneratePassword')) {
             $request | Add-Member -MemberType NoteProperty -Name GeneratePassword -Value $true
         }
@@ -227,7 +227,9 @@ function Set-PasswordStatePassword {
 
         $json = ConvertTo-Json -InputObject $request
 
-        $result = Invoke-RestMethod -Uri $uri -Method Put -ContentType "application/$Format" -Headers $headers -Body $json
-        return $result
+        If ($PSCmdlet.ShouldProcess("Setting values for password id [$PasswordId] using params:`n$json")) {
+            $result = Invoke-RestMethod -Uri $uri -Method Put -ContentType "application/$Format" -Headers $headers -Body $json
+            return $result
+        }
     }
 }

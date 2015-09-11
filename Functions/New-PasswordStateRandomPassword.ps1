@@ -77,7 +77,7 @@ function New-PasswordStateRandomPassword {
         .EXAMPLE
             New-PasswordStateRandomPassword -MinLength 20 -NumberOfWords 2
     #>
-    [cmdletbinding()]
+    [cmdletbinding(SupportsShouldProcess = $true)]
     param (
         [parameter(Mandatory = $true)]
         [pscredential]$ApiKey,
@@ -165,8 +165,9 @@ function New-PasswordStateRandomPassword {
     } else {
         $uri = "$Endpoint/generatepassword/$params" + "&apikey=$($ApiKey.GetNetworkCredential().password)"
     }
-
-    $result = Invoke-RestMethod -Uri $uri -Method Get -ContentType "application/json" -Headers $headers
-    return $result
-
+    
+    If ($PSCmdlet.ShouldProcess("Creating new random password using params:`n$($params | ConvertTo-Json)")) {
+        $result = Invoke-RestMethod -Uri $uri -Method Get -ContentType "application/json" -Headers $headers
+        return $result
+    }
 }

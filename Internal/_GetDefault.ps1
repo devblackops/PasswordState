@@ -18,10 +18,10 @@ function _GetDefault {
     [cmdletbinding()]
     param(
         [Parameter(Mandatory)]
-        [string]$Option
+        [string]$Option = [string]::empty
     )
 
-    $repo = (Join-Path -path $env:USERPROFILE -ChildPath '.passwordstate')
+    $repo = (Join-Path -Path $env:USERPROFILE -ChildPath '.passwordstate')
 
     if (Test-Path -Path $repo -Verbose:$false) {
 
@@ -29,11 +29,15 @@ function _GetDefault {
         
         if (Test-Path -Path $options ) {
             $obj = Get-Content -Path $options | ConvertFrom-Json
-            return $obj.$Option
+            if ($options -ne [string]::empty) {
+                return $obj.$Option
+            } else {
+                return $obj
+            }
         } else {
-            Write-Error "Unable to find [$options]"
+            Write-Error -Message "Unable to find [$options]"
         }
     } else {
-        Write-Error "Undable to find PasswordState configuration folder at [$repo]"
+        Write-Error -Message "Undable to find PasswordState configuration folder at [$repo]"
     }
 }

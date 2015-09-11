@@ -41,7 +41,7 @@ function Export-PasswordStateApiKey {
 
     begin {
         if (-not (Test-Path -Path $Repository -Verbose:$false)) {
-            Write-Verbose "Creating PasswordState key repository: $Repository"
+            Write-Verbose -Message "Creating PasswordState key repository: $Repository"
             New-Item -ItemType Directory -Path $Repository -Verbose:$false | Out-Null
         }
     }
@@ -49,8 +49,8 @@ function Export-PasswordStateApiKey {
     process {
         foreach ($item in $ApiKey) {
             $exportPath = Join-Path -path $Repository -ChildPath "$($item.Username).cred" -Verbose:$false
-            Write-Verbose "Exporting key [$($item.Username)] to $exportPath"
-            $item.Password | convertfrom-securestring -Verbose:$false | Out-File $exportPath -Verbose:$false
+            Write-Verbose -Message "Exporting key [$($item.Username)] to $exportPath"
+            $item.Password | ConvertFrom-SecureString -Verbose:$false | Out-File $exportPath -Verbose:$false
         }
     }
 }

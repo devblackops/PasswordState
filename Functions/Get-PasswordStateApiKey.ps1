@@ -33,11 +33,11 @@ function Get-PasswordStateApiKey {
     param(
         [string]$Repository = (_GetDefault -Option 'credential_repository'),
 
-        [string]$Name
+        [string]$Name = [string]::empty
     )
 
     if (-not (Test-Path -Path $Repository -Verbose:$false)) {
-        Write-Error 'PasswordState key repository does not exist!'
+        Write-Error -Message 'PasswordState key repository does not exist!'
         break
     }
 

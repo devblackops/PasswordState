@@ -18,13 +18,13 @@ limitations under the License.
 Set-StrictMode -Version 3
 
 # Load public functions
-$functions = Get-ChildItem -Recurse "$PSScriptRoot\Functions" -Include *.ps1
+$functions = Get-ChildItem -Path "$PSScriptRoot\Functions" -Recurse -Include *.ps1
 foreach ($function in $functions) {
     . $function.FullName
 }
 
 # Load internal functions
-$internals = Get-ChildItem -Recurse "$PSScriptRoot\Internal" -Include *.ps1
+$internals = Get-ChildItem -Path "$PSScriptRoot\Internal" -Recurse -Include *.ps1
 foreach ($internal in $internals) {
     . $internal.FullName
 }

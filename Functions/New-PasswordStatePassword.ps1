@@ -74,12 +74,12 @@ function New-PasswordStatePassword {
             New-PasswordStatePassword -ApiKey $key -PasswordListId 1 -Title 'testPassword' -Username 'testPassword' -Description 'this is a test' -GeneratePassword
 
     #>
-    [cmdletbinding()]
+    [cmdletbinding(SupportsShouldProcess = $true)]
     param(
-        [parameter(Mandatory = $true)]
+        [parameter(Mandatory)]
         [pscredential]$ApiKey,
 
-        [parameter(Mandatory = $true)]
+        [parameter(Mandatory)]
         [int]$PasswordListId,
 
         [string]$Endpoint = (_GetDefault -Option 'api_endpoint'),
@@ -87,11 +87,11 @@ function New-PasswordStatePassword {
         [ValidateSet('json','xml')]
         [string]$Format = 'json',
 
-        [Parameter(Mandatory = $true)]
+        [Parameter(Mandatory)]
         [string]$Title,
 
-        [Parameter(ParameterSetName='UsePassword', Mandatory = $true)]
-        [string]$Password,
+        [Parameter(ParameterSetName='UsePassword', Mandatory)]
+        [securestring]$Password,
 
         [string]$Username,
 
@@ -136,15 +136,16 @@ function New-PasswordStatePassword {
     $headers = @{}
     $headers['Accept'] = "application/$Format"
 
-    $request = "" | select Title, PasswordListID, apikey
-    $request.Title = $Title    
+    $request = "" | Select-Object -Property Title, PasswordListID, apikey
+    $request.Title = $Title
     $request.PasswordListID = $PasswordListId
     $request.apikey = $($ApiKey.GetNetworkCredential().password)
 
     if ($Password -ne [string]::Empty) {
-        $request | Add-Member -MemberType NoteProperty -Name Password -Value $Password
+        $BSTR = [System.Runtime.InteropServices.Marshal]::SecureStringToBSTR($Password)
+        $UnsecurePassword = [System.Runtime.InteropServices.Marshal]::PtrToStringAuto($BSTR)
+        $request | Add-Member -MemberType NoteProperty -Name Password -Value $UnsecurePassword
     }
-
     if ([string]::IsNullOrEmpty($Username)) {
         $request | Add-Member -MemberType NoteProperty -Name UserName -Value $Username
     }
@@ -204,6 +205,8 @@ function New-PasswordStatePassword {
 
     $json = ConvertTo-Json -InputObject $request
 
-    $result = Invoke-RestMethod -Uri $uri -Method Post -ContentType "application/$Format" -Headers $headers -Body $json
-    return $result
+    If ($PSCmdlet.ShouldProcess("Creating new password entry: $Title `n$json")) {
+        $result = Invoke-RestMethod -Uri $uri -Method Post -ContentType "application/$Format" -Headers $headers -Body $json
+        return $result
+    }
 }
