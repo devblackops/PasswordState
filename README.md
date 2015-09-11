@@ -1,7 +1,7 @@
 # PasswordState
 
 Passwordstate is a PowerShell module used to interface with 
-ClickStudio's PasswordState application via the REST API.
+ClickStudio's [PasswordState](http://www.clickstudios.com.au/) application via the REST API.
 
 This module supports creating, retrieving, and updating 
 PasswordState entries using simple PowerShell cmdlets that 
@@ -73,4 +73,4 @@ you can integrate into your existing processes.
 	Set-PasswordStatePassword -ApiKey $key -PasswordId 1234 -Username 'mypassword'
 	```
 	
-For more information, see [http://devblackops.io/powershell-module-for-clickstudios-passwordstate/v](http://devblackops.io/powershell-module-for-clickstudios-passwordstate/)
+For more information, see [http://devblackops.io](http://devblackops.io/powershell-module-for-clickstudios-passwordstate/)
