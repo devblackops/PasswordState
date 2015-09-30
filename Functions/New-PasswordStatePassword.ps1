@@ -70,6 +70,8 @@ function New-PasswordStatePassword {
             If set to true, a newly generated random password will be created based on the Password Generator options associated with the Password List. If the Password List is set to use the user's Password Generator options, the Default Password Generator options will be used instead.
         .PARAMETER GenerateGenFieldPassword
             If set to true, any 'Generic Fields' which you have set to be of type 'Password' will have a newly generated random password assigned to it. If the Password List or Generic Field is set to use the user's Password Generator options, the Default Password Generator options will be used instead.
+        .PARAMETER AccountTypeID
+            The account type id number for the password entry.
         .EXAMPLE
             New-PasswordStatePassword -ApiKey $key -PasswordListId 1 -Title 'testPassword' -Username 'testPassword' -Description 'this is a test' -GeneratePassword
 
@@ -119,6 +121,8 @@ function New-PasswordStatePassword {
 
         [string]$Notes,
 
+        [int]$AccountTypeID,
+
         [string]$Url,
 
         [string]$ExpiryDate,
@@ -146,52 +150,57 @@ function New-PasswordStatePassword {
         $UnsecurePassword = [System.Runtime.InteropServices.Marshal]::PtrToStringAuto($BSTR)
         $request | Add-Member -MemberType NoteProperty -Name Password -Value $UnsecurePassword
     }
-    if ([string]::IsNullOrEmpty($Username)) {
+
+    if ($PSBoundParameters.ContainsKey('Username')) {
         $request | Add-Member -MemberType NoteProperty -Name UserName -Value $Username
     }
-    if ([string]::IsNullOrEmpty($Description)) {
+
+    if ($PSBoundParameters.ContainsKey('Description')) {
         $request | Add-Member -MemberType NoteProperty -Name Description -Value $Description
     }
-    if ([string]::IsNullOrEmpty($GenericField1)) {
+    if ($PSBoundParameters.ContainsKey('GenericField1')) {
         $request | Add-Member -MemberType NoteProperty -Name GenericField1 -Value $GenericField1
     }
-    if ([string]::IsNullOrEmpty($GenericField2)) {
+    if ($PSBoundParameters.ContainsKey('GenericField2')) {
         $request | Add-Member -MemberType NoteProperty -Name GenericField2 -Value $GenericField2
     }
-    if ([string]::IsNullOrEmpty($GenericField3)) {
+    if ($PSBoundParameters.ContainsKey('GenericField3')) {
         $request | Add-Member -MemberType NoteProperty -Name GenericField3 -Value $GenericField3
     }
-    if ([string]::IsNullOrEmpty($GenericField4)) {
+    if ($PSBoundParameters.ContainsKey('GenericField4')) {
         $request | Add-Member -MemberType NoteProperty -Name GenericField4 -Value $GenericField4
     }
-    if ([string]::IsNullOrEmpty($GenericField5)) {
+    if ($PSBoundParameters.ContainsKey('GenericField5')) {
         $request | Add-Member -MemberType NoteProperty -Name GenericField5 -Value $GenericField5
     }
-    if ([string]::IsNullOrEmpty($GenericField6)) {
+    if ($PSBoundParameters.ContainsKey('GenericField6')) {
         $request | Add-Member -MemberType NoteProperty -Name GenericField6 -Value $GenericField6
     }
-    if ([string]::IsNullOrEmpty($GenericField7)) {
+    if ($PSBoundParameters.ContainsKey('GenericField7')) {
         $request | Add-Member -MemberType NoteProperty -Name GenericField7 -Value $GenericField7
     }
-    if ([string]::IsNullOrEmpty($GenericField8)) {
+    if ($PSBoundParameters.ContainsKey('GenericField8')) {
         $request | Add-Member -MemberType NoteProperty -Name GenericField8 -Value $GenericField8
     }
-    if ([string]::IsNullOrEmpty($GenericField9)) {
+    if ($PSBoundParameters.ContainsKey('GenericField9')) {
         $request | Add-Member -MemberType NoteProperty -Name GenericField9 -Value $GenericField9
     }
-    if ([string]::IsNullOrEmpty($GenericField10)) {
+    if ($PSBoundParameters.ContainsKey('GenericField10')) {
         $request | Add-Member -MemberType NoteProperty -Name GenericField10 -Value $GenericField10
     }
-    if ([string]::IsNullOrEmpty($Notes)) {
+    if ($PSBoundParameters.ContainsKey('Notes')) {
         $request | Add-Member -MemberType NoteProperty -Name Notes -Value $Notes
     }
-    if ([string]::IsNullOrEmpty($Url)) {
+    if ($PSBoundParameters.ContainsKey('AccountTypeID')) {
+        $request | Add-Member -MemberType NoteProperty -Name AccountTypeID -Value $AccountTypeID
+    }
+    if ($PSBoundParameters.ContainsKey('Url')) {
         $request | Add-Member -MemberType NoteProperty -Name Url -Value $Url
     }
-    if ($null -ne $GeneratePassword) {
+    if ($GeneratePassword.IsPresent) {
         $request | Add-Member -MemberType NoteProperty -Name GeneratePassword -Value $true
     }
-    if ($null -ne $GenerateGenFieldPassword) {
+    if ($GenerateGenFieldPassword.IsPresent) {
         $request | Add-Member -MemberType NoteProperty -Name GenerateGenFieldPassword -Value $true
     }
 
@@ -204,6 +213,8 @@ function New-PasswordStatePassword {
     }
 
     $json = ConvertTo-Json -InputObject $request
+
+    Write-Verbose $json
 
     If ($PSCmdlet.ShouldProcess("Creating new password entry: $Title `n$json")) {
         $result = Invoke-RestMethod -Uri $uri -Method Post -ContentType "application/$Format" -Headers $headers -Body $json
