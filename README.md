@@ -1,3 +1,5 @@
+[![Build status](https://ci.appveyor.com/api/projects/status/1019ek26bd5x2op2?svg=true)](https://ci.appveyor.com/project/devblackops/passwordstate)
+
 # PasswordState
 
 Passwordstate is a PowerShell module used to interface with 
