@@ -145,7 +145,7 @@ function New-PasswordStatePassword {
     $request.PasswordListID = $PasswordListId
     $request.apikey = $($ApiKey.GetNetworkCredential().password)
 
-    if ($Password -ne [string]::Empty) {
+    if ($null -ne $Password) {
         $BSTR = [System.Runtime.InteropServices.Marshal]::SecureStringToBSTR($Password)
         $UnsecurePassword = [System.Runtime.InteropServices.Marshal]::PtrToStringAuto($BSTR)
         $request | Add-Member -MemberType NoteProperty -Name Password -Value $UnsecurePassword
