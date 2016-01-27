@@ -207,7 +207,7 @@ function New-PasswordStatePassword {
     $uri = "$Endpoint/passwords"
 
     if (-Not $PSBoundParameters.ContainsKey('UseV6Api')) {
-        $headers['APIKey'] = $ApiKey.GetNetworkCredential().password    
+        $headers['APIKey'] = $ApiKey.GetNetworkCredential().password
     } else {
         $uri += "?apikey=$($ApiKey.GetNetworkCredential().password)"
     }
