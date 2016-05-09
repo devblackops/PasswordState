@@ -92,8 +92,9 @@ function New-PasswordStatePassword {
         [Parameter(Mandatory)]
         [string]$Title,
 
-        [Parameter(ParameterSetName='UsePassword', Mandatory)]
-        [securestring]$Password,
+        [Parameter(Mandatory=$true,ParameterSetName='UsePassword')]
+		[Parameter(Mandatory=$true,ParameterSetName='UsePasswordWithFile')]
+		[securestring]$Password,
 
         [string]$Username,
 
@@ -129,12 +130,26 @@ function New-PasswordStatePassword {
 
         [bool]$AllowExport,
 
-        [Parameter(ParameterSetName='GenPassword')]
-        [switch]$GeneratePassword,
+        [Parameter(Mandatory=$true,ParameterSetName='GenPassword')]
+		[Parameter(Mandatory=$true,ParameterSetName='GenPasswordWithFile')]
+		[switch]$GeneratePassword,
 
         [switch]$GenerateGenFieldPassword,
 
-        [switch]$UseV6Api
+        [switch]$UseV6Api,
+
+		[Parameter(Mandatory=$true,ParameterSetName='GenPasswordWithFile')]
+		[Parameter(Mandatory=$true,ParameterSetName='UsePasswordWithFile')]
+		[String]$DocumentPath,
+
+		[Parameter(Mandatory=$true,ParameterSetName='GenPasswordWithFile')]
+		[Parameter(Mandatory=$true,ParameterSetName='UsePasswordWithFile')]
+		[String]$DocumentName,
+		
+		[Parameter(Mandatory=$true,ParameterSetName='GenPasswordWithFile')]
+		[Parameter(Mandatory=$true,ParameterSetName='UsePasswordWithFile')]
+        [String]$DocumentDescription
+
     )
 
     $headers = @{}
