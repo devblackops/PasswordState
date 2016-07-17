@@ -12,7 +12,7 @@
 RootModule = 'PasswordState.psm1'
 
 # Version number of this module.
-ModuleVersion = '1.0.3'
+ModuleVersion = '1.1.0'
 
 # ID used to uniquely identify this module
 GUID = '659695ad-f4eb-4ca4-8359-ae3cf74fe875'
@@ -107,7 +107,7 @@ PrivateData = @{
         Tags = 'PasswordState', 'Credential', 'Secret'
 
         # A URL to the license for this module.
-        LicenseUri = 'http://www.apache.org/licenses/LICENSE-2.0'
+        LicenseUri = 'https://github.com/devblackops/PasswordState/blob/master/LICENSE'
 
         # A URL to the main website for this project.
         ProjectUri = 'https://github.com/devblackops/PasswordState'
