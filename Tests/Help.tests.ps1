@@ -1,6 +1,6 @@
 # Taken with love from @juneb_get_help (https://raw.githubusercontent.com/juneb/PesterTDD/master/Module.Help.Tests.ps1)
 
-$moduleName = 'Infoblox'
+$moduleName = 'PasswordState'
 
 $here = Split-Path -Parent $MyInvocation.MyCommand.Path
 $root = Split-Path -Path $here -Parent
