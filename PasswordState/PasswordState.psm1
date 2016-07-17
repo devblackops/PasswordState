@@ -17,19 +17,12 @@ limitations under the License.
 # Not playing slop
 Set-StrictMode -Version 3
 
-# Load public functions
-$functions = Get-ChildItem -Path "$PSScriptRoot\Functions" -Recurse -Include *.ps1
-foreach ($function in $functions) {
-    . $function.FullName
-}
-
-# Load internal functions
-$internals = Get-ChildItem -Path "$PSScriptRoot\Internal" -Recurse -Include *.ps1
-foreach ($internal in $internals) {
-    . $internal.FullName
+# Dot source public/private
+$Public  = @( Get-ChildItem -Path $PSScriptRoot\Public\*.ps1 -Recurse -ErrorAction SilentlyContinue )
+$Private = @( Get-ChildItem -Path $PSScriptRoot\Private\*.ps1 -Recurse -ErrorAction SilentlyContinue )
+Foreach($import in @($Public + $Private)) {
+    . $import.fullname
 }
 
 # Allow untrusted SSL
 _SetCertPolicy
-
-#Export-ModuleMember -Function *PasswordState*
