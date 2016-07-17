@@ -22,6 +22,8 @@ function New-PasswordStatePassword {
             Create a new password in PasswordState.
         .PARAMETER ApiKey
             The API key for the password list in PasswordState.
+        .PARAMETER PasswordListId
+            The Id of the password list in PasswordState.
         .PARAMETER Endpoint
             The Uri of your PasswordState site. (i.e. https://passwordstate.local)
         .PARAMETER Format
@@ -72,8 +74,14 @@ function New-PasswordStatePassword {
             If set to true, any 'Generic Fields' which you have set to be of type 'Password' will have a newly generated random password assigned to it. If the Password List or Generic Field is set to use the user's Password Generator options, the Default Password Generator options will be used instead.
         .PARAMETER AccountTypeID
             The account type id number for the password entry.
+        .PARAMETER WhatIf
+            Do not create a new password entry, just show -WhatIf message.
+        .PARAMETER Confirm
+            Confirm action before executing.
         .EXAMPLE
             New-PasswordStatePassword -ApiKey $key -PasswordListId 1 -Title 'testPassword' -Username 'testPassword' -Description 'this is a test' -GeneratePassword
+
+            Create a new password entry with an auto-generated password in list with ID 1 and tile of 'testPassword'
 
     #>
     [cmdletbinding(SupportsShouldProcess = $true)]

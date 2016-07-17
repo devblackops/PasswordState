@@ -34,10 +34,16 @@ function Get-PasswordStatePasswordHistory {
             backwards compatibility with older PasswordState versions.
         .EXAMPLE
             $history = Get-PasswordStatePasswordHistory -ApiKey $key -PasswordId 1234 -Endpoint 'https://passwordstate.local'
+
+            Retrieve history for password ID 1234
         .EXAMPLE
             $history = Get-PasswordStatePasswordHistory -ApiKey $key -PasswordId $id -Endpoint 'https://passwordstate.local' -format xml
+
+            Retrieve history for password ID $id in XML format
         .EXAMPLE
             Get-PasswordStatePasswordHistory -ApiKey $key -PasswordId 1234 -Endpoint 'https://passwordstate.local' | fl
+
+            Retrieve history for password ID 1234 and pipe to Format-List
     #>
     [cmdletbinding()]
     param(

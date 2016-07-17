@@ -17,27 +17,63 @@ limitations under the License.
 function Find-PasswordStatePassword {
     <#
         .SYNOPSIS
-            Get all passwords in all shared password lists in PasswordState.
+            Finds a password entries using criteria
         .DESCRIPTION
-            Get all passwords in all shared password lists in PasswordState.
+            Finds a password entries using criteria
         .PARAMETER ApiKey
-            The API key for the password list
+            The API key for the password list in PasswordState.
         .PARAMETER SystemApiKey
             The system API key for PasswordState.
         .PARAMETER Endpoint
             The Uri of your PasswordState site. (i.e. https://passwordstate.local)
+        .PARAMETER PasswordListId
+            The Id of the password list in PasswordState.
+        .PARAMETER SearchString
+            Search text
+        .PARAMETER Title
+            Search for text in Title field
+        .PARAMETER Username
+            Search for text in Username field
+        .PARAMETER Description
+            Search for text in Description field
+        .PARAMETER GenericField1
+            Search for text in GenericField1 field
+        .PARAMETER GenericField2
+            Search for text in GenericField2 field
+        .PARAMETER GenericField3
+            Search for text in GenericField3 field
+        .PARAMETER GenericField4
+            Search for text in GenericField4 field
+        .PARAMETER GenericField5
+            Search for text in GenericField5 field
+        .PARAMETER GenericField6
+            Search for text in GenericField6 field
+        .PARAMETER GenericField7
+            Search for text in GenericField7 field
+        .PARAMETER GenericField8
+            Search for text in GenericField8 field
+        .PARAMETER GenericField9
+            Search for text in GenericField9 field
+        .PARAMETER GenericField10
+            Search for text in GenericField10 field
+        .PARAMETER Notes
+            Search for text in Notes field
+        .PARAMETER Url
+            Search for text in Url field
+        .PARAMETER ExpireBefore
+            Search passwords expiring before this date
+        .PARAMETER ExpireAfter
+            Search passwords expiring after this date
         .PARAMETER Format
             The response format from PasswordState. Choose either json or xml.
         .PARAMETER UseV6Api
             PasswordState versions prior to v7 did not support passing the API key in a HTTP header
             but instead expected the API key to be passed as a query parameter. This switch is used for 
             backwards compatibility with older PasswordState versions.
-        .EXAMPLE
-            $allPasswords = Get-PasswordStateAllPasswords -SystemApiKey $sysKey -Endpoint 'https://passwordstate.local'
-        .EXAMPLE
-            $allPasswords = Get-PasswordStateAllPasswords -SystemApiKey $sysKey -Endpoint 'https://passwordstate.local' -format xml
-        .EXAMPLE
-            Get-PasswordStateAllPasswords -SystemApiKey $key -Endpoint 'https://passwordstate.local' | fl
+        .EXAMPLE        
+            Find-PasswordStatePassword -ApiKey $key -PasswordListId 1 -Title 'test'
+
+            Find password in list ID 1 with 'test' in the title            
     #>
     [cmdletbinding(DefaultParameterSetName='ListSearch')]
     param(

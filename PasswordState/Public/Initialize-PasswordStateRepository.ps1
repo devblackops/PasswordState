@@ -26,8 +26,13 @@ function Initialize-PasswordStateRepository {
             Path to credential repository. Default is $env:USERPROFILE\.passwordstate
         .EXAMPLE
             Initialize-PasswordStateRepository -ApiEndpoint 'https://passwordstate.local/api'
+
+            Initialize the PasswordState repository with default value of 'https://passwordstate.local/api' for endpoint.
         .EXAMPLE
             Initialize-PasswordStateRepository -ApiEndpoint 'https://passwordstate.local/api' -ConfigurationRepository 'C:\PasswordStateCreds'
+
+            Initialize the PasswordState repository with default value of 'https://passwordstate.local/api' for endpoint and 'C:\PasswordStateCreds'
+            for the repository location.
     #>
     [cmdletbinding()]
     param(

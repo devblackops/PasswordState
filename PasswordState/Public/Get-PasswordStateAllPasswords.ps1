@@ -24,6 +24,8 @@ function Get-PasswordStateAllPasswords {
             The system API key for PasswordState.
         .PARAMETER Endpoint
             The Uri of your PasswordState site. (i.e. https://passwordstate.local)
+        .PARAMETER PreventAuditing
+            Prevent audit records from being generated on every password that is being exported.
         .PARAMETER Format
             The response format from PasswordState. Choose either json or xml.
         .PARAMETER UseV6Api
@@ -32,10 +34,8 @@ function Get-PasswordStateAllPasswords {
             backwards compatibility with older PasswordState versions.
         .EXAMPLE
             $allPasswords = Get-PasswordStateAllPasswords -SystemApiKey $sysKey -Endpoint 'https://passwordstate.local'
-        .EXAMPLE
-            $allPasswords = Get-PasswordStateAllPasswords -SystemApiKey $sysKey -Endpoint 'https://passwordstate.local' -format xml
-        .EXAMPLE
-            Get-PasswordStateAllPasswords -SystemApiKey $key -Endpoint 'https://passwordstate.local' | fl
+
+            Get all password entries from all lists using the system API key        
     #>
     [cmdletbinding()]
     param(

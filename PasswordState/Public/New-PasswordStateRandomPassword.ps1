@@ -26,6 +26,8 @@ function New-PasswordStateRandomPassword {
             PasswordState versions prior to v7 did not support passing the API key in a HTTP header
             but instead expected the API key to be passed as a query parameter. This switch is used for 
             backwards compatibility with older PasswordState versions.
+        .PARAMETER Endpoint
+            The Uri of your PasswordState site. (i.e. https://passwordstate.local)
         .PARAMETER Quantity
             The quantity of passwords to generate.
         .PARAMETER AlphaSpecial
@@ -66,16 +68,30 @@ function New-PasswordStateRandomPassword {
             Separate the generated Words with S for Spaces, D for Dashes and N for No Separation.
         .PARAMETER GeneratorId
             Password generate policy Id from PasswordState.
+        .PARAMETER WhatIf
+            Do not generate a random password, just show -WhatIf message.
+        .PARAMETER Confirm
+            Confirm action before executing.
         .EXAMPLE
             New-PasswordStateRandomPassword
+
+            Generate a new random password with defaults
         .EXAMPLE
             New-PasswordStateRandomPassword -Quantity 10
+
+            Generate 10 random passwords
         .EXAMPLE
             New-PasswordStateRandomPassword -Quantity 10 -WordPhrases $false -MinLength 20
+
+            Generate 10 random passwords without word phrases and a minimum length of 20 characters.
         .EXAMPLE
             New-PasswordStateRandomPassword -WordPhrases $false -MinLength 20 -UpperCase $true -LowerCase $false
+
+            Generate a random password without word phrases, a minimum length of 20 characters and only uppercase characters.
         .EXAMPLE
             New-PasswordStateRandomPassword -MinLength 20 -NumberOfWords 2
+
+            Generate a new random password that is at least 20 characters longs and uses two words.
     #>
     [cmdletbinding(SupportsShouldProcess = $true)]
     param (

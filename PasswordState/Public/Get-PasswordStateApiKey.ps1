@@ -22,12 +22,16 @@ function Get-PasswordStateApiKey {
             List available PasswordState API keys in the repository.
         .PARAMETER Repository
             Path to repository. Default is $env:USERPROFILE\.passwordstate
+        .PARAMETER Name
+            Name of API key (without .cred extension) to get.
         .EXAMPLE
             Get-PasswordStateApiKey
-        .EXAMPLE
-            Get-PasswordStateApiKey | Format-Table
+
+            List all API keys from default repository
         .EXAMPLE
             Get-PasswordStateApiKey -Repository c:\users\joe\data\.customrepo
+
+            List all API keys from 'c:\users\joe\data\.customrepo' repository
     #>
     [cmdletbinding()]
     param(

@@ -26,10 +26,12 @@ function Export-PasswordStateApiKey {
             Path to repository. Default is $env:USERPROFILE\.passwordstate
         .EXAMPLE
             Export-PasswordStateApiKey -ApiKey $cred
+
+            Export an API key to the default PasswordState repository
         .EXAMPLE
             Export-PasswordStateApiKey -ApiKey $cred -Repository c:\users\joe\data\.customrepo
-        .EXAMPLE
-            $cred | Export-PasswordStateApiKey -Repository c:\users\joe\data\.customrepo
+
+            Export an API key to the 'c:\users\joe\data\.customrepo' PasswordState repository        
     #>
     [cmdletbinding()]
     param(

@@ -26,8 +26,12 @@ function Import-PasswordStateApiKey {
             Path to repository. Default is $env:USERPROFILE\.passwordstate
         .EXAMPLE
             $cred = Import-PasswordStateApiKey -Name personal
+
+            Import the 'personal' API key from the default repository location.
         .EXAMPLE
             $cred = Import-PasswordStateApiKey -Name personal -Repository c:\users\joe\data\.customrepo
+
+            Import the 'personal' API key from the 'c:\users\joe\data\.customrepo' repository.
     #>
     [cmdletbinding()]
     param(

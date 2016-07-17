@@ -68,6 +68,10 @@ function Set-PasswordStatePassword {
             If set to true, a newly generated random password will be created based on the Password Generator options associated with the Password List. If the Password List is set to use the user's Password Generator options, the Default Password Generator options will be used instead.
         .PARAMETER GenerateGenFieldPassword
             If set to true, any 'Generic Fields' which you have set to be of type 'Password' will have a newly generated random password assigned to it. If the Password List or Generic Field is set to use the user's Password Generator options, the Default Password Generator options will be used instead.
+        .PARAMETER WhatIf
+            Do not set the password, just show -WhatIf message.
+        .PARAMETER Confirm
+            Confirm action before executing.
         .EXAMPLE
             Set-PasswordStatePassword -ApiKey $key -PasswordId 1234 -GeneratePassword
 

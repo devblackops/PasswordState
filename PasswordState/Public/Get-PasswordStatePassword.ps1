@@ -34,8 +34,12 @@ function Get-PasswordStatePassword {
             backwards compatibility with older PasswordState versions.
         .EXAMPLE
             $password = Get-PasswordStatePassword -ApiKey $key -PasswordId 1234 -Endpoint 'https://passwordstate.local'
+
+            Get password entry with ID 1234
         .EXAMPLE
             $password = Get-PasswordStatePassword -ApiKey $key -PasswordId $id -Endpoint 'https://passwordstate.local' -format json
+
+            Get password entry with ID 1234 and JSON format
     #>
     [cmdletbinding()]
     param(

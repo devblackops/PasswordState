@@ -32,10 +32,12 @@ function Get-PasswordStateAllLists {
             backwards compatibility with older PasswordState versions.
         .EXAMPLE
             $lists = Get-PasswordStateList -SystemApiKey $sysKey -Endpoint 'https://passwordstate.local'
+
+            Get all password lists using system API key
         .EXAMPLE
             $lists = Get-PasswordStateList -SystemApiKey $sysKey -Endpoint 'https://passwordstate.local' -Format xml
-        .EXAMPLE
-            Get-PasswordStateList -SystemApiKey $key -Endpoint 'https://passwordstate.local' | fl
+
+            Get all password lists using system API key in XML format
     #>
     [cmdletbinding()]
     param(
