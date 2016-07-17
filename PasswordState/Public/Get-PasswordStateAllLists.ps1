@@ -15,30 +15,6 @@ limitations under the License.
 #>
 
 function Get-PasswordStateAllLists {
-    <#
-        .SYNOPSIS
-            Get all shared password lists in PasswordState.
-        .DESCRIPTION
-            Get all shared password lists in PasswordState.
-        .PARAMETER SystemApiKey
-            The system API key for PasswordState.
-        .PARAMETER Endpoint
-            The Uri of your PasswordState site. (i.e. https://passwordstate.local)
-        .PARAMETER Format
-            The response format from PasswordState. Choose either json or xml.
-        .PARAMETER UseV6Api
-            PasswordState versions prior to v7 did not support passing the API key in a HTTP header
-            but instead expected the API key to be passed as a query parameter. This switch is used for 
-            backwards compatibility with older PasswordState versions.
-        .EXAMPLE
-            $lists = Get-PasswordStateList -SystemApiKey $sysKey -Endpoint 'https://passwordstate.local'
-
-            Get all password lists using system API key
-        .EXAMPLE
-            $lists = Get-PasswordStateList -SystemApiKey $sysKey -Endpoint 'https://passwordstate.local' -Format xml
-
-            Get all password lists using system API key in XML format
-    #>
     [cmdletbinding()]
     param(
         [parameter(Mandatory = $true)]

@@ -15,36 +15,6 @@ limitations under the License.
 #>
 
 function Get-PasswordStateListPasswords {
-    <#
-        .SYNOPSIS
-            Get all passwords in a PasswordState list.
-        .DESCRIPTION
-            Get all passwords in a PasswordState list.
-        .PARAMETER ApiKey
-            The API key for the password list
-        .PARAMETER PasswordListId
-            The Id of the password list in PasswordState.
-        .PARAMETER Endpoint
-            The Uri of your PasswordState site. (i.e. https://passwordstate.local)
-        .PARAMETER Format
-            The response format from PasswordState. Choose either json or xml.
-        .PARAMETER UseV6Api
-            PasswordState versions prior to v7 did not support passing the API key in a HTTP header
-            but instead expected the API key to be passed as a query parameter. This switch is used for 
-            backwards compatibility with older PasswordState versions.
-        .EXAMPLE
-            $passwords = Get-PasswordStateListPasswords -ApiKey $key -PasswordListId 1234 -Endpoint 'https://passwordstate.local'
-
-            Get all password entries from list ID 1234
-        .EXAMPLE
-            $passwords = Get-PasswordStateListPasswords -ApiKey $key -PasswordListId $id -Endpoint 'https://passwordstate.local' -format xml
-
-            Get all password entries from list ID 1234 in XML format
-        .EXAMPLE
-            Get-PasswordStateListPasswords -ApiKey $key -PasswordListId 1234 -Endpoint 'https://passwordstate.local' | fl
-
-            Get all password entries from list ID 1234 and pipe to Format-List
-    #>
     [cmdletbinding()]
     param(
         [parameter(Mandatory = $true)]

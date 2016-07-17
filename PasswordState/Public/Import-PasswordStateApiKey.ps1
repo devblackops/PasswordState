@@ -15,24 +15,6 @@ limitations under the License.
 #>
 
 function Import-PasswordStateApiKey {
-    <#
-        .SYNOPSIS
-            Imports a PasswordState API key.
-        .DESCRIPTION
-            Imports a given PasswordState API key from the repository.
-        .PARAMETER Name
-            Name of the key to retrieve. Do not include the file extension.
-        .PARAMETER Repository
-            Path to repository. Default is $env:USERPROFILE\.passwordstate
-        .EXAMPLE
-            $cred = Import-PasswordStateApiKey -Name personal
-
-            Import the 'personal' API key from the default repository location.
-        .EXAMPLE
-            $cred = Import-PasswordStateApiKey -Name personal -Repository c:\users\joe\data\.customrepo
-
-            Import the 'personal' API key from the 'c:\users\joe\data\.customrepo' repository.
-    #>
     [cmdletbinding()]
     param(
         [parameter(Mandatory, ValueFromPipeline, ValueFromPipelineByPropertyName)]

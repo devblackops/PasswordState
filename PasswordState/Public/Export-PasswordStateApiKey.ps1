@@ -15,24 +15,6 @@ limitations under the License.
 #>
 
 function Export-PasswordStateApiKey {
-    <#
-        .SYNOPSIS
-            Exports a PowerShell credential object to the PasswordState key repository.
-        .DESCRIPTION
-            Exports a PowerShell credential object to the PasswordState key repository.
-        .PARAMETER ApiKey
-            PowerShell credential object to export.
-        .PARAMETER Repository
-            Path to repository. Default is $env:USERPROFILE\.passwordstate
-        .EXAMPLE
-            Export-PasswordStateApiKey -ApiKey $cred
-
-            Export an API key to the default PasswordState repository
-        .EXAMPLE
-            Export-PasswordStateApiKey -ApiKey $cred -Repository c:\users\joe\data\.customrepo
-
-            Export an API key to the 'c:\users\joe\data\.customrepo' PasswordState repository        
-    #>
     [cmdletbinding()]
     param(
         [parameter(Mandatory = $true, ValueFromPipeline = $true)]
