@@ -26,7 +26,8 @@ task Init {
 task Test -Depends Init, Analyze, Pester
 
 task Analyze -Depends Init {
-    $saResults = Invoke-ScriptAnalyzer -Path $sut -Severity Error -Recurse -Verbose:$false
+    $excludedRules = @('PSAvoidUsingUserNameAndPassWordParams')
+    $saResults = Invoke-ScriptAnalyzer -Path $sut -Severity Error -ExcludeRule $excludedRules -Recurse -Verbose:$false
     if ($saResults) {
         $saResults | Format-Table
         Write-Error -Message 'One or more Script Analyzer errors/warnings where found. Build cannot continue!'
