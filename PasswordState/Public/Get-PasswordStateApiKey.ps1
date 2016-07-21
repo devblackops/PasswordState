@@ -15,20 +15,6 @@ limitations under the License.
 #>
 
 function Get-PasswordStateApiKey {
-    <#
-        .SYNOPSIS
-            List available PasswordState API keys in the repository.
-        .DESCRIPTION
-            List available PasswordState API keys in the repository.
-        .PARAMETER Repository
-            Path to repository. Default is $env:USERPROFILE\.passwordstate
-        .EXAMPLE
-            Get-PasswordStateApiKey
-        .EXAMPLE
-            Get-PasswordStateApiKey | Format-Table
-        .EXAMPLE
-            Get-PasswordStateApiKey -Repository c:\users\joe\data\.customrepo
-    #>
     [cmdletbinding()]
     param(
         [string]$Repository = (_GetDefault -Option 'credential_repository'),

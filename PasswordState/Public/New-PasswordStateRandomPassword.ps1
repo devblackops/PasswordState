@@ -15,68 +15,6 @@ limitations under the License.
 #>
 
 function New-PasswordStateRandomPassword {
-    <#
-        .SYNOPSIS
-            Generate a random password from PasswordState.
-        .DESCRIPTION
-            Generate a random password from PasswordState.
-        .PARAMETER ApiKey
-            The password generator API key.
-        .PARAMETER UseV6Api
-            PasswordState versions prior to v7 did not support passing the API key in a HTTP header
-            but instead expected the API key to be passed as a query parameter. This switch is used for 
-            backwards compatibility with older PasswordState versions.
-        .PARAMETER Quantity
-            The quantity of passwords to generate.
-        .PARAMETER AlphaSpecial
-            Include Alphanumerics and special characters.
-        .PARAMETER WordPhrases
-            Include word phrases - a random word will be generated.
-        .PARAMETER MinLength
-            Minimum length for alphanumercis and special characters.
-        .PARAMETER MaxLength
-            Maximum length for alphanumercis and special characters.
-        .PARAMETER LowerCase
-            Include lowercase characters.
-        .PARAMETER UpperCase
-            Include uppercase characters.
-        .PARAMETER Numeric
-            Include numeric characters.
-        .PARAMETER HigherAlphaRatio
-            Include higher ratio of alphanumerics vs special characters.
-        .PARAMETER AmbiguousChars
-            Include ambiguous characters - such as I, l, and 1.
-        .PARAMETER SpecialChars
-            Include special characters.
-        .PARAMETER SpecialCharList
-            List of special characters - such as !#$%^&*+/=_-.
-        .PARAMETER BracketChars
-            Include brackets.
-        .PARAMETER BracketCharsList
-            List of brackets - such as [](){}<>.
-        .PARAMETER NumberOfWords
-            The number of words to include.
-        .PARAMETER NumberOfWords
-            Maximum word length to generate.
-        .PARAMETER MaxWordLength
-            Maximum word length to generate.
-        .PARAMETER PrefexAppend
-            P to Prefix the Word, A to Append and I to Insert.
-        .PARAMETER SeperateWords
-            Separate the generated Words with S for Spaces, D for Dashes and N for No Separation.
-        .PARAMETER GeneratorId
-            Password generate policy Id from PasswordState.
-        .EXAMPLE
-            New-PasswordStateRandomPassword
-        .EXAMPLE
-            New-PasswordStateRandomPassword -Quantity 10
-        .EXAMPLE
-            New-PasswordStateRandomPassword -Quantity 10 -WordPhrases $false -MinLength 20
-        .EXAMPLE
-            New-PasswordStateRandomPassword -WordPhrases $false -MinLength 20 -UpperCase $true -LowerCase $false
-        .EXAMPLE
-            New-PasswordStateRandomPassword -MinLength 20 -NumberOfWords 2
-    #>
     [cmdletbinding(SupportsShouldProcess = $true)]
     param (
         [parameter(Mandatory = $true)]
