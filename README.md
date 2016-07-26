@@ -10,12 +10,12 @@ PasswordState entries using simple PowerShell cmdlets that
 you can integrate into your existing processes.
 
 # Getting Started
-You start off by running `Initialize-PasswordStateRepository`, which will initialize some base variables used in the PasswordState PowerShell module. It takes 2 parameters: -APIEndpoint is where your current PasswordState installation resides, and the -CredentialRepository is where you can store "Credentials" or API keys in this case.
-If you do not specify -CredentialRepository it will be created under your userprofile folder.
+You start off by running `Initialize-PasswordStateRepository`, which will initialize some base variables used in the PasswordState PowerShell module. It takes 2 parameters: -APIEndpoint is the URL to where your current PasswordState installation resides, and the -CredentialRepository is where you can store "Credentials" or API keys in this case.
+If you do not specify -CredentialRepository it will be created under your `%UserProfile%` folder.
 
-Then you want to store some "credentials" on disk (Not really credentials, but API keys, PowerShell credential objects are used as a method of storing credentials, to make sure the stored API keys are encrypted)
+Then you want to store some "credentials" on disk (Not really credentials, but API keys, PowerShell credential objects are used as a method of storing credentials in a secure way)
 
-First you create a credential object using PowerShells `Get-Credential` cmdlet. You will be prompted to input a username/password, in username put in the name you want to call the credential file (Usually something that refers to, what the actual API key, is giving you access to, a password list for instance), and in the password field enter your APIkey. If you do not specify a location, the credentials will be stored in the location you specified when you ran `Initialize-PasswordStateRepository`
+First you create a credential object using PowerShells `Get-Credential` cmdlet. You will be prompted to input a username/password, in username put in the name you want to call the credential file (Usually something that refers to, what the actual API key is giving you access to, a password list for instance), and in the password field enter your APIkey. If you do not specify a location, the credentials will be stored in the location you specified when you ran `Initialize-PasswordStateRepository`
 
 
    ```powershell   
