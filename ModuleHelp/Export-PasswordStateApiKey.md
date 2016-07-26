@@ -7,16 +7,14 @@ schema: 2.0.0
 # Export-PasswordStateApiKey
 ## SYNOPSIS
 Exports a PowerShell credential object to the PasswordState key repository.
-
 ## SYNTAX
 
 ```
-Export-PasswordStateApiKey [-ApiKey] <PSCredential[]> [[-Repository] <String>]
+Export-PasswordStateApiKey [-ApiKey] <PSCredential[]> [[-Repository] <String>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
 Exports a PowerShell credential object to the PasswordState key repository.
-
 ## EXAMPLES
 
 ### -------------------------- EXAMPLE 1 --------------------------
@@ -25,14 +23,12 @@ Export-PasswordStateApiKey -ApiKey $cred
 ```
 
 Export an API key to the default PasswordState repository
-
 ### -------------------------- EXAMPLE 2 --------------------------
 ```
 Export-PasswordStateApiKey -ApiKey $cred -Repository c:\users\joe\data\.customrepo
 ```
 
 Export an API key to the 'c:\users\joe\data\.customrepo' PasswordState repository
-
 ## PARAMETERS
 
 ### -ApiKey
@@ -66,6 +62,8 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
+### CommonParameters
+This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see about_CommonParameters (http://go.microsoft.com/fwlink/?LinkID=113216).
 ## INPUTS
 
 ## OUTPUTS

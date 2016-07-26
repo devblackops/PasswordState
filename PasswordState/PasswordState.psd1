@@ -78,6 +78,7 @@ FunctionsToExport = @(
     'New-PasswordStatePassword',
     'New-PasswordStateRandomPassword',
     'Set-PasswordStatePassword'
+	'Set-PasswordStateDocument'
 )
 
 # Cmdlets to export from this module

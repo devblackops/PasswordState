@@ -15,7 +15,7 @@
     limitations under the License.
 #>
 
-function New-PasswordStateDocument {
+function Set-PasswordStateDocument {
   [cmdletbinding(SupportsShouldProcess = $true)]
   param(
     [parameter(Mandatory = $true)]
@@ -52,13 +52,11 @@ function New-PasswordStateDocument {
   process {
    
                 
-    If ($PasswordId)
-    {
+    If ($PasswordId) {
       $uri = "$Endpoint/document/password/$($PasswordID)?DocumentName=$([System.Web.HttpUtility]::UrlEncode($DocumentName))&DocumentDescription=$([System.Web.HttpUtility]::UrlEncode($DocumentDescription))"
       $ID = "PasswordID [$PasswordId]"
     }
-    else
-    {
+    else {
       $uri = "$Endpoint/document/passwordlist/$($PasswordListID)?DocumentName=$([System.Web.HttpUtility]::UrlEncode($DocumentName))&DocumentDescription=$([System.Web.HttpUtility]::UrlEncode($DocumentDescription))"
       $ID = "PasswordListID [$PasswordListId]"
     }

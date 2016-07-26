@@ -7,7 +7,6 @@ schema: 2.0.0
 # Set-PasswordStatePassword
 ## SYNOPSIS
 Updates an existing password in PasswordState.
-
 ## SYNTAX
 
 ```
@@ -17,11 +16,11 @@ Set-PasswordStatePassword -ApiKey <PSCredential> -PasswordId <Int32> [-Endpoint 
  [-GenericField5 <String>] [-GenericField6 <String>] [-GenericField7 <String>] [-GenericField8 <String>]
  [-GenericField9 <String>] [-GenericField10 <String>] [-Notes <String>] [-Url <String>] [-ExpiryDate <String>]
  [-AllowExport <Boolean>] [-GeneratePassword] [-GenerateGenFieldPassword] [-WhatIf] [-Confirm]
+ [<CommonParameters>]
 ```
 
 ## DESCRIPTION
 Updates an existing password in PasswordState.
-
 ## EXAMPLES
 
 ### -------------------------- EXAMPLE 1 --------------------------
@@ -30,14 +29,12 @@ Set-PasswordStatePassword -ApiKey $key -PasswordId 1234 -GeneratePassword
 ```
 
 Change the password for entry 1234 to a new randomly generated one.
-
 ### -------------------------- EXAMPLE 2 --------------------------
 ```
 Set-PasswordStatePassword -ApiKey $key -PasswordId 1234 -Username 'mypassword'
 ```
 
 Change the username for entry 1234 to mypassword
-
 ## PARAMETERS
 
 ### -ApiKey
@@ -435,6 +432,8 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
+### CommonParameters
+This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see about_CommonParameters (http://go.microsoft.com/fwlink/?LinkID=113216).
 ## INPUTS
 
 ## OUTPUTS

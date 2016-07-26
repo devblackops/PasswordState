@@ -7,17 +7,15 @@ schema: 2.0.0
 # Get-PasswordStateListPasswords
 ## SYNOPSIS
 Get all passwords in a PasswordState list.
-
 ## SYNTAX
 
 ```
 Get-PasswordStateListPasswords [-ApiKey] <PSCredential> [-PasswordListId] <Int32> [[-Endpoint] <String>]
- [[-Format] <String>] [-UseV6Api]
+ [[-Format] <String>] [-UseV6Api] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
 Get all passwords in a PasswordState list.
-
 ## EXAMPLES
 
 ### -------------------------- EXAMPLE 1 --------------------------
@@ -26,21 +24,18 @@ $passwords = Get-PasswordStateListPasswords -ApiKey $key -PasswordListId 1234 -E
 ```
 
 Get all password entries from list ID 1234
-
 ### -------------------------- EXAMPLE 2 --------------------------
 ```
 $passwords = Get-PasswordStateListPasswords -ApiKey $key -PasswordListId $id -Endpoint 'https://passwordstate.local' -format xml
 ```
 
 Get all password entries from list ID 1234 in XML format
-
 ### -------------------------- EXAMPLE 3 --------------------------
 ```
 Get-PasswordStateListPasswords -ApiKey $key -PasswordListId 1234 -Endpoint 'https://passwordstate.local' | fl
 ```
 
 Get all password entries from list ID 1234 and pipe to Format-List
-
 ## PARAMETERS
 
 ### -ApiKey
@@ -124,6 +119,8 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
+### CommonParameters
+This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see about_CommonParameters (http://go.microsoft.com/fwlink/?LinkID=113216).
 ## INPUTS
 
 ## OUTPUTS

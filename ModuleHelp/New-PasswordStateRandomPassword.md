@@ -7,13 +7,12 @@ schema: 2.0.0
 # New-PasswordStateRandomPassword
 ## SYNOPSIS
 Generate a random password from PasswordState.
-
 ## SYNTAX
 
 ### UseGenerator
 ```
 New-PasswordStateRandomPassword -ApiKey <PSCredential> [-UseV6Api] [-Endpoint <String>] [-Quantity <Int32>]
- -GeneratorId <Int32> [-WhatIf] [-Confirm]
+ -GeneratorId <Int32> [-WhatIf] [-Confirm] [<CommonParameters>]
 ```
 
 ### NoGenerator
@@ -23,12 +22,11 @@ New-PasswordStateRandomPassword -ApiKey <PSCredential> [-UseV6Api] [-Endpoint <S
  [-LowerCase <Boolean>] [-UpperCase <Boolean>] [-Numeric <Boolean>] [-HigherAlphaRatio <Boolean>]
  [-AmbiguousChars <Boolean>] [-SpecialChars <Boolean>] [-SpecialCharList <String>] [-BracketChars <Boolean>]
  [-BracketCharsList <String>] [-NumberOfWords <Int32>] [-MaxWordLength <Int32>] [-PrefexAppend <String>]
- [-SeperateWords <String>] [-WhatIf] [-Confirm]
+ [-SeperateWords <String>] [-WhatIf] [-Confirm] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
 Generate a random password from PasswordState.
-
 ## EXAMPLES
 
 ### -------------------------- EXAMPLE 1 --------------------------
@@ -37,35 +35,30 @@ New-PasswordStateRandomPassword
 ```
 
 Generate a new random password with defaults
-
 ### -------------------------- EXAMPLE 2 --------------------------
 ```
 New-PasswordStateRandomPassword -Quantity 10
 ```
 
 Generate 10 random passwords
-
 ### -------------------------- EXAMPLE 3 --------------------------
 ```
 New-PasswordStateRandomPassword -Quantity 10 -WordPhrases $false -MinLength 20
 ```
 
 Generate 10 random passwords without word phrases and a minimum length of 20 characters.
-
 ### -------------------------- EXAMPLE 4 --------------------------
 ```
 New-PasswordStateRandomPassword -WordPhrases $false -MinLength 20 -UpperCase $true -LowerCase $false
 ```
 
 Generate a random password without word phrases, a minimum length of 20 characters and only uppercase characters.
-
 ### -------------------------- EXAMPLE 5 --------------------------
 ```
 New-PasswordStateRandomPassword -MinLength 20 -NumberOfWords 2
 ```
 
 Generate a new random password that is at least 20 characters longs and uses two words.
-
 ## PARAMETERS
 
 ### -ApiKey
@@ -433,6 +426,8 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
+### CommonParameters
+This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see about_CommonParameters (http://go.microsoft.com/fwlink/?LinkID=113216).
 ## INPUTS
 
 ## OUTPUTS

@@ -101,91 +101,71 @@ function New-PasswordStatePassword
   $request.PasswordListID = $PasswordListId
   $request.apikey = $($ApiKey.GetNetworkCredential().password)
 
-  if ($null -ne $Password) 
-  {
+  if ($null -ne $Password) {
     $BSTR = [System.Runtime.InteropServices.Marshal]::SecureStringToBSTR($Password)
     $UnsecurePassword = [System.Runtime.InteropServices.Marshal]::PtrToStringAuto($BSTR)
     $request | Add-Member -MemberType NoteProperty -Name Password -Value $UnsecurePassword
   }
 
-  if ($PSBoundParameters.ContainsKey('Username')) 
-  {
+  if ($PSBoundParameters.ContainsKey('Username')) {
     $request | Add-Member -MemberType NoteProperty -Name UserName -Value $Username
   }
 
-  if ($PSBoundParameters.ContainsKey('Description')) 
-  {
+  if ($PSBoundParameters.ContainsKey('Description')) {
     $request | Add-Member -MemberType NoteProperty -Name Description -Value $Description
   }
-  if ($PSBoundParameters.ContainsKey('GenericField1')) 
-  {
+  if ($PSBoundParameters.ContainsKey('GenericField1')) {
     $request | Add-Member -MemberType NoteProperty -Name GenericField1 -Value $GenericField1
   }
-  if ($PSBoundParameters.ContainsKey('GenericField2')) 
-  {
+  if ($PSBoundParameters.ContainsKey('GenericField2')) {
     $request | Add-Member -MemberType NoteProperty -Name GenericField2 -Value $GenericField2
   }
-  if ($PSBoundParameters.ContainsKey('GenericField3')) 
-  {
+  if ($PSBoundParameters.ContainsKey('GenericField3')) {
     $request | Add-Member -MemberType NoteProperty -Name GenericField3 -Value $GenericField3
   }
-  if ($PSBoundParameters.ContainsKey('GenericField4')) 
-  {
+  if ($PSBoundParameters.ContainsKey('GenericField4')) {
     $request | Add-Member -MemberType NoteProperty -Name GenericField4 -Value $GenericField4
   }
-  if ($PSBoundParameters.ContainsKey('GenericField5')) 
-  {
+  if ($PSBoundParameters.ContainsKey('GenericField5')) {
     $request | Add-Member -MemberType NoteProperty -Name GenericField5 -Value $GenericField5
   }
-  if ($PSBoundParameters.ContainsKey('GenericField6')) 
-  {
+  if ($PSBoundParameters.ContainsKey('GenericField6')) {
     $request | Add-Member -MemberType NoteProperty -Name GenericField6 -Value $GenericField6
   }
-  if ($PSBoundParameters.ContainsKey('GenericField7')) 
-  {
+  if ($PSBoundParameters.ContainsKey('GenericField7')) {
     $request | Add-Member -MemberType NoteProperty -Name GenericField7 -Value $GenericField7
   }
-  if ($PSBoundParameters.ContainsKey('GenericField8')) 
-  {
+  if ($PSBoundParameters.ContainsKey('GenericField8')) {
     $request | Add-Member -MemberType NoteProperty -Name GenericField8 -Value $GenericField8
   }
-  if ($PSBoundParameters.ContainsKey('GenericField9')) 
-  {
+  if ($PSBoundParameters.ContainsKey('GenericField9')) {
     $request | Add-Member -MemberType NoteProperty -Name GenericField9 -Value $GenericField9
   }
-  if ($PSBoundParameters.ContainsKey('GenericField10')) 
-  {
+  if ($PSBoundParameters.ContainsKey('GenericField10')) {
     $request | Add-Member -MemberType NoteProperty -Name GenericField10 -Value $GenericField10
   }
-  if ($PSBoundParameters.ContainsKey('Notes')) 
-  {
+  if ($PSBoundParameters.ContainsKey('Notes')) {
     $request | Add-Member -MemberType NoteProperty -Name Notes -Value $Notes
   }
-  if ($PSBoundParameters.ContainsKey('AccountTypeID')) 
-  {
+  if ($PSBoundParameters.ContainsKey('AccountTypeID')) {
     $request | Add-Member -MemberType NoteProperty -Name AccountTypeID -Value $AccountTypeID
   }
-  if ($PSBoundParameters.ContainsKey('Url')) 
-  {
+  if ($PSBoundParameters.ContainsKey('Url')) {
     $request | Add-Member -MemberType NoteProperty -Name Url -Value $Url
   }
-  if ($GeneratePassword.IsPresent) 
-  {
+  if ($GeneratePassword.IsPresent) {
     $request | Add-Member -MemberType NoteProperty -Name GeneratePassword -Value $true
   }
-  if ($GenerateGenFieldPassword.IsPresent) 
-  {
+  if ($GenerateGenFieldPassword.IsPresent) {
     $request | Add-Member -MemberType NoteProperty -Name GenerateGenFieldPassword -Value $true
   }
 
   $uri = "$Endpoint/passwords"
 
-  if (-Not $PSBoundParameters.ContainsKey('UseV6Api')) 
-  {
+  if (-Not $PSBoundParameters.ContainsKey('UseV6Api')) {
     $headers['APIKey'] = $ApiKey.GetNetworkCredential().password
   }
-  else 
-  {
+  else {
     $uri += "?apikey=$($ApiKey.GetNetworkCredential().password)"
   }
 
@@ -195,18 +175,15 @@ function New-PasswordStatePassword
 
   $Output = @()
 
-  If ($DocumentPath) 
-  {
+  If ($DocumentPath) {
     $DocumentInfo = "Upload Document.`nDocumentPath : $DocumentPath`nDocumentName : $DocumentName`nDocument Description : $DocumentDescription"
   }
 
-  If ($PSCmdlet.ShouldProcess("Creating new password entry: $Title `n$json`n$DocumentInfo")) 
-  {
+  If ($PSCmdlet.ShouldProcess("Creating new password entry: $Title `n$json`n$DocumentInfo")) {
     $result = Invoke-RestMethod -Uri $uri -Method Post -ContentType "application/$Format" -Headers $headers -Body $json
     $Output += $result
     
-    If ($DocumentPath) 
-    {
+    If ($DocumentPath) {
       $uri = "$Endpoint/document/password/$($result.PasswordID)?DocumentName=$([System.Web.HttpUtility]::UrlEncode($DocumentName))&DocumentDescription=$([System.Web.HttpUtility]::UrlEncode($DocumentDescription))"
       Write-Verbose  -Message $uri 
 

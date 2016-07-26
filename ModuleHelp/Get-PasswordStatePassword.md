@@ -7,17 +7,15 @@ schema: 2.0.0
 # Get-PasswordStatePassword
 ## SYNOPSIS
 Get a password object from PasswordState.
-
 ## SYNTAX
 
 ```
 Get-PasswordStatePassword [-ApiKey] <PSCredential> [-PasswordId] <Int32> [[-Endpoint] <String>]
- [[-Format] <String>] [-UseV6Api]
+ [[-Format] <String>] [-UseV6Api] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
 Get a password object from PasswordState.
-
 ## EXAMPLES
 
 ### -------------------------- EXAMPLE 1 --------------------------
@@ -26,14 +24,12 @@ $password = Get-PasswordStatePassword -ApiKey $key -PasswordId 1234 -Endpoint 'h
 ```
 
 Get password entry with ID 1234
-
 ### -------------------------- EXAMPLE 2 --------------------------
 ```
 $password = Get-PasswordStatePassword -ApiKey $key -PasswordId $id -Endpoint 'https://passwordstate.local' -format json
 ```
 
 Get password entry with ID 1234 and JSON format
-
 ## PARAMETERS
 
 ### -ApiKey
@@ -117,6 +113,8 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
+### CommonParameters
+This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see about_CommonParameters (http://go.microsoft.com/fwlink/?LinkID=113216).
 ## INPUTS
 
 ## OUTPUTS
