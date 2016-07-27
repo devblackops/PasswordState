@@ -86,7 +86,7 @@ function New-PasswordStatePassword
     [Parameter(Mandatory = $true,ParameterSetName = 'GenPasswordWithFile')]
     [Parameter(Mandatory = $true,ParameterSetName = 'UsePasswordWithFile')]
     [String]$DocumentName,
-		
+        
     [Parameter(Mandatory = $true,ParameterSetName = 'GenPasswordWithFile')]
     [Parameter(Mandatory = $true,ParameterSetName = 'UsePasswordWithFile')]
     [String]$DocumentDescription

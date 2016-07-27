@@ -1,4 +1,4 @@
-﻿#requires -Version 3
+#requires -Version 3
 <#
     Copyright 2015 Brandon Olin
 
@@ -36,7 +36,7 @@ function Set-PasswordStateDocument {
     [parameter(Mandatory = $true,ParameterSetName = 'PasswordListID')]
     [parameter(Mandatory = $true,ParameterSetName = 'PasswordID')]
     [String]$DocumentName,
-		
+        
     [parameter(Mandatory = $true,ParameterSetName = 'PasswordListID')]
     [parameter(Mandatory = $true,ParameterSetName = 'PasswordID')]
     [String]$DocumentDescription
