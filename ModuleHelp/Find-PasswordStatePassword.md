@@ -7,7 +7,6 @@ schema: 2.0.0
 # Find-PasswordStatePassword
 ## SYNOPSIS
 Finds a password entries using criteria
-
 ## SYNTAX
 
 ### ListSearch (Default)
@@ -17,7 +16,7 @@ Find-PasswordStatePassword -ApiKey <PSCredential> [-Endpoint <String>] -Password
  [-GenericField2 <String>] [-GenericField3 <String>] [-GenericField4 <String>] [-GenericField5 <String>]
  [-GenericField6 <String>] [-GenericField7 <String>] [-GenericField8 <String>] [-GenericField9 <String>]
  [-GenericField10 <String>] [-Notes <String>] [-Url <String>] [-ExpireBefore <DateTime>]
- [-ExpireAfter <DateTime>] [-Format <String>] [-UseV6Api]
+ [-ExpireAfter <DateTime>] [-Format <String>] [-UseV6Api] [<CommonParameters>]
 ```
 
 ### GlobalSearch
@@ -27,17 +26,17 @@ Find-PasswordStatePassword -SystemApiKey <PSCredential> [-Endpoint <String>] [-T
  [-GenericField3 <String>] [-GenericField4 <String>] [-GenericField5 <String>] [-GenericField6 <String>]
  [-GenericField7 <String>] [-GenericField8 <String>] [-GenericField9 <String>] [-GenericField10 <String>]
  [-Notes <String>] [-Url <String>] [-ExpireBefore <DateTime>] [-ExpireAfter <DateTime>] [-Format <String>]
- [-UseV6Api]
+ [-UseV6Api] [<CommonParameters>]
 ```
 
 ### GeneralSearch
 ```
 Find-PasswordStatePassword [-Endpoint <String>] -PasswordListId <Int32> -SearchString <String> [-UseV6Api]
+ [<CommonParameters>]
 ```
 
 ## DESCRIPTION
 Finds a password entries using criteria
-
 ## EXAMPLES
 
 ### -------------------------- EXAMPLE 1 --------------------------
@@ -46,7 +45,6 @@ Find-PasswordStatePassword -ApiKey $key -PasswordListId 1 -Title 'test'
 ```
 
 Find password in list ID 1 with 'test' in the title
-
 ## PARAMETERS
 
 ### -ApiKey
@@ -415,6 +413,8 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
+### CommonParameters
+This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see about_CommonParameters (http://go.microsoft.com/fwlink/?LinkID=113216).
 ## INPUTS
 
 ## OUTPUTS

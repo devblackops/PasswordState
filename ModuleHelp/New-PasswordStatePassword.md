@@ -10,6 +10,17 @@ Create a new password in PasswordState.
 
 ## SYNTAX
 
+### UsePasswordWithFile
+```
+New-PasswordStatePassword -ApiKey <PSCredential> -PasswordListId <Int32> [-Endpoint <String>]
+ [-Format <String>] -Title <String> -Password <SecureString> [-Username <String>] [-Description <String>]
+ [-GenericField1 <String>] [-GenericField2 <String>] [-GenericField3 <String>] [-GenericField4 <String>]
+ [-GenericField5 <String>] [-GenericField6 <String>] [-GenericField7 <String>] [-GenericField8 <String>]
+ [-GenericField9 <String>] [-GenericField10 <String>] [-Notes <String>] [-AccountTypeID <Int32>]
+ [-Url <String>] [-ExpiryDate <String>] [-AllowExport <Boolean>] [-GenerateGenFieldPassword] [-UseV6Api]
+ -DocumentPath <String> -DocumentName <String> -DocumentDescription <String> [-WhatIf] [-Confirm]
+```
+
 ### UsePassword
 ```
 New-PasswordStatePassword -ApiKey <PSCredential> -PasswordListId <Int32> [-Endpoint <String>]
@@ -19,6 +30,17 @@ New-PasswordStatePassword -ApiKey <PSCredential> -PasswordListId <Int32> [-Endpo
  [-GenericField9 <String>] [-GenericField10 <String>] [-Notes <String>] [-AccountTypeID <Int32>]
  [-Url <String>] [-ExpiryDate <String>] [-AllowExport <Boolean>] [-GenerateGenFieldPassword] [-UseV6Api]
  [-WhatIf] [-Confirm]
+```
+
+### GenPasswordWithFile
+```
+New-PasswordStatePassword -ApiKey <PSCredential> -PasswordListId <Int32> [-Endpoint <String>]
+ [-Format <String>] -Title <String> [-Username <String>] [-Description <String>] [-GenericField1 <String>]
+ [-GenericField2 <String>] [-GenericField3 <String>] [-GenericField4 <String>] [-GenericField5 <String>]
+ [-GenericField6 <String>] [-GenericField7 <String>] [-GenericField8 <String>] [-GenericField9 <String>]
+ [-GenericField10 <String>] [-Notes <String>] [-AccountTypeID <Int32>] [-Url <String>] [-ExpiryDate <String>]
+ [-AllowExport <Boolean>] [-GeneratePassword] [-GenerateGenFieldPassword] [-UseV6Api] -DocumentPath <String>
+ -DocumentName <String> -DocumentDescription <String> [-WhatIf] [-Confirm]
 ```
 
 ### GenPassword
@@ -128,7 +150,7 @@ The password field for the password entry.
 
 ```yaml
 Type: SecureString
-Parameter Sets: UsePassword
+Parameter Sets: UsePasswordWithFile, UsePassword
 Aliases: 
 
 Required: True
@@ -399,10 +421,10 @@ If the Password List is set to use the user's Password Generator options, the De
 
 ```yaml
 Type: SwitchParameter
-Parameter Sets: GenPassword
+Parameter Sets: GenPasswordWithFile, GenPassword
 Aliases: 
 
-Required: False
+Required: True
 Position: Named
 Default value: False
 Accept pipeline input: False
@@ -426,10 +448,8 @@ Accept wildcard characters: False
 ```
 
 ### -UseV6Api
-PasswordState versions prior to v7 did not support passing the API key in a HTTP header
-but instead expected the API key to be passed as a query parameter.
-This switch is used for 
-backwards compatibility with older PasswordState versions.
+PasswordState versions prior to v7 did not support passing the API key in a HTTP header but instead expected the API key to be passed as a query parameter.
+This switch is used for  backwards compatibility with older PasswordState versions.
 
 ```yaml
 Type: SwitchParameter
@@ -453,7 +473,7 @@ Aliases: wi
 
 Required: False
 Position: Named
-Default value: 
+Default value: False
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
@@ -467,6 +487,51 @@ Parameter Sets: (All)
 Aliases: cf
 
 Required: False
+Position: Named
+Default value: False
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -DocumentDescription
+The description of the document shown in PasswordState
+
+```yaml
+Type: String
+Parameter Sets: UsePasswordWithFile, GenPasswordWithFile
+Aliases: 
+
+Required: True
+Position: Named
+Default value: 
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -DocumentName
+The name of the file to be displayed in PasswordState, this is also the name used, when the file is downloaded from PasswordState.
+
+```yaml
+Type: String
+Parameter Sets: UsePasswordWithFile, GenPasswordWithFile
+Aliases: 
+
+Required: True
+Position: Named
+Default value: 
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -DocumentPath
+This is the path to the file, that is to be uploaded to PasswordState
+
+```yaml
+Type: String
+Parameter Sets: UsePasswordWithFile, GenPasswordWithFile
+Aliases: 
+
+Required: True
 Position: Named
 Default value: 
 Accept pipeline input: False

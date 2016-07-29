@@ -122,6 +122,9 @@ function Find-PasswordStatePassword {
     if ($PSBoundParameters.ContainsKey('Description')) {
         $params += "&Description=$Description"
     }
+    if ($PSBoundParameters.ContainsKey('Username')) {
+        $params += "&Username=$Username"
+    }
     if ($PSBoundParameters.ContainsKey('GenericField1')) {
         $params += "&GenericField1=$GenericField1"
     }
