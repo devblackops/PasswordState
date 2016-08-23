@@ -175,6 +175,7 @@ function New-PasswordStatePassword
 
   $Output = @()
 
+  $DocumentInfo = $null
   If ($DocumentPath) {
     $DocumentInfo = "Upload Document.`nDocumentPath : $DocumentPath`nDocumentName : $DocumentName`nDocument Description : $DocumentDescription"
   }

@@ -1,3 +1,6 @@
+## 1.2.1 (2016-08-23)
+  * Fixed bug in New-PasswordStatePassword when trying to display -WhatIf message when a document is not being uploaded
+
 ## 1.2.0 (2016-07-26)
   * Added option to upload file to New-PasswordStatePassword
   * Added new function to upload document (New-PasswordStateDocument)

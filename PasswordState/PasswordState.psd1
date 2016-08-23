@@ -12,7 +12,7 @@
 RootModule = 'PasswordState.psm1'
 
 # Version number of this module.
-ModuleVersion = '1.2.0'
+ModuleVersion = '1.2.1'
 
 # ID used to uniquely identify this module
 GUID = '659695ad-f4eb-4ca4-8359-ae3cf74fe875'
