@@ -26,8 +26,7 @@ task Init {
 task Test -Depends Init, Analyze, Pester
 
 task Analyze -Depends Init {
-    $excludedRules = @('PSAvoidUsingUserNameAndPassWordParams')
-    $saResults = Invoke-ScriptAnalyzer -Path $sut -Severity Error -ExcludeRule $excludedRules -Recurse -Verbose:$false
+    $saResults = Invoke-ScriptAnalyzer -Path $sut -Severity Error -Recurse -Verbose:$false
     if ($saResults) {
         $saResults | Format-Table
         Write-Error -Message 'One or more Script Analyzer errors/warnings where found. Build cannot continue!'
@@ -51,9 +50,9 @@ task GenerateHelp -Depends Init {
 }
 
 task ExportFunctions {
-    $files = Get-ChildItem -Path $sut\Public | Select -ExpandProperty Name
+    $files = Get-ChildItem -Path $sut\Public | Select-Object -ExpandProperty Name
     $functions = @()
-    $files | % {
+    $files | ForEach-Object {
         $functions += $_.Split('.')[0]
     }
     Update-ModuleManifest -Path $manifest -FunctionsToExport $functions
