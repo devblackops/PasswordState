@@ -15,6 +15,7 @@ limitations under the License.
 #>
 
 function Set-PasswordStatePassword {
+    [Diagnostics.CodeAnalysis.SuppressMessageAttribute('PSAvoidUsingUserNameAndPassWordParams', '')]
     [cmdletbinding(SupportsShouldProcess = $true)]
     param(
         [parameter(Mandatory = $true)]

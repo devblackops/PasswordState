@@ -16,58 +16,53 @@
 #>
 
 function Set-PasswordStateDocument {
-  [cmdletbinding(SupportsShouldProcess = $true)]
-  param(
-    [parameter(Mandatory = $true)]
-    [pscredential]$ApiKey,
+    [cmdletbinding(SupportsShouldProcess = $true)]
+    param(
+        [parameter(Mandatory = $true)]
+        [pscredential]$ApiKey,
 
-    [parameter(Mandatory = $true,ParameterSetName = 'PasswordID')]
-    [int]$PasswordId,
-    
-    [parameter(Mandatory = $true,ParameterSetName = 'PasswordListID')]
-    [int]$PasswordListId,
-
-    [string]$Endpoint = (_GetDefault -Option 'api_endpoint'),
-
-    [parameter(Mandatory = $true,ParameterSetName = 'PasswordListID')]
-    [parameter(Mandatory = $true,ParameterSetName = 'PasswordID')]
-    [String]$DocumentPath,
-
-    [parameter(Mandatory = $true,ParameterSetName = 'PasswordListID')]
-    [parameter(Mandatory = $true,ParameterSetName = 'PasswordID')]
-    [String]$DocumentName,
+        [parameter(Mandatory = $true,ParameterSetName = 'PasswordID')]
+        [int]$PasswordId,
         
-    [parameter(Mandatory = $true,ParameterSetName = 'PasswordListID')]
-    [parameter(Mandatory = $true,ParameterSetName = 'PasswordID')]
-    [String]$DocumentDescription
+        [parameter(Mandatory = $true,ParameterSetName = 'PasswordListID')]
+        [int]$PasswordListId,
 
+        [string]$Endpoint = (_GetDefault -Option 'api_endpoint'),
+
+        [parameter(Mandatory = $true,ParameterSetName = 'PasswordListID')]
+        [parameter(Mandatory = $true,ParameterSetName = 'PasswordID')]
+        [String]$DocumentPath,
+
+        [parameter(Mandatory = $true,ParameterSetName = 'PasswordListID')]
+        [parameter(Mandatory = $true,ParameterSetName = 'PasswordID')]
+        [String]$DocumentName,
+            
+        [parameter(Mandatory = $true,ParameterSetName = 'PasswordListID')]
+        [parameter(Mandatory = $true,ParameterSetName = 'PasswordID')]
+        [String]$DocumentDescription
+    )
+
+    begin {
+        $headers = @{}
+        $headers['APIKey'] = $ApiKey.GetNetworkCredential().password
+    }
+
+    process {          
+        if ($PasswordId) {
+            $uri = "$Endpoint/document/password/$($PasswordID)?DocumentName=$([System.Web.HttpUtility]::UrlEncode($DocumentName))&DocumentDescription=$([System.Web.HttpUtility]::UrlEncode($DocumentDescription))"
+            $id = "PasswordID [$PasswordId]"
+        } else {
+            $uri = "$Endpoint/document/passwordlist/$($PasswordListID)?DocumentName=$([System.Web.HttpUtility]::UrlEncode($DocumentName))&DocumentDescription=$([System.Web.HttpUtility]::UrlEncode($DocumentDescription))"
+            $id = "PasswordListID [$PasswordListId]"
+        }
         
-  )
+        Write-Verbose -Message $uri
+        Write-Verbose -Message $id
+              
 
-  begin {
-    $headers = @{}
-    $headers['APIKey'] = $ApiKey.GetNetworkCredential().password
-  }
-
-  process {
-   
-                
-    If ($PasswordId) {
-      $uri = "$Endpoint/document/password/$($PasswordID)?DocumentName=$([System.Web.HttpUtility]::UrlEncode($DocumentName))&DocumentDescription=$([System.Web.HttpUtility]::UrlEncode($DocumentDescription))"
-      $ID = "PasswordID [$PasswordId]"
+        if ($PSCmdlet.ShouldProcess("Uploading document `nUpload Document.`nDocumentPath : $DocumentPath`nDocumentName : $DocumentName`nDocument Description : $DocumentDescription to $ID")) {
+            $result = Invoke-RestMethod -Uri $uri -Method Post -InFile $DocumentPath -ContentType 'multipart/form-data' -Headers $headers 
+            return $result
+        }
     }
-    else {
-      $uri = "$Endpoint/document/passwordlist/$($PasswordListID)?DocumentName=$([System.Web.HttpUtility]::UrlEncode($DocumentName))&DocumentDescription=$([System.Web.HttpUtility]::UrlEncode($DocumentDescription))"
-      $ID = "PasswordListID [$PasswordListId]"
-    }
-    
-    Write-Verbose -Message $uri
-    Write-Verbose -Message $ID
-           
-
-    If ($PSCmdlet.ShouldProcess("Uploading document `nUpload Document.`nDocumentPath : $DocumentPath`nDocumentName : $DocumentName`nDocument Description : $DocumentDescription to $ID")) {
-      $result = Invoke-RestMethod -Uri $uri -Method Post -InFile $DocumentPath -ContentType 'multipart/form-data' -Headers $headers 
-      return $result
-    }
-  }
 }
