@@ -1,3 +1,6 @@
+## 1.2.2 (2016-10-11)
+  * Fixed bug in New-PasswordStatePassword not returning newly created password
+
 ## 1.2.1 (2016-08-23)
   * Fixed bug in New-PasswordStatePassword when trying to display -WhatIf message when a document is not being uploaded
 

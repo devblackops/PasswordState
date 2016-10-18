@@ -173,7 +173,7 @@ function New-PasswordStatePassword
 
   Write-Verbose -Message $json
 
-  $Output = @()
+  $output = @()
 
   $DocumentInfo = $null
   If ($DocumentPath) {
@@ -182,16 +182,15 @@ function New-PasswordStatePassword
 
   If ($PSCmdlet.ShouldProcess("Creating new password entry: $Title `n$json`n$DocumentInfo")) {
     $result = Invoke-RestMethod -Uri $uri -Method Post -ContentType "application/$Format" -Headers $headers -Body $json
-    $Output += $result
+    $output += $result
     
     If ($DocumentPath) {
       $uri = "$Endpoint/document/password/$($result.PasswordID)?DocumentName=$([System.Web.HttpUtility]::UrlEncode($DocumentName))&DocumentDescription=$([System.Web.HttpUtility]::UrlEncode($DocumentDescription))"
       Write-Verbose  -Message $uri 
 
       $result = Invoke-RestMethod -Uri $uri -Method Post -InFile $DocumentPath -ContentType 'multipart/form-data' -Headers $headers 
-      $Output += $result
-      
-      return $Output
+      $output += $result    
     }
+    return $output
   }
 }
