@@ -16,7 +16,11 @@ limitations under the License.
 
 function _SetCertPolicy {
     # Allow untrusted SSL certs
-    Add-Type -TypeDefinition @"
+    if ($PSVersionTable.PSEdition -eq 'Core') {
+        $PSDefaultParameterValues.Add("Invoke-RestMethod:SkipCertificateCheck", $true)
+        $PSDefaultParameterValues.Add("Invoke-WebRequest:SkipCertificateCheck", $true)
+    } else {
+        Add-Type -TypeDefinition @"
         using System.Net;
         using System.Security.Cryptography.X509Certificates;
         public class TrustAllCertsPolicy : ICertificatePolicy {
@@ -27,5 +31,6 @@ function _SetCertPolicy {
             }
         }
 "@
-    [System.Net.ServicePointManager]::CertificatePolicy = New-Object -TypeName TrustAllCertsPolicy
+        [System.Net.ServicePointManager]::CertificatePolicy = New-Object -TypeName TrustAllCertsPolicy
+    }
 }
