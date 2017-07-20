@@ -1,3 +1,7 @@
+# 1.2.3 (2017-07-19)
+  * PR8 - Added support for PowerShell Core by using new method in Invoke-RestMethod to skip certificate checking.
+    Existing method (using C#) is still in place for PowerShell 5.x and below. (via @ephos)
+
 ## 1.2.2 (2016-10-11)
   * Fixed bug in New-PasswordStatePassword not returning newly created password
 
