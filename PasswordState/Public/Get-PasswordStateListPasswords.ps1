@@ -28,7 +28,9 @@ function Get-PasswordStateListPasswords {
         [ValidateSet('json','xml')]
         [string]$Format = 'json',
 
-        [switch]$UseV6Api
+        [switch]$UseV6Api,
+
+        [switch]$ExcludePasswords
     )
 
     $headers = @{}
@@ -41,6 +43,7 @@ function Get-PasswordStateListPasswords {
         $uri = "$Endpoint/passwords/$PasswordListId" + "?apikey=$($ApiKey.GetNetworkCredential().password)&format=$Format&QueryAll"
     }  
 
+    if ($ExcludePasswords){$uri=$uri+"&ExcludePassword=true"}
     $result = Invoke-RestMethod -Uri $uri -Method Get -ContentType "application/$Format" -Headers $headers
     return $result
 }
