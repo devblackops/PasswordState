@@ -1,12 +1,15 @@
----
+﻿---
 external help file: PasswordState-help.xml
-online version: 
+Module Name: PasswordState
+online version:
 schema: 2.0.0
 ---
 
 # Get-PasswordStateAllPasswords
+
 ## SYNOPSIS
 Get all passwords in all shared password lists in PasswordState.
+
 ## SYNTAX
 
 ```
@@ -16,14 +19,16 @@ Get-PasswordStateAllPasswords [-SystemApiKey] <PSCredential> [[-Endpoint] <Strin
 
 ## DESCRIPTION
 Get all passwords in all shared password lists in PasswordState.
+
 ## EXAMPLES
 
-### -------------------------- EXAMPLE 1 --------------------------
+### EXAMPLE 1
 ```
 $allPasswords = Get-PasswordStateAllPasswords -SystemApiKey $sysKey -Endpoint 'https://passwordstate.local'
 ```
 
 Get all password entries from all lists using the system API key
+
 ## PARAMETERS
 
 ### -SystemApiKey
@@ -32,11 +37,11 @@ The system API key for PasswordState.
 ```yaml
 Type: PSCredential
 Parameter Sets: (All)
-Aliases: 
+Aliases:
 
 Required: True
 Position: 1
-Default value: 
+Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
@@ -49,7 +54,7 @@ https://passwordstate.local)
 ```yaml
 Type: String
 Parameter Sets: (All)
-Aliases: 
+Aliases:
 
 Required: False
 Position: 2
@@ -64,7 +69,7 @@ Prevent audit records from being generated on every password that is being expor
 ```yaml
 Type: SwitchParameter
 Parameter Sets: (All)
-Aliases: 
+Aliases:
 
 Required: False
 Position: Named
@@ -80,7 +85,7 @@ Choose either json or xml.
 ```yaml
 Type: String
 Parameter Sets: (All)
-Aliases: 
+Aliases:
 
 Required: False
 Position: 3
@@ -98,7 +103,7 @@ backwards compatibility with older PasswordState versions.
 ```yaml
 Type: SwitchParameter
 Parameter Sets: (All)
-Aliases: 
+Aliases:
 
 Required: False
 Position: Named
@@ -109,6 +114,7 @@ Accept wildcard characters: False
 
 ### CommonParameters
 This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see about_CommonParameters (http://go.microsoft.com/fwlink/?LinkID=113216).
+
 ## INPUTS
 
 ## OUTPUTS
@@ -116,4 +122,3 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ## NOTES
 
 ## RELATED LINKS
-

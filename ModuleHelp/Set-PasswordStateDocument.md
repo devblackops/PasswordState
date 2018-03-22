@@ -1,10 +1,12 @@
----
+﻿---
 external help file: PasswordState-help.xml
-online version: 
+Module Name: PasswordState
+online version:
 schema: 2.0.0
 ---
 
 # Set-PasswordStateDocument
+
 ## SYNOPSIS
 Attach a document to an existing Password or PasswordList
 
@@ -14,12 +16,14 @@ Attach a document to an existing Password or PasswordList
 ```
 Set-PasswordStateDocument -ApiKey <PSCredential> -PasswordId <Int32> [-Endpoint <String>]
  -DocumentPath <String> -DocumentName <String> -DocumentDescription <String> [-WhatIf] [-Confirm]
+ [<CommonParameters>]
 ```
 
 ### PasswordListID
 ```
 Set-PasswordStateDocument -ApiKey <PSCredential> -PasswordListId <Int32> [-Endpoint <String>]
  -DocumentPath <String> -DocumentName <String> -DocumentDescription <String> [-WhatIf] [-Confirm]
+ [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -42,11 +46,11 @@ The API key for the password list in PasswordState.
 ```yaml
 Type: PSCredential
 Parameter Sets: (All)
-Aliases: 
+Aliases:
 
 Required: True
 Position: Named
-Default value: 
+Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
@@ -61,7 +65,7 @@ Aliases: cf
 
 Required: False
 Position: Named
-Default value: 
+Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
@@ -72,11 +76,11 @@ The description of the document shown in PasswordState
 ```yaml
 Type: String
 Parameter Sets: (All)
-Aliases: 
+Aliases:
 
 Required: True
 Position: Named
-Default value: 
+Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
@@ -87,11 +91,11 @@ The name of the file to be displayed in PasswordState, this is also the name use
 ```yaml
 Type: String
 Parameter Sets: (All)
-Aliases: 
+Aliases:
 
 Required: True
 Position: Named
-Default value: 
+Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
@@ -102,11 +106,11 @@ This is the path to the file, that is to be uploaded to PasswordState
 ```yaml
 Type: String
 Parameter Sets: (All)
-Aliases: 
+Aliases:
 
 Required: True
 Position: Named
-Default value: 
+Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
@@ -117,11 +121,11 @@ The Uri of your PasswordState site.
 ```yaml
 Type: String
 Parameter Sets: (All)
-Aliases: 
+Aliases:
 
 Required: False
 Position: Named
-Default value: 
+Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
@@ -132,11 +136,11 @@ The ID of the password that you want to attach a document to.
 ```yaml
 Type: Int32
 Parameter Sets: PasswordID
-Aliases: 
+Aliases:
 
 Required: True
 Position: Named
-Default value: 
+Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
@@ -147,11 +151,11 @@ The ID of the password list that you want to attach a document to.
 ```yaml
 Type: Int32
 Parameter Sets: PasswordListID
-Aliases: 
+Aliases:
 
 Required: True
 Position: Named
-Default value: 
+Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
@@ -166,15 +170,17 @@ Aliases: wi
 
 Required: False
 Position: Named
-Default value: 
+Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
+### CommonParameters
+This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see about_CommonParameters (http://go.microsoft.com/fwlink/?LinkID=113216).
+
 ## INPUTS
 
 ### None
-
 
 ## OUTPUTS
 
@@ -183,4 +189,3 @@ Accept wildcard characters: False
 ## NOTES
 
 ## RELATED LINKS
-

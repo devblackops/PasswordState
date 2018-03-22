@@ -1,10 +1,12 @@
----
+﻿---
 external help file: PasswordState-help.xml
-online version: 
+Module Name: PasswordState
+online version:
 schema: 2.0.0
 ---
 
 # New-PasswordStatePassword
+
 ## SYNOPSIS
 Create a new password in PasswordState.
 
@@ -19,6 +21,7 @@ New-PasswordStatePassword -ApiKey <PSCredential> -PasswordListId <Int32> [-Endpo
  [-GenericField9 <String>] [-GenericField10 <String>] [-Notes <String>] [-AccountTypeID <Int32>]
  [-Url <String>] [-ExpiryDate <String>] [-AllowExport <Boolean>] [-GenerateGenFieldPassword] [-UseV6Api]
  -DocumentPath <String> -DocumentName <String> -DocumentDescription <String> [-WhatIf] [-Confirm]
+ [<CommonParameters>]
 ```
 
 ### UsePassword
@@ -29,7 +32,7 @@ New-PasswordStatePassword -ApiKey <PSCredential> -PasswordListId <Int32> [-Endpo
  [-GenericField5 <String>] [-GenericField6 <String>] [-GenericField7 <String>] [-GenericField8 <String>]
  [-GenericField9 <String>] [-GenericField10 <String>] [-Notes <String>] [-AccountTypeID <Int32>]
  [-Url <String>] [-ExpiryDate <String>] [-AllowExport <Boolean>] [-GenerateGenFieldPassword] [-UseV6Api]
- [-WhatIf] [-Confirm]
+ [-WhatIf] [-Confirm] [<CommonParameters>]
 ```
 
 ### GenPasswordWithFile
@@ -40,7 +43,7 @@ New-PasswordStatePassword -ApiKey <PSCredential> -PasswordListId <Int32> [-Endpo
  [-GenericField6 <String>] [-GenericField7 <String>] [-GenericField8 <String>] [-GenericField9 <String>]
  [-GenericField10 <String>] [-Notes <String>] [-AccountTypeID <Int32>] [-Url <String>] [-ExpiryDate <String>]
  [-AllowExport <Boolean>] [-GeneratePassword] [-GenerateGenFieldPassword] [-UseV6Api] -DocumentPath <String>
- -DocumentName <String> -DocumentDescription <String> [-WhatIf] [-Confirm]
+ -DocumentName <String> -DocumentDescription <String> [-WhatIf] [-Confirm] [<CommonParameters>]
 ```
 
 ### GenPassword
@@ -51,6 +54,7 @@ New-PasswordStatePassword -ApiKey <PSCredential> -PasswordListId <Int32> [-Endpo
  [-GenericField6 <String>] [-GenericField7 <String>] [-GenericField8 <String>] [-GenericField9 <String>]
  [-GenericField10 <String>] [-Notes <String>] [-AccountTypeID <Int32>] [-Url <String>] [-ExpiryDate <String>]
  [-AllowExport <Boolean>] [-GeneratePassword] [-GenerateGenFieldPassword] [-UseV6Api] [-WhatIf] [-Confirm]
+ [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -58,7 +62,7 @@ Create a new password in PasswordState.
 
 ## EXAMPLES
 
-### -------------------------- EXAMPLE 1 --------------------------
+### EXAMPLE 1
 ```
 New-PasswordStatePassword -ApiKey $key -PasswordListId 1 -Title 'testPassword' -Username 'testPassword' -Description 'this is a test' -GeneratePassword
 ```
@@ -73,11 +77,11 @@ The API key for the password list in PasswordState.
 ```yaml
 Type: PSCredential
 Parameter Sets: (All)
-Aliases: 
+Aliases:
 
 Required: True
 Position: Named
-Default value: 
+Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
@@ -88,7 +92,7 @@ The Id of the password list in PasswordState.
 ```yaml
 Type: Int32
 Parameter Sets: (All)
-Aliases: 
+Aliases:
 
 Required: True
 Position: Named
@@ -105,7 +109,7 @@ https://passwordstate.local)
 ```yaml
 Type: String
 Parameter Sets: (All)
-Aliases: 
+Aliases:
 
 Required: False
 Position: Named
@@ -121,7 +125,7 @@ Choose either json or xml.
 ```yaml
 Type: String
 Parameter Sets: (All)
-Aliases: 
+Aliases:
 
 Required: False
 Position: Named
@@ -136,11 +140,11 @@ The title field for the password entry.
 ```yaml
 Type: String
 Parameter Sets: (All)
-Aliases: 
+Aliases:
 
 Required: True
 Position: Named
-Default value: 
+Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
@@ -151,11 +155,11 @@ The password field for the password entry.
 ```yaml
 Type: SecureString
 Parameter Sets: UsePasswordWithFile, UsePassword
-Aliases: 
+Aliases:
 
 Required: True
 Position: Named
-Default value: 
+Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
@@ -166,11 +170,11 @@ The username field for the password entry.
 ```yaml
 Type: String
 Parameter Sets: (All)
-Aliases: 
+Aliases:
 
 Required: False
 Position: Named
-Default value: 
+Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
@@ -181,11 +185,11 @@ The description field for the password entry.
 ```yaml
 Type: String
 Parameter Sets: (All)
-Aliases: 
+Aliases:
 
 Required: False
 Position: Named
-Default value: 
+Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
@@ -196,11 +200,11 @@ The generic field 1 for the password entry.
 ```yaml
 Type: String
 Parameter Sets: (All)
-Aliases: 
+Aliases:
 
 Required: False
 Position: Named
-Default value: 
+Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
@@ -211,11 +215,11 @@ The generic field 2 for the password entry.
 ```yaml
 Type: String
 Parameter Sets: (All)
-Aliases: 
+Aliases:
 
 Required: False
 Position: Named
-Default value: 
+Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
@@ -226,11 +230,11 @@ The generic field 3 for the password entry.
 ```yaml
 Type: String
 Parameter Sets: (All)
-Aliases: 
+Aliases:
 
 Required: False
 Position: Named
-Default value: 
+Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
@@ -241,11 +245,11 @@ The generic field 4 for the password entry.
 ```yaml
 Type: String
 Parameter Sets: (All)
-Aliases: 
+Aliases:
 
 Required: False
 Position: Named
-Default value: 
+Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
@@ -256,11 +260,11 @@ The generic field 5 for the password entry.
 ```yaml
 Type: String
 Parameter Sets: (All)
-Aliases: 
+Aliases:
 
 Required: False
 Position: Named
-Default value: 
+Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
@@ -271,11 +275,11 @@ The generic field 6 for the password entry.
 ```yaml
 Type: String
 Parameter Sets: (All)
-Aliases: 
+Aliases:
 
 Required: False
 Position: Named
-Default value: 
+Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
@@ -286,11 +290,11 @@ The generic field 7 for the password entry.
 ```yaml
 Type: String
 Parameter Sets: (All)
-Aliases: 
+Aliases:
 
 Required: False
 Position: Named
-Default value: 
+Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
@@ -301,11 +305,11 @@ The generic field 8 for the password entry.
 ```yaml
 Type: String
 Parameter Sets: (All)
-Aliases: 
+Aliases:
 
 Required: False
 Position: Named
-Default value: 
+Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
@@ -316,11 +320,11 @@ The generic field 9 for the password entry.
 ```yaml
 Type: String
 Parameter Sets: (All)
-Aliases: 
+Aliases:
 
 Required: False
 Position: Named
-Default value: 
+Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
@@ -331,11 +335,11 @@ The generic field 10 for the password entry.
 ```yaml
 Type: String
 Parameter Sets: (All)
-Aliases: 
+Aliases:
 
 Required: False
 Position: Named
-Default value: 
+Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
@@ -346,11 +350,11 @@ The notes field for the password entry.
 ```yaml
 Type: String
 Parameter Sets: (All)
-Aliases: 
+Aliases:
 
 Required: False
 Position: Named
-Default value: 
+Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
@@ -361,7 +365,7 @@ The account type id number for the password entry.
 ```yaml
 Type: Int32
 Parameter Sets: (All)
-Aliases: 
+Aliases:
 
 Required: False
 Position: Named
@@ -376,11 +380,11 @@ The url field for the password entry.
 ```yaml
 Type: String
 Parameter Sets: (All)
-Aliases: 
+Aliases:
 
 Required: False
 Position: Named
-Default value: 
+Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
@@ -391,11 +395,11 @@ The expire field for the password entry.
 ```yaml
 Type: String
 Parameter Sets: (All)
-Aliases: 
+Aliases:
 
 Required: False
 Position: Named
-Default value: 
+Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
@@ -406,7 +410,7 @@ Allow the password to be exported
 ```yaml
 Type: Boolean
 Parameter Sets: (All)
-Aliases: 
+Aliases:
 
 Required: False
 Position: Named
@@ -422,7 +426,7 @@ If the Password List is set to use the user's Password Generator options, the De
 ```yaml
 Type: SwitchParameter
 Parameter Sets: GenPasswordWithFile, GenPassword
-Aliases: 
+Aliases:
 
 Required: True
 Position: Named
@@ -438,7 +442,7 @@ If the Password List or Generic Field is set to use the user's Password Generato
 ```yaml
 Type: SwitchParameter
 Parameter Sets: (All)
-Aliases: 
+Aliases:
 
 Required: False
 Position: Named
@@ -454,7 +458,7 @@ This switch is used for  backwards compatibility with older PasswordState versio
 ```yaml
 Type: SwitchParameter
 Parameter Sets: (All)
-Aliases: 
+Aliases:
 
 Required: False
 Position: Named
@@ -499,11 +503,11 @@ The description of the document shown in PasswordState
 ```yaml
 Type: String
 Parameter Sets: UsePasswordWithFile, GenPasswordWithFile
-Aliases: 
+Aliases:
 
 Required: True
 Position: Named
-Default value: 
+Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
@@ -514,11 +518,11 @@ The name of the file to be displayed in PasswordState, this is also the name use
 ```yaml
 Type: String
 Parameter Sets: UsePasswordWithFile, GenPasswordWithFile
-Aliases: 
+Aliases:
 
 Required: True
 Position: Named
-Default value: 
+Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
@@ -529,14 +533,17 @@ This is the path to the file, that is to be uploaded to PasswordState
 ```yaml
 Type: String
 Parameter Sets: UsePasswordWithFile, GenPasswordWithFile
-Aliases: 
+Aliases:
 
 Required: True
 Position: Named
-Default value: 
+Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
+
+### CommonParameters
+This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see about_CommonParameters (http://go.microsoft.com/fwlink/?LinkID=113216).
 
 ## INPUTS
 
@@ -545,4 +552,3 @@ Accept wildcard characters: False
 ## NOTES
 
 ## RELATED LINKS
-

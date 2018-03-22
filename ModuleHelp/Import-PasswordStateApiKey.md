@@ -1,12 +1,15 @@
----
+﻿---
 external help file: PasswordState-help.xml
-online version: 
+Module Name: PasswordState
+online version:
 schema: 2.0.0
 ---
 
 # Import-PasswordStateApiKey
+
 ## SYNOPSIS
 Imports a PasswordState API key.
+
 ## SYNTAX
 
 ```
@@ -15,20 +18,23 @@ Import-PasswordStateApiKey [-Name] <String[]> [[-Repository] <String>] [<CommonP
 
 ## DESCRIPTION
 Imports a given PasswordState API key from the repository.
+
 ## EXAMPLES
 
-### -------------------------- EXAMPLE 1 --------------------------
+### EXAMPLE 1
 ```
 $cred = Import-PasswordStateApiKey -Name personal
 ```
 
 Import the 'personal' API key from the default repository location.
-### -------------------------- EXAMPLE 2 --------------------------
+
+### EXAMPLE 2
 ```
 $cred = Import-PasswordStateApiKey -Name personal -Repository c:\users\joe\data\.customrepo
 ```
 
 Import the 'personal' API key from the 'c:\users\joe\data\.customrepo' repository.
+
 ## PARAMETERS
 
 ### -Name
@@ -38,11 +44,11 @@ Do not include the file extension.
 ```yaml
 Type: String[]
 Parameter Sets: (All)
-Aliases: 
+Aliases:
 
 Required: True
 Position: 1
-Default value: 
+Default value: None
 Accept pipeline input: True (ByPropertyName, ByValue)
 Accept wildcard characters: False
 ```
@@ -54,7 +60,7 @@ Default is $env:USERPROFILE\.passwordstate
 ```yaml
 Type: String
 Parameter Sets: (All)
-Aliases: 
+Aliases:
 
 Required: False
 Position: 2
@@ -65,6 +71,7 @@ Accept wildcard characters: False
 
 ### CommonParameters
 This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see about_CommonParameters (http://go.microsoft.com/fwlink/?LinkID=113216).
+
 ## INPUTS
 
 ## OUTPUTS
@@ -72,4 +79,3 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ## NOTES
 
 ## RELATED LINKS
-

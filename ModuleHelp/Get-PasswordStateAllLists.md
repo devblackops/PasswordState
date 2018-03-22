@@ -1,12 +1,15 @@
----
+﻿---
 external help file: PasswordState-help.xml
-online version: 
+Module Name: PasswordState
+online version:
 schema: 2.0.0
 ---
 
 # Get-PasswordStateAllLists
+
 ## SYNOPSIS
 Get all shared password lists in PasswordState.
+
 ## SYNTAX
 
 ```
@@ -16,20 +19,23 @@ Get-PasswordStateAllLists [-SystemApiKey] <PSCredential> [[-Endpoint] <String>] 
 
 ## DESCRIPTION
 Get all shared password lists in PasswordState.
+
 ## EXAMPLES
 
-### -------------------------- EXAMPLE 1 --------------------------
+### EXAMPLE 1
 ```
 $lists = Get-PasswordStateList -SystemApiKey $sysKey -Endpoint 'https://passwordstate.local'
 ```
 
 Get all password lists using system API key
-### -------------------------- EXAMPLE 2 --------------------------
+
+### EXAMPLE 2
 ```
 $lists = Get-PasswordStateList -SystemApiKey $sysKey -Endpoint 'https://passwordstate.local' -Format xml
 ```
 
 Get all password lists using system API key in XML format
+
 ## PARAMETERS
 
 ### -SystemApiKey
@@ -38,11 +44,11 @@ The system API key for PasswordState.
 ```yaml
 Type: PSCredential
 Parameter Sets: (All)
-Aliases: 
+Aliases:
 
 Required: True
 Position: 1
-Default value: 
+Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
@@ -55,7 +61,7 @@ https://passwordstate.local)
 ```yaml
 Type: String
 Parameter Sets: (All)
-Aliases: 
+Aliases:
 
 Required: False
 Position: 2
@@ -71,7 +77,7 @@ Choose either json or xml.
 ```yaml
 Type: String
 Parameter Sets: (All)
-Aliases: 
+Aliases:
 
 Required: False
 Position: 3
@@ -89,7 +95,7 @@ backwards compatibility with older PasswordState versions.
 ```yaml
 Type: SwitchParameter
 Parameter Sets: (All)
-Aliases: 
+Aliases:
 
 Required: False
 Position: Named
@@ -100,6 +106,7 @@ Accept wildcard characters: False
 
 ### CommonParameters
 This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see about_CommonParameters (http://go.microsoft.com/fwlink/?LinkID=113216).
+
 ## INPUTS
 
 ## OUTPUTS
@@ -107,4 +114,3 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ## NOTES
 
 ## RELATED LINKS
-

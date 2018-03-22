@@ -1,41 +1,48 @@
----
+﻿---
 external help file: PasswordState-help.xml
-online version: 
+Module Name: PasswordState
+online version:
 schema: 2.0.0
 ---
 
 # Get-PasswordStateListPasswords
+
 ## SYNOPSIS
 Get all passwords in a PasswordState list.
+
 ## SYNTAX
 
 ```
 Get-PasswordStateListPasswords [-ApiKey] <PSCredential> [-PasswordListId] <Int32> [[-Endpoint] <String>]
- [[-Format] <String>] [-UseV6Api] [<CommonParameters>]
+ [[-Format] <String>] [-UseV6Api] [-ExcludePasswords] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
 Get all passwords in a PasswordState list.
+
 ## EXAMPLES
 
-### -------------------------- EXAMPLE 1 --------------------------
+### EXAMPLE 1
 ```
 $passwords = Get-PasswordStateListPasswords -ApiKey $key -PasswordListId 1234 -Endpoint 'https://passwordstate.local'
 ```
 
 Get all password entries from list ID 1234
-### -------------------------- EXAMPLE 2 --------------------------
+
+### EXAMPLE 2
 ```
 $passwords = Get-PasswordStateListPasswords -ApiKey $key -PasswordListId $id -Endpoint 'https://passwordstate.local' -format xml
 ```
 
 Get all password entries from list ID 1234 in XML format
-### -------------------------- EXAMPLE 3 --------------------------
+
+### EXAMPLE 3
 ```
 Get-PasswordStateListPasswords -ApiKey $key -PasswordListId 1234 -Endpoint 'https://passwordstate.local' | fl
 ```
 
 Get all password entries from list ID 1234 and pipe to Format-List
+
 ## PARAMETERS
 
 ### -ApiKey
@@ -44,11 +51,11 @@ The API key for the password list
 ```yaml
 Type: PSCredential
 Parameter Sets: (All)
-Aliases: 
+Aliases:
 
 Required: True
 Position: 1
-Default value: 
+Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
@@ -59,7 +66,7 @@ The Id of the password list in PasswordState.
 ```yaml
 Type: Int32
 Parameter Sets: (All)
-Aliases: 
+Aliases:
 
 Required: True
 Position: 2
@@ -76,7 +83,7 @@ https://passwordstate.local)
 ```yaml
 Type: String
 Parameter Sets: (All)
-Aliases: 
+Aliases:
 
 Required: False
 Position: 3
@@ -92,7 +99,7 @@ Choose either json or xml.
 ```yaml
 Type: String
 Parameter Sets: (All)
-Aliases: 
+Aliases:
 
 Required: False
 Position: 4
@@ -104,13 +111,13 @@ Accept wildcard characters: False
 ### -UseV6Api
 PasswordState versions prior to v7 did not support passing the API key in a HTTP header
 but instead expected the API key to be passed as a query parameter.
-This switch is used for 
+This switch is used for
 backwards compatibility with older PasswordState versions.
 
 ```yaml
 Type: SwitchParameter
 Parameter Sets: (All)
-Aliases: 
+Aliases:
 
 Required: False
 Position: Named
@@ -119,8 +126,24 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
+### -ExcludePasswords
+Exclude the password from return results.
+
+```yaml
+Type: SwitchParameter
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
 ### CommonParameters
 This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see about_CommonParameters (http://go.microsoft.com/fwlink/?LinkID=113216).
+
 ## INPUTS
 
 ## OUTPUTS
@@ -128,4 +151,3 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ## NOTES
 
 ## RELATED LINKS
-

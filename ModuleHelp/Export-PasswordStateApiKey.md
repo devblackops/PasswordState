@@ -1,12 +1,15 @@
----
+﻿---
 external help file: PasswordState-help.xml
-online version: 
+Module Name: PasswordState
+online version:
 schema: 2.0.0
 ---
 
 # Export-PasswordStateApiKey
+
 ## SYNOPSIS
 Exports a PowerShell credential object to the PasswordState key repository.
+
 ## SYNTAX
 
 ```
@@ -15,20 +18,23 @@ Export-PasswordStateApiKey [-ApiKey] <PSCredential[]> [[-Repository] <String>] [
 
 ## DESCRIPTION
 Exports a PowerShell credential object to the PasswordState key repository.
+
 ## EXAMPLES
 
-### -------------------------- EXAMPLE 1 --------------------------
+### EXAMPLE 1
 ```
 Export-PasswordStateApiKey -ApiKey $cred
 ```
 
 Export an API key to the default PasswordState repository
-### -------------------------- EXAMPLE 2 --------------------------
+
+### EXAMPLE 2
 ```
 Export-PasswordStateApiKey -ApiKey $cred -Repository c:\users\joe\data\.customrepo
 ```
 
 Export an API key to the 'c:\users\joe\data\.customrepo' PasswordState repository
+
 ## PARAMETERS
 
 ### -ApiKey
@@ -37,11 +43,11 @@ PowerShell credential object to export.
 ```yaml
 Type: PSCredential[]
 Parameter Sets: (All)
-Aliases: 
+Aliases:
 
 Required: True
 Position: 1
-Default value: 
+Default value: None
 Accept pipeline input: True (ByValue)
 Accept wildcard characters: False
 ```
@@ -53,7 +59,7 @@ Default is $env:USERPROFILE\.passwordstate
 ```yaml
 Type: String
 Parameter Sets: (All)
-Aliases: 
+Aliases:
 
 Required: False
 Position: 2
@@ -64,6 +70,7 @@ Accept wildcard characters: False
 
 ### CommonParameters
 This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see about_CommonParameters (http://go.microsoft.com/fwlink/?LinkID=113216).
+
 ## INPUTS
 
 ## OUTPUTS
@@ -71,4 +78,3 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ## NOTES
 
 ## RELATED LINKS
-

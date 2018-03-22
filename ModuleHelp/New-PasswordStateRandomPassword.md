@@ -1,12 +1,15 @@
----
+﻿---
 external help file: PasswordState-help.xml
-online version: 
+Module Name: PasswordState
+online version:
 schema: 2.0.0
 ---
 
 # New-PasswordStateRandomPassword
+
 ## SYNOPSIS
 Generate a random password from PasswordState.
+
 ## SYNTAX
 
 ### UseGenerator
@@ -27,38 +30,44 @@ New-PasswordStateRandomPassword -ApiKey <PSCredential> [-UseV6Api] [-Endpoint <S
 
 ## DESCRIPTION
 Generate a random password from PasswordState.
+
 ## EXAMPLES
 
-### -------------------------- EXAMPLE 1 --------------------------
+### EXAMPLE 1
 ```
 New-PasswordStateRandomPassword
 ```
 
 Generate a new random password with defaults
-### -------------------------- EXAMPLE 2 --------------------------
+
+### EXAMPLE 2
 ```
 New-PasswordStateRandomPassword -Quantity 10
 ```
 
 Generate 10 random passwords
-### -------------------------- EXAMPLE 3 --------------------------
+
+### EXAMPLE 3
 ```
 New-PasswordStateRandomPassword -Quantity 10 -WordPhrases $false -MinLength 20
 ```
 
 Generate 10 random passwords without word phrases and a minimum length of 20 characters.
-### -------------------------- EXAMPLE 4 --------------------------
+
+### EXAMPLE 4
 ```
 New-PasswordStateRandomPassword -WordPhrases $false -MinLength 20 -UpperCase $true -LowerCase $false
 ```
 
 Generate a random password without word phrases, a minimum length of 20 characters and only uppercase characters.
-### -------------------------- EXAMPLE 5 --------------------------
+
+### EXAMPLE 5
 ```
 New-PasswordStateRandomPassword -MinLength 20 -NumberOfWords 2
 ```
 
 Generate a new random password that is at least 20 characters longs and uses two words.
+
 ## PARAMETERS
 
 ### -ApiKey
@@ -67,11 +76,11 @@ The password generator API key.
 ```yaml
 Type: PSCredential
 Parameter Sets: (All)
-Aliases: 
+Aliases:
 
 Required: True
 Position: Named
-Default value: 
+Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
@@ -85,7 +94,7 @@ backwards compatibility with older PasswordState versions.
 ```yaml
 Type: SwitchParameter
 Parameter Sets: (All)
-Aliases: 
+Aliases:
 
 Required: False
 Position: Named
@@ -102,7 +111,7 @@ https://passwordstate.local)
 ```yaml
 Type: String
 Parameter Sets: (All)
-Aliases: 
+Aliases:
 
 Required: False
 Position: Named
@@ -117,7 +126,7 @@ The quantity of passwords to generate.
 ```yaml
 Type: Int32
 Parameter Sets: (All)
-Aliases: 
+Aliases:
 
 Required: False
 Position: Named
@@ -132,7 +141,7 @@ Include Alphanumerics and special characters.
 ```yaml
 Type: Boolean
 Parameter Sets: NoGenerator
-Aliases: 
+Aliases:
 
 Required: False
 Position: Named
@@ -147,7 +156,7 @@ Include word phrases - a random word will be generated.
 ```yaml
 Type: Boolean
 Parameter Sets: NoGenerator
-Aliases: 
+Aliases:
 
 Required: False
 Position: Named
@@ -162,7 +171,7 @@ Minimum length for alphanumercis and special characters.
 ```yaml
 Type: Int32
 Parameter Sets: NoGenerator
-Aliases: 
+Aliases:
 
 Required: False
 Position: Named
@@ -177,7 +186,7 @@ Maximum length for alphanumercis and special characters.
 ```yaml
 Type: Int32
 Parameter Sets: NoGenerator
-Aliases: 
+Aliases:
 
 Required: False
 Position: Named
@@ -192,7 +201,7 @@ Include lowercase characters.
 ```yaml
 Type: Boolean
 Parameter Sets: NoGenerator
-Aliases: 
+Aliases:
 
 Required: False
 Position: Named
@@ -207,7 +216,7 @@ Include uppercase characters.
 ```yaml
 Type: Boolean
 Parameter Sets: NoGenerator
-Aliases: 
+Aliases:
 
 Required: False
 Position: Named
@@ -222,7 +231,7 @@ Include numeric characters.
 ```yaml
 Type: Boolean
 Parameter Sets: NoGenerator
-Aliases: 
+Aliases:
 
 Required: False
 Position: Named
@@ -237,7 +246,7 @@ Include higher ratio of alphanumerics vs special characters.
 ```yaml
 Type: Boolean
 Parameter Sets: NoGenerator
-Aliases: 
+Aliases:
 
 Required: False
 Position: Named
@@ -252,7 +261,7 @@ Include ambiguous characters - such as I, l, and 1.
 ```yaml
 Type: Boolean
 Parameter Sets: NoGenerator
-Aliases: 
+Aliases:
 
 Required: False
 Position: Named
@@ -267,7 +276,7 @@ Include special characters.
 ```yaml
 Type: Boolean
 Parameter Sets: NoGenerator
-Aliases: 
+Aliases:
 
 Required: False
 Position: Named
@@ -282,11 +291,11 @@ List of special characters - such as !#$%^&*+/=_-.
 ```yaml
 Type: String
 Parameter Sets: NoGenerator
-Aliases: 
+Aliases:
 
 Required: False
 Position: Named
-Default value: 
+Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
@@ -297,7 +306,7 @@ Include brackets.
 ```yaml
 Type: Boolean
 Parameter Sets: NoGenerator
-Aliases: 
+Aliases:
 
 Required: False
 Position: Named
@@ -312,11 +321,11 @@ List of brackets - such as \[\](){}\<\>.
 ```yaml
 Type: String
 Parameter Sets: NoGenerator
-Aliases: 
+Aliases:
 
 Required: False
 Position: Named
-Default value: 
+Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
@@ -327,7 +336,7 @@ The number of words to include.
 ```yaml
 Type: Int32
 Parameter Sets: NoGenerator
-Aliases: 
+Aliases:
 
 Required: False
 Position: Named
@@ -342,7 +351,7 @@ Maximum word length to generate.
 ```yaml
 Type: Int32
 Parameter Sets: NoGenerator
-Aliases: 
+Aliases:
 
 Required: False
 Position: Named
@@ -357,7 +366,7 @@ P to Prefix the Word, A to Append and I to Insert.
 ```yaml
 Type: String
 Parameter Sets: NoGenerator
-Aliases: 
+Aliases:
 
 Required: False
 Position: Named
@@ -372,7 +381,7 @@ Separate the generated Words with S for Spaces, D for Dashes and N for No Separa
 ```yaml
 Type: String
 Parameter Sets: NoGenerator
-Aliases: 
+Aliases:
 
 Required: False
 Position: Named
@@ -387,7 +396,7 @@ Password generate policy Id from PasswordState.
 ```yaml
 Type: Int32
 Parameter Sets: UseGenerator
-Aliases: 
+Aliases:
 
 Required: True
 Position: Named
@@ -406,7 +415,7 @@ Aliases: wi
 
 Required: False
 Position: Named
-Default value: 
+Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
@@ -421,13 +430,14 @@ Aliases: cf
 
 Required: False
 Position: Named
-Default value: 
+Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
 ### CommonParameters
 This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see about_CommonParameters (http://go.microsoft.com/fwlink/?LinkID=113216).
+
 ## INPUTS
 
 ## OUTPUTS
@@ -435,4 +445,3 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ## NOTES
 
 ## RELATED LINKS
-

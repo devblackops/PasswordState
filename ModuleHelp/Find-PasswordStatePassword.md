@@ -1,12 +1,15 @@
----
+﻿---
 external help file: PasswordState-help.xml
-online version: 
+Module Name: PasswordState
+online version:
 schema: 2.0.0
 ---
 
 # Find-PasswordStatePassword
+
 ## SYNOPSIS
 Finds a password entries using criteria
+
 ## SYNTAX
 
 ### ListSearch (Default)
@@ -37,14 +40,16 @@ Find-PasswordStatePassword [-Endpoint <String>] -PasswordListId <Int32> -SearchS
 
 ## DESCRIPTION
 Finds a password entries using criteria
+
 ## EXAMPLES
 
-### -------------------------- EXAMPLE 1 --------------------------
+### EXAMPLE 1
 ```
 Find-PasswordStatePassword -ApiKey $key -PasswordListId 1 -Title 'test'
 ```
 
 Find password in list ID 1 with 'test' in the title
+
 ## PARAMETERS
 
 ### -ApiKey
@@ -53,11 +58,11 @@ The API key for the password list in PasswordState.
 ```yaml
 Type: PSCredential
 Parameter Sets: ListSearch
-Aliases: 
+Aliases:
 
 Required: True
 Position: Named
-Default value: 
+Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
@@ -68,11 +73,11 @@ The system API key for PasswordState.
 ```yaml
 Type: PSCredential
 Parameter Sets: GlobalSearch
-Aliases: 
+Aliases:
 
 Required: True
 Position: Named
-Default value: 
+Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
@@ -85,7 +90,7 @@ https://passwordstate.local)
 ```yaml
 Type: String
 Parameter Sets: (All)
-Aliases: 
+Aliases:
 
 Required: False
 Position: Named
@@ -100,7 +105,7 @@ The Id of the password list in PasswordState.
 ```yaml
 Type: Int32
 Parameter Sets: ListSearch, GeneralSearch
-Aliases: 
+Aliases:
 
 Required: True
 Position: Named
@@ -115,11 +120,11 @@ Search text
 ```yaml
 Type: String
 Parameter Sets: GeneralSearch
-Aliases: 
+Aliases:
 
 Required: True
 Position: Named
-Default value: 
+Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
@@ -130,11 +135,11 @@ Search for text in Title field
 ```yaml
 Type: String
 Parameter Sets: ListSearch, GlobalSearch
-Aliases: 
+Aliases:
 
 Required: False
 Position: Named
-Default value: 
+Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
@@ -145,11 +150,11 @@ Search for text in Username field
 ```yaml
 Type: String
 Parameter Sets: ListSearch, GlobalSearch
-Aliases: 
+Aliases:
 
 Required: False
 Position: Named
-Default value: 
+Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
@@ -160,11 +165,11 @@ Search for text in Description field
 ```yaml
 Type: String
 Parameter Sets: ListSearch, GlobalSearch
-Aliases: 
+Aliases:
 
 Required: False
 Position: Named
-Default value: 
+Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
@@ -175,11 +180,11 @@ Search for text in GenericField1 field
 ```yaml
 Type: String
 Parameter Sets: ListSearch, GlobalSearch
-Aliases: 
+Aliases:
 
 Required: False
 Position: Named
-Default value: 
+Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
@@ -190,11 +195,11 @@ Search for text in GenericField2 field
 ```yaml
 Type: String
 Parameter Sets: ListSearch, GlobalSearch
-Aliases: 
+Aliases:
 
 Required: False
 Position: Named
-Default value: 
+Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
@@ -205,11 +210,11 @@ Search for text in GenericField3 field
 ```yaml
 Type: String
 Parameter Sets: ListSearch, GlobalSearch
-Aliases: 
+Aliases:
 
 Required: False
 Position: Named
-Default value: 
+Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
@@ -220,11 +225,11 @@ Search for text in GenericField4 field
 ```yaml
 Type: String
 Parameter Sets: ListSearch, GlobalSearch
-Aliases: 
+Aliases:
 
 Required: False
 Position: Named
-Default value: 
+Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
@@ -235,11 +240,11 @@ Search for text in GenericField5 field
 ```yaml
 Type: String
 Parameter Sets: ListSearch, GlobalSearch
-Aliases: 
+Aliases:
 
 Required: False
 Position: Named
-Default value: 
+Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
@@ -250,11 +255,11 @@ Search for text in GenericField6 field
 ```yaml
 Type: String
 Parameter Sets: ListSearch, GlobalSearch
-Aliases: 
+Aliases:
 
 Required: False
 Position: Named
-Default value: 
+Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
@@ -265,11 +270,11 @@ Search for text in GenericField7 field
 ```yaml
 Type: String
 Parameter Sets: ListSearch, GlobalSearch
-Aliases: 
+Aliases:
 
 Required: False
 Position: Named
-Default value: 
+Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
@@ -280,11 +285,11 @@ Search for text in GenericField8 field
 ```yaml
 Type: String
 Parameter Sets: ListSearch, GlobalSearch
-Aliases: 
+Aliases:
 
 Required: False
 Position: Named
-Default value: 
+Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
@@ -295,11 +300,11 @@ Search for text in GenericField9 field
 ```yaml
 Type: String
 Parameter Sets: ListSearch, GlobalSearch
-Aliases: 
+Aliases:
 
 Required: False
 Position: Named
-Default value: 
+Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
@@ -310,11 +315,11 @@ Search for text in GenericField10 field
 ```yaml
 Type: String
 Parameter Sets: ListSearch, GlobalSearch
-Aliases: 
+Aliases:
 
 Required: False
 Position: Named
-Default value: 
+Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
@@ -325,11 +330,11 @@ Search for text in Notes field
 ```yaml
 Type: String
 Parameter Sets: ListSearch, GlobalSearch
-Aliases: 
+Aliases:
 
 Required: False
 Position: Named
-Default value: 
+Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
@@ -340,11 +345,11 @@ Search for text in Url field
 ```yaml
 Type: String
 Parameter Sets: ListSearch, GlobalSearch
-Aliases: 
+Aliases:
 
 Required: False
 Position: Named
-Default value: 
+Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
@@ -355,11 +360,11 @@ Search passwords expiring before this date
 ```yaml
 Type: DateTime
 Parameter Sets: ListSearch, GlobalSearch
-Aliases: 
+Aliases:
 
 Required: False
 Position: Named
-Default value: 
+Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
@@ -370,11 +375,11 @@ Search passwords expiring after this date
 ```yaml
 Type: DateTime
 Parameter Sets: ListSearch, GlobalSearch
-Aliases: 
+Aliases:
 
 Required: False
 Position: Named
-Default value: 
+Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
@@ -386,7 +391,7 @@ Choose either json or xml.
 ```yaml
 Type: String
 Parameter Sets: ListSearch, GlobalSearch
-Aliases: 
+Aliases:
 
 Required: False
 Position: Named
@@ -404,7 +409,7 @@ backwards compatibility with older PasswordState versions.
 ```yaml
 Type: SwitchParameter
 Parameter Sets: (All)
-Aliases: 
+Aliases:
 
 Required: False
 Position: Named
@@ -415,6 +420,7 @@ Accept wildcard characters: False
 
 ### CommonParameters
 This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see about_CommonParameters (http://go.microsoft.com/fwlink/?LinkID=113216).
+
 ## INPUTS
 
 ## OUTPUTS
@@ -422,4 +428,3 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ## NOTES
 
 ## RELATED LINKS
-
