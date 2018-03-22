@@ -3,6 +3,10 @@ param(
     [string[]]$Task = 'default'
 )
 
+$PSDefaultParameterValues = @{
+    'Install-Module:Scope' = 'CurrentUser'
+}
+
 function Resolve-Module {
     [Cmdletbinding()]
     param (

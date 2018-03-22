@@ -5,7 +5,6 @@ properties {
     }
 
     $sut = "$projectRoot\PasswordState"
-    $manifest = "$sut\PasswordState.psd1"
     $tests = "$projectRoot\Tests"
 
     $psVersion = $PSVersionTable.PSVersion.Major
@@ -19,7 +18,7 @@ task Init {
     Get-Item ENV:BH*
 
     $modules = 'Pester', 'PSDeploy', 'PSScriptAnalyzer', 'platyPS'
-    Install-Module $modules -Repository PSGallery -Confirm:$false
+    Install-Module $modules -Repository PSGallery -Scope CurrentUser -Confirm:$false
     Import-Module $modules -Verbose:$false -Force
 }
 
@@ -42,6 +41,7 @@ task Pester -Depends Init {
 }
 
 task UpdateHelpMarkdown -Depends Init {
+    Import-Module -Name $env:BHPSModuleManifest -Force
     Update-MarkdownHelp -Path "$projectRoot\ModuleHelp\*" -Encoding ([System.Text.Encoding]::UTF8)
 }
 
@@ -55,7 +55,7 @@ task ExportFunctions {
     $files | ForEach-Object {
         $functions += $_.Split('.')[0]
     }
-    Update-ModuleManifest -Path $manifest -FunctionsToExport $functions
+    Update-ModuleManifest -Path $env:BHPSModuleManifest -FunctionsToExport $functions
 }
 
 task Deploy -depends Test {
