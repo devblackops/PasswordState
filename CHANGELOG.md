@@ -1,3 +1,6 @@
+# 1.3.0 (2018-03-21)
+  * PR10 - Add support for excluding passwords in Get-PasswordStateListPasswords function. (via [@boojew](https://github.com/boojew))
+
 # 1.2.3 (2017-07-19)
   * PR8 - Added support for PowerShell Core by using new method in Invoke-RestMethod to skip certificate checking.
     Existing method (using C#) is still in place for PowerShell 5.x and below. (via @ephos)
