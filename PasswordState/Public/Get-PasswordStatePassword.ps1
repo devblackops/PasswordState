@@ -15,10 +15,12 @@ limitations under the License.
 #>
 
 function Get-PasswordStatePassword {
-    [cmdletbinding()]
+    [cmdletbinding(DefaultParameterSetName = 'Api')]
     param(
-        [parameter(Mandatory = $true)]
-        [pscredential]$ApiKey,
+        [parameter(Mandatory = $false,ParameterSetName = 'WinApi')]
+        [parameter(Mandatory = $true, ParameterSetName = 'Api')]
+        [Alias('ApiKey')]
+        [pscredential]$Credential,
 
         [parameter(Mandatory = $true)]
         [int]$PasswordId,
@@ -28,19 +30,54 @@ function Get-PasswordStatePassword {
         [ValidateSet('json','xml')]
         [string]$Format = 'json',
 
-        [switch]$UseV6Api
+        [switch]$UseV6Api,
+
+        [parameter(ParameterSetName = 'WinApi')]
+        [switch]$UseWinApi,
+
+        [switch]$ReturnAsCredential
     )
 
-    $headers = @{}
-    $headers['Accept'] = "application/$Format"
+    $irmParams = @{
+        Method = 'Get'
+        ContentType = "application/$Format"
+        Uri         =  "https://$Endpoint/passwords/$PasswordId"
+        # Uri         =  "$Endpoint/passwords/$PasswordId"
+        Headers     = @{
+            Accept = "application/$Format"
+        }
+        Verbose     = $false
+    }
 
-    if (-Not $PSBoundParameters.ContainsKey('UseV6Api')) {
-        $headers['APIKey'] = $ApiKey.GetNetworkCredential().password    
-        $uri = "$Endpoint/passwords/$PasswordId" + "?format=$Format"
+    if ($PSCmdlet.ParameterSetName -eq 'WinApi') {
+        $irmParams.Uri = "https://$Endpoint/winapi/passwords/$PasswordID"
+        if ($Credential) {
+            $irmParams.Credential = $Credential
+        } else {
+            $irmParams.UseDefaultCredentials = $true
+        }
     } else {
-        $uri = "$Endpoint/passwords/$PasswordId" + "?apikey=$($ApiKey.GetNetworkCredential().password)&format=$Format"
-    }  
+        if (-not $UseV6Api.IsPresent) {
+            $irmParams.Headers.ApiKey = $Credential.GetNetworkCredential().password
+            $irmParams.Uri += "?format=$Format"
+        } else {
+            $irmParams.Uri += "?apikey=$($Credential.GetNetworkCredential().password)&format=$Format"
+        }
+    }
 
-    $result = Invoke-RestMethod -Uri $uri -Method Get -ContentType "application/$Format" -Headers $headers
+    $result = Invoke-RestMethod @irmParams
+
+    if ($ReturnAsCredential.IsPresent) {
+        if (-not [string]::IsNullOrEmpty($result.Username)) {
+            $u = $result.username
+        } else {
+            $u = 'blank'
+        }
+        $secPass = $result.Password | ConvertTo-SecureString -AsPlainText -Force
+        $cred = [pscredential]::new($u, $secPass)
+        $result | Add-Member -MemberType NoteProperty -Name Credential -Value $cred
+        $result = $result | Select-Object -Property * -ExcludeProperty Password
+    }
+
     return $result
 }
