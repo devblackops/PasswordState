@@ -2,27 +2,27 @@
 
 # PasswordState
 
-Passwordstate is a PowerShell module used to interface with 
+Passwordstate is a PowerShell module used to interface with
 ClickStudio's [PasswordState](http://www.clickstudios.com.au/) application via the REST API.
 
-This module supports creating, retrieving, and updating 
-PasswordState entries using simple PowerShell cmdlets that 
+This module supports creating, retrieving, and updating
+PasswordState entries using simple PowerShell cmdlets that
 you can integrate into your existing processes.
 
 # Getting Started
 You start off by running `Initialize-PasswordStateRepository`, which will initialize some base variables used in the PasswordState PowerShell module. It takes 2 parameters: -APIEndpoint is the URL to where your current PasswordState installation resides, and the -CredentialRepository is where you can store "Credentials" or API keys in this case.
-If you do not specify -CredentialRepository it will be created under your `%UserProfile%` folder.
+If you do not specify -CredentialRepository it will be created under your `%HOME%` folder.
 
 Then you want to store some "credentials" on disk (Not really credentials, but API keys, PowerShell credential objects are used as a method of storing credentials in a secure way)
 
 First you create a credential object using PowerShells `Get-Credential` cmdlet. You will be prompted to input a username/password, in username put in the name you want to call the credential file (Usually something that refers to, what the actual API key is giving you access to, a password list for instance), and in the password field enter your APIkey. If you do not specify a location, the credentials will be stored in the location you specified when you ran `Initialize-PasswordStateRepository`
 
 
-   ```powershell   
+   ```powershell
    $Initialize-PasswordStateRepository -ApiEndpoint 'https://passwordstate.local/api' -CredentialRepository 'C:\PasswordStateCreds'
    $Cred = Get-Credential
    Export-PasswordStateApiKey -ApiKey $cred
-   ```  
+   ```
 
 Lets say you entered "ADUserList" as Username and "52e7c9d84hb7fa33f6b123dac823e956" as password, this will result in a file called  ADUserList.cred under the directory C:\PasswordStateCreds
 
@@ -46,8 +46,8 @@ Get-PasswordStateListPasswords -ApiKey $ADUserListCred -PasswordListId 42
 	```powershell
 	Initialize-PasswordStateRepository -ApiEndpoint 'https://passwordstate.local/api' -CredentialRepository 'C:\PasswordStateCreds'
 	```
- - Export-PasswordStateApiKey 
- 
+ - Export-PasswordStateApiKey
+
   	```powershell
     $Cred = Get-Credential
     Export-PasswordStateApiKey -ApiKey $cred -Repository c:\users\joe\data\.customrepo
@@ -114,16 +114,16 @@ Get-PasswordStateListPasswords -ApiKey $ADUserListCred -PasswordListId 42
 	Set-PasswordStatePassword -ApiKey $key -PasswordId 1234 -Username 'mypassword'
 	```
 - Set-PasswordStateDocument (On PasswordList)
- 
+
 	```powershell
 	 Set-PasswordStateDocument -ApiKey $key -PasswordListId 1 -DocumentPath "C:\temp\Secure.txt" -DocumentName SecureDoc.txt -DocumentDescription 'My Very Secure Document'
 	```
 - Set-PasswordStateDocument (On Password)
- 
+
 	```powershell
 	 Set-PasswordStateDocument -ApiKey $key -PasswordId 4242 -DocumentPath "C:\temp\Secure.txt" -DocumentName SecureDoc.txt -DocumentDescription 'My Very Secure Document'
 	```
 
-	
-	
+
+
 For more information, see [http://devblackops.io](http://devblackops.io/powershell-module-for-clickstudios-passwordstate/)

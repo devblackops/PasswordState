@@ -1,5 +1,5 @@
 <#
-Copyright 2015 Brandon Olin
+Copyright 2019 Brandon Olin
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -17,16 +17,15 @@ limitations under the License.
 function _GetDefault {
     [cmdletbinding()]
     param(
-        [Parameter(Mandatory)]
         [string]$Option = [string]::empty
     )
 
-    $repo = (Join-Path -Path $env:USERPROFILE -ChildPath '.passwordstate')
+    $repo = (Join-Path -Path $env:HOME -ChildPath '.passwordstate')
 
     if (Test-Path -Path $repo -Verbose:$false) {
 
         $options = (Join-Path -Path $repo -ChildPath 'options.json')
-        
+
         if (Test-Path -Path $options ) {
             $obj = Get-Content -Path $options | ConvertFrom-Json
             if ($options -ne [string]::empty) {

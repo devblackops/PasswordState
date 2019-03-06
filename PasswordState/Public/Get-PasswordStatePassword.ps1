@@ -1,20 +1,41 @@
-<#
-Copyright 2015 Brandon Olin
-
-Licensed under the Apache License, Version 2.0 (the "License");
-you may not use this file except in compliance with the License.
-You may obtain a copy of the License at
-
-    http://www.apache.org/licenses/LICENSE-2.0
-
-Unless required by applicable law or agreed to in writing, software
-distributed under the License is distributed on an "AS IS" BASIS,
-WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-See the License for the specific language governing permissions and
-limitations under the License.
-#>
-
 function Get-PasswordStatePassword {
+        <#
+    .SYNOPSIS
+        Get a password object from PasswordState.
+    .DESCRIPTION
+        Get a password object from PasswordState.
+    .PARAMETER Credential
+        The API key for the Password list.
+    .PARAMETER PasswordId
+        The Id of the password in PasswordState.
+    .PARAMETER Endpoint
+        The Uri of your PasswordState site.
+        (i.e. https://passwordstate.local)
+    .PARAMETER Format
+        The response format from PasswordState.
+        Choose either json or xml.
+    .PARAMETER UseV6Api
+        PasswordState versions prior to v7 did not support passing the API key in a HTTP header
+        but instead expected the API key to be passed as a query parameter.
+        This switch is used for backwards compatibility with older PasswordState versions.
+    .PARAMETER UseWinApi
+        Use Windows authentication instead of an API key.
+    .PARAMETER ReturnAsCredential
+        Exclude the password from return results.
+    .EXAMPLE
+        PS C:\> $password = Get-PasswordStatePassword -ApiKey $key -PasswordId 1234 -Endpoint 'https://passwordstate.local'
+
+        Get a password object from PasswordState.
+    .EXAMPLE
+        PS C:\> $password = Get-PasswordStatePassword -ApiKey $key -PasswordId $id -Endpoint 'https://passwordstate.local' -format json
+
+        Get password entry with ID 1234 and JSON format.
+    .EXAMPLE
+        PS C:\> Get-PasswordStatePassword -PasswordId $id -Endpoint 'https://passwordstate.local' -UseWinApi
+
+        Get a password object from PasswordState using integrated Windows authentication.
+    #>
+    [Diagnostics.CodeAnalysis.SuppressMessageAttribute('PSAvoidUsingConvertToSecureStringWithPlainText', '', Scope='Function', Target='*')]
     [cmdletbinding(DefaultParameterSetName = 'Api')]
     param(
         [parameter(Mandatory = $false,ParameterSetName = 'WinApi')]
@@ -41,8 +62,7 @@ function Get-PasswordStatePassword {
     $irmParams = @{
         Method = 'Get'
         ContentType = "application/$Format"
-        Uri         =  "https://$Endpoint/passwords/$PasswordId"
-        # Uri         =  "$Endpoint/passwords/$PasswordId"
+        Uri         =  "$Endpoint/passwords/$PasswordId"
         Headers     = @{
             Accept = "application/$Format"
         }

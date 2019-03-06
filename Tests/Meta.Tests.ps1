@@ -15,27 +15,27 @@ Describe 'Text files formatting' {
     Context 'Files encoding' {
         It "Doesn't use Unicode encoding" {
             $unicodeFilesCount = 0
-            $allTextFiles | %{
+            $allTextFiles | Foreach-Object {
                 if (Test-FileUnicode $_) {
                     $unicodeFilesCount += 1
                     Write-Warning "File $($_.FullName) contains 0x00 bytes. It's probably uses Unicode and need to be converted to UTF-8. Use Fixer 'Get-UnicodeFilesList `$pwd | ConvertTo-UTF8'."
                 }
             }
-            $unicodeFilesCount | Should Be 0
+            $unicodeFilesCount | Should -Be 0
         }
     }
 
     Context 'Indentations' {
         It 'Uses spaces for indentation, not tabs' {
             $totalTabsCount = 0
-            $allTextFiles | %{
+            $allTextFiles | Foreach-Object {
                 $fileName = $_.FullName
-                (Get-Content $_.FullName -Raw) | Select-String "`t" | % {
+                (Get-Content $_.FullName -Raw) | Select-String "`t" | Foreach-Object {
                     Write-Warning "There are tab in $fileName. Use Fixer 'Get-TextFilesList `$pwd | ConvertTo-SpaceIndentation'."
                     $totalTabsCount++
                 }
             }
-            $totalTabsCount | Should Be 0
+            $totalTabsCount | Should -Be 0
         }
     }
 }

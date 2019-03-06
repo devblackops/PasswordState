@@ -1,29 +1,72 @@
-<#
-Copyright 2015 Brandon Olin
-
-Licensed under the Apache License, Version 2.0 (the "License");
-you may not use this file except in compliance with the License.
-You may obtain a copy of the License at
-
-    http://www.apache.org/licenses/LICENSE-2.0
-
-Unless required by applicable law or agreed to in writing, software
-distributed under the License is distributed on an "AS IS" BASIS,
-WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-See the License for the specific language governing permissions and
-limitations under the License.
-#>
-
 function Find-PasswordStatePassword {
+    <#
+    .SYNOPSIS
+        Finds a password entries using criteria.
+    .DESCRIPTION
+        Finds a password entries using criteria.
+    .PARAMETER ApiKey
+        The API key for the password list in PasswordState.
+    .PARAMETER SystemApiKey
+        The system API key for PasswordState.
+    .PARAMETER Endpoint
+        The Uri of your PasswordState site.
+    .PARAMETER PasswordListId
+        The Id of the password list in PasswordState.
+    .PARAMETER SearchString
+        Search text.
+    .PARAMETER Title
+        Search for text in Title field.
+    .PARAMETER Username
+        Search for text in Username field.
+    .PARAMETER Description
+        Search for text in Description field.
+    .PARAMETER GenericField1
+        Search for text in GenericField1 field.
+    .PARAMETER GenericField2
+        Search for text in GenericField2 field.
+    .PARAMETER GenericField3
+        Search for text in GenericField3 field.
+    .PARAMETER GenericField4
+        Search for text in GenericField4 field.
+    .PARAMETER GenericField5
+        Search for text in GenericField5 field.
+    .PARAMETER GenericField6
+        Search for text in GenericField6 field.
+    .PARAMETER GenericField7
+        Search for text in GenericField7 field.
+    .PARAMETER GenericField8
+        Search for text in GenericField8 field.
+    .PARAMETER GenericField9
+        Search for text in GenericField9 field.
+    .PARAMETER GenericField10
+        Search for text in GenericField10 field.
+    .PARAMETER Notes
+        Search for text in Notes field.
+    .PARAMETER Url
+        Search for text in Url field.
+    .PARAMETER ExpireBefore
+        Search passwords expiring before this date.
+    .PARAMETER ExpireAfter
+        Search passwords expiring after this date.
+    .PARAMETER Format
+        The response format from PasswordState.
+        Choose either json or xml.
+    .PARAMETER UseV6Api
+        PasswordState versions prior to v7 did not support passing the API key in a HTTP header
+        but instead expected the API key to be passed as a query parameter.
+        This switch is used for backwards compatibility with older PasswordState versions.
+    .EXAMPLE
+        PS C:\> Find-PasswordStatePassword -ApiKey $key -PasswordListId 1 -Title 'test'
+
+        Find password in list ID 1 with 'test' in the title
+    #>
     [Diagnostics.CodeAnalysis.SuppressMessageAttribute('PSAvoidUsingUserNameAndPassWordParams', '')]
     [cmdletbinding(DefaultParameterSetName='ListSearch')]
     param(
         [Parameter(ParameterSetName='ListSearch', Mandatory=$true)]
-        #[Parameter(ParameterSetName='GeneralSearch', Mandatory=$true)]
         [pscredential]$ApiKey,
 
         [Parameter(ParameterSetName='GlobalSearch', Mandatory=$true)]
-        #[Parameter(ParameterSetName='GeneralSearch', Mandatory=$true)]
         [pscredential]$SystemApiKey,
 
         [string]$Endpoint = (_GetDefault -Option 'api_endpoint'),
@@ -103,7 +146,7 @@ function Find-PasswordStatePassword {
         [Parameter(ParameterSetName='ListSearch')]
         [Parameter(ParameterSetName='GlobalSearch')]
         [datetime]$ExpireAfter,
-   
+
         [Parameter(ParameterSetName='ListSearch')]
         [Parameter(ParameterSetName='GlobalSearch')]
         [ValidateSet('json','xml')]
@@ -161,8 +204,8 @@ function Find-PasswordStatePassword {
     }
     if ($PSBoundParameters.ContainsKey('Url')) {
         $params += "&Url=$Url"
-    }      
-    if ($PSBoundParameters.ContainsKey('SystemApiKey')) {     
+    }
+    if ($PSBoundParameters.ContainsKey('SystemApiKey')) {
         if (-Not $PSBoundParameters.ContainsKey('UseV6Api')) {
             $headers['APIKey'] = $SystemApiKey.GetNetworkCredential().password
             $uri = "$Endpoint/searchpasswords" + "$params"
@@ -175,7 +218,7 @@ function Find-PasswordStatePassword {
             $uri = "$Endpoint/searchpasswords/$PasswordListId" + "$params"
         } else {
             $uri = "$Endpoint/searchpasswords/$PasswordListId" + "$params&apikey=$($ApiKey.GetNetworkCredential().password)"
-        }  
+        }
     }
 
     $result = Invoke-RestMethod -Uri $uri -Method Get -ContentType "application/$Format" -Headers $headers

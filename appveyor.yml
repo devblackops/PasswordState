@@ -1,18 +1,8 @@
-# See http://www.appveyor.com/docs/appveyor-yml for many more options
-
-# Skip on updates to the readme.
-# We can force this by adding [skip ci] or [ci skip] anywhere in commit message 
+version: 0.1.0.{build}
+image: Visual Studio 2017
 skip_commits:
-  message: /updated readme.*|update readme.*s/ 
+  message: /updated readme.*|update readme.*s/
+build: "off"
 
-environment:
-  PSGalleryApiKey:
-    secure: LwSHxTwnDG7eUFOPZSAfy5Wj0Zi5hUc7CB290hC3DcnmVkvK5y76h6miZJUJCBBw
-
-os: WMF 5
-
-build: false
-
-#Kick off the CI/CD pipeline
 test_script:
-  - ps: . .\build.ps1
+  - ps: ./build.ps1 -Task Test -Bootstrap -Verbose
