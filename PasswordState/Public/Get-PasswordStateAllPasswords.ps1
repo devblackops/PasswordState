@@ -34,16 +34,17 @@ function Get-PasswordStateAllPasswords {
     $headers['Accept'] = "application/$Format"
 
     if (-Not $PSBoundParameters.ContainsKey('UseV6Api')) {
-        $headers['APIKey'] = $SystemApiKey.GetNetworkCredential().password    
+        $headers['APIKey'] = $SystemApiKey.GetNetworkCredential().password
         $uri = "$Endpoint/passwords/?format=$Format&QueryAll"
     } else {
         $uri = "$Endpoint/passwords/?apikey=$($SystemApiKey.GetNetworkCredential().password)&format=$Format&QueryAll"
-    }  
+    }
 
     if ($PSBoundParameters.ContainsKey('PreventAuditing')) {
         $uri += '&PreventAuditing=true'
     }
-    
+
     $result = Invoke-RestMethod -Uri $uri -Method Get -ContentType "application/$Format" -Headers $headers
+
     return $result
 }
