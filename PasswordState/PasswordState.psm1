@@ -23,6 +23,3 @@ $Private = @( Get-ChildItem -Path $PSScriptRoot\Private\*.ps1 -Recurse -ErrorAct
 Foreach($import in @($Public + $Private)) {
     . $import.fullname
 }
-
-# Allow untrusted SSL
-_SetCertPolicy
