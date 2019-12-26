@@ -20,7 +20,7 @@ function Initialize-PasswordStateRepository {
         [parameter(Mandatory)]
         [string]$ApiEndpoint,
 
-        [string]$CredentialRepository = (Join-Path -path $env:USERPROFILE -ChildPath '.passwordstate' -Verbose:$false)
+        [string]$RepositoryKey = (Join-Path -path $env:USERPROFILE -ChildPath '.passwordstate' -Verbose:$false)
     )
 
     # If necessary, create our repository under $env:USERNAME\.passwordstate
@@ -34,7 +34,7 @@ function Initialize-PasswordStateRepository {
 
     $options = @{
         api_endpoint = $ApiEndpoint
-        credential_repository = $CredentialRepository
+        credential_repository = $RepositoryKey
     }
 
     $json = $options | ConvertTo-Json -Verbose:$false

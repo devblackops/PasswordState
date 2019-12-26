@@ -14,36 +14,30 @@ See the License for the specific language governing permissions and
 limitations under the License.
 #>
 
-function Get-PasswordStateListPasswords {
+function Get-PasswordStateAllList {
     [cmdletbinding()]
     param(
         [parameter(Mandatory = $true)]
-        [pscredential]$ApiKey,
-
-        [parameter(Mandatory = $true)]
-        [int]$PasswordListId,
+        [pscredential]$SystemApiKey,
 
         [string]$Endpoint = (_GetDefault -Option 'api_endpoint'),
 
         [ValidateSet('json','xml')]
         [string]$Format = 'json',
 
-        [switch]$UseV6Api,
-
-        [switch]$ExcludePasswords
+        [switch]$UseV6Api
     )
 
     $headers = @{}
     $headers['Accept'] = "application/$Format"
 
     if (-Not $PSBoundParameters.ContainsKey('UseV6Api')) {
-        $headers['APIKey'] = $ApiKey.GetNetworkCredential().password    
-        $uri = "$Endpoint/passwords/$PasswordListId" + "?format=$Format&QueryAll"
+        $headers['APIKey'] = $SystemApiKey.GetNetworkCredential().password    
+        $uri = "$Endpoint/passwordlists?format=$Format"
     } else {
-        $uri = "$Endpoint/passwords/$PasswordListId" + "?apikey=$($ApiKey.GetNetworkCredential().password)&format=$Format&QueryAll"
+        $uri = "$Endpoint/passwordlists?apikey=$($SystemApiKey.GetNetworkCredential().password)&format=$Format"
     }  
 
-    if ($ExcludePasswords){$uri=$uri+"&ExcludePassword=true"}
     $result = Invoke-RestMethod -Uri $uri -Method Get -ContentType "application/$Format" -Headers $headers
     return $result
 }

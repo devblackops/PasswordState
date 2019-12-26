@@ -18,7 +18,8 @@ function _GetDefault {
     [cmdletbinding()]
     param(
         [Parameter(Mandatory)]
-        [string]$Option = [string]::empty
+        [ValidateNotNull()]
+        [string]$Option
     )
 
     $repo = (Join-Path -Path $env:USERPROFILE -ChildPath '.passwordstate')
