@@ -19,7 +19,7 @@ Remove-Module PasswordState -ErrorAction Ignore
 Import-Module "$PSScriptRoot\..\PasswordState\PasswordState.psd1"
 Import-Module "$PSScriptRoot\..\PasswordState\PasswordState.psm1" -Force
 
-
+Set-StrictMode -Off
 
 $totalFailed = 0
 $totalRun = 0
