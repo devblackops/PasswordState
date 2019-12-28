@@ -1,6 +1,12 @@
 ﻿# List of functions that should be ignored
 $global:FunctionHelpTestExceptions = @(
-
+ '_GetDefault'
+, 'Export-PasswordStateApiKey'
+, 'Find-PasswordStatePassword'
+, 'Get-PasswordStateAllList'
+, 'Get-PasswordStateListPassword'
+, 'Get-PasswordStateAllPassword'
+, 'Initialize-PasswordStateRepository'
 )
 
 <#
