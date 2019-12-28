@@ -5,7 +5,7 @@ online version:
 schema: 2.0.0
 ---
 
-# Get-PasswordStateAllLists
+# Get-PasswordStateAllList
 
 ## SYNOPSIS
 Get all shared password lists in PasswordState.
@@ -13,7 +13,7 @@ Get all shared password lists in PasswordState.
 ## SYNTAX
 
 ```
-Get-PasswordStateAllLists [-SystemApiKey] <PSCredential> [[-Endpoint] <String>] [[-Format] <String>]
+Get-PasswordStateAllList [-SystemApiKey] <PSCredential> [[-Endpoint] <String>] [[-Format] <String>]
  [-UseV6Api] [<CommonParameters>]
 ```
 

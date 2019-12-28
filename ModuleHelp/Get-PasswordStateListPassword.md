@@ -5,34 +5,48 @@ online version:
 schema: 2.0.0
 ---
 
-# Get-PasswordStateAllPasswords
+# Get-PasswordStateListPassword
 
 ## SYNOPSIS
-Get all passwords in all shared password lists in PasswordState.
+Get all passwords in a PasswordState list.
 
 ## SYNTAX
 
-```
-Get-PasswordStateAllPasswords [-SystemApiKey] <PSCredential> [[-Endpoint] <String>] [-PreventAuditing]
- [[-Format] <String>] [-UseV6Api] [<CommonParameters>]
+```powershell
+Get-PasswordStateListPassword [-ApiKey] <PSCredential> [-PasswordListId] <Int32> [[-Endpoint] <String>]
+ [[-Format] <String>] [-UseV6Api] [-ExcludePasswords] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-Get all passwords in all shared password lists in PasswordState.
+Get all passwords in a PasswordState list.
 
 ## EXAMPLES
 
 ### EXAMPLE 1
 ```
-$allPasswords = Get-PasswordStateAllPasswords -SystemApiKey $sysKey -Endpoint 'https://passwordstate.local'
+$passwords = Get-PasswordStateListPassword -ApiKey $key -PasswordListId 1234 -Endpoint 'https://passwordstate.local'
 ```
 
-Get all password entries from all lists using the system API key
+Get all password entries from list ID 1234
+
+### EXAMPLE 2
+```
+$passwords = Get-PasswordStateListPassword -ApiKey $key -PasswordListId $id -Endpoint 'https://passwordstate.local' -format xml
+```
+
+Get all password entries from list ID 1234 in XML format
+
+### EXAMPLE 3
+```
+Get-PasswordStateListPassword -ApiKey $key -PasswordListId 1234 -Endpoint 'https://passwordstate.local' | fl
+```
+
+Get all password entries from list ID 1234 and pipe to Format-List
 
 ## PARAMETERS
 
-### -SystemApiKey
-The system API key for PasswordState.
+### -ApiKey
+The API key for the password list
 
 ```yaml
 Type: PSCredential
@@ -42,6 +56,21 @@ Aliases:
 Required: True
 Position: 1
 Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -PasswordListId
+The Id of the password list in PasswordState.
+
+```yaml
+Type: Int32
+Parameter Sets: (All)
+Aliases:
+
+Required: True
+Position: 2
+Default value: 0
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
@@ -57,23 +86,8 @@ Parameter Sets: (All)
 Aliases:
 
 Required: False
-Position: 2
+Position: 3
 Default value: (_GetDefault -Option 'api_endpoint')
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -PreventAuditing
-Prevent audit records from being generated on every password that is being exported.
-
-```yaml
-Type: SwitchParameter
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: Named
-Default value: False
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
@@ -88,7 +102,7 @@ Parameter Sets: (All)
 Aliases:
 
 Required: False
-Position: 3
+Position: 4
 Default value: Json
 Accept pipeline input: False
 Accept wildcard characters: False
@@ -97,7 +111,7 @@ Accept wildcard characters: False
 ### -UseV6Api
 PasswordState versions prior to v7 did not support passing the API key in a HTTP header
 but instead expected the API key to be passed as a query parameter.
-This switch is used for 
+This switch is used for
 backwards compatibility with older PasswordState versions.
 
 ```yaml
@@ -108,6 +122,21 @@ Aliases:
 Required: False
 Position: Named
 Default value: False
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -ExcludePasswords
+Exclude the password from return results.
+
+```yaml
+Type: SwitchParameter
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
