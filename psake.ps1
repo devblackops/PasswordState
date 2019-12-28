@@ -33,11 +33,13 @@ task Analyze -Depends Init {
 }
 
 task Pester -Depends Init {
-    $testResults = Invoke-Pester -Path $tests -PassThru
+    cd $tests
+    $testResults = .\pester.ps1
     if ($testResults.FailedCount -gt 0) {
         $testResults | Format-List
         Write-Error -Message 'One or more Pester tests failed. Build cannot continue!'
     }
+    cd $sut
 }
 
 task UpdateHelpMarkdown -Depends Init {
