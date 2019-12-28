@@ -1,4 +1,4 @@
-#Remove-Module -Name 'PasswordState' -Force
+﻿#Remove-Module -Name 'PasswordState' -Force
 #Import-Module "$PSScriptRoot\..\..\PasswordState\PasswordState.psd1"
 InModuleScope 'PasswordState' {
     Describe "Function Find-PasswordStatePassword" {

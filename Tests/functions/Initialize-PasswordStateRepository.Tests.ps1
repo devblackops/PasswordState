@@ -13,9 +13,9 @@ InModuleScope 'PasswordState' {
                 param($param)
                 ((Get-Command -Name 'Initialize-PasswordStateRepository').Parameters[$param]) | should -Not -Be $null
             }
-            It "Should ensure that the mandatory property for Parameter <param> is <mandatory>" -TestCases $Tests {
+            It "Should ensure that the mandatory property for Parameter <param> is set to <mandatory>" -TestCases $Tests {
                 param($param,$mandatory)
-                "$(((Get-Command -Name 'Initialize-PasswordStateRepository').Parameters[$param].Attributes | Select-Object -First 1).Mandatory)" | should -be $mandatory
+                "$(((Get-Command -Name 'Initialize-PasswordStateRepository').Parameters[$param].Attributes | ? { $_.GetType().fullname -match 'ParameterAttribute'}).Mandatory)" | should -be $mandatory
             }
         }
     }
