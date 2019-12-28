@@ -18,8 +18,8 @@ limitations under the License.
 Set-StrictMode -Version 3
 
 # Dot source public/private
-$Public  = @( Get-ChildItem -Path $PSScriptRoot\Public\*.ps1 -Recurse -ErrorAction SilentlyContinue )
-$Private = @( Get-ChildItem -Path $PSScriptRoot\Private\*.ps1 -Recurse -ErrorAction SilentlyContinue )
+$Public  = @( Get-ChildItem -Path $PSScriptRoot\functions\*.ps1 -Recurse -ErrorAction SilentlyContinue )
+$Private = @( Get-ChildItem -Path $PSScriptRoot\Internal\functions\*.ps1 -Recurse -ErrorAction SilentlyContinue )
 Foreach($import in @($Public + $Private)) {
     . $import.fullname
 }
