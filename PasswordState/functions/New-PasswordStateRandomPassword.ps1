@@ -15,9 +15,9 @@ limitations under the License.
 #>
 
 function New-PasswordStateRandomPassword {
-    [cmdletbinding(SupportsShouldProcess = $true)]
+    [CmdletBinding(SupportsShouldProcess = $true)]
     param (
-        [parameter(Mandatory = $true)]
+        [Parameter(Mandatory)]
         [pscredential]$ApiKey,
 
         [switch]$UseV6Api,
@@ -81,12 +81,11 @@ function New-PasswordStateRandomPassword {
         [ValidateSet('S','D','N')]
         [string]$SeperateWords = 'D',
 
-        [Parameter(ParameterSetName='UseGenerator', Mandatory = $true)]
+        [Parameter(ParameterSetName='UseGenerator', Mandatory)]
         [int]$GeneratorId
     )
 
     $headers = @{}
-    #$headers['Accept'] = "application/$Format"
     $params = "?Qty=$Quantity"
     if (-not $PsBoundParameters.ContainsKey('GeneratorId')) {
         $params += "&IncludeAlphaSpecial=$AlphaSpecial&IncludeWordPhrases=$WordPhrases&minLength=$MinLength&maxLength=$MaxLength"

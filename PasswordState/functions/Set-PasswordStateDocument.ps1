@@ -16,29 +16,29 @@
 #>
 
 function Set-PasswordStateDocument {
-    [cmdletbinding(SupportsShouldProcess = $true)]
+    [CmdletBinding(SupportsShouldProcess = $true)]
     param(
-        [parameter(Mandatory = $true)]
+        [Parameter(Mandatory)]
         [pscredential]$ApiKey,
 
-        [parameter(Mandatory = $true,ParameterSetName = 'PasswordID')]
+        [Parameter(Mandatory,ParameterSetName = 'PasswordID')]
         [int]$PasswordId,
         
-        [parameter(Mandatory = $true,ParameterSetName = 'PasswordListID')]
+        [Parameter(Mandatory,ParameterSetName = 'PasswordListID')]
         [int]$PasswordListId,
 
         [string]$Endpoint = (_GetDefault -Option 'api_endpoint'),
 
-        [parameter(Mandatory = $true,ParameterSetName = 'PasswordListID')]
-        [parameter(Mandatory = $true,ParameterSetName = 'PasswordID')]
+        [Parameter(Mandatory,ParameterSetName = 'PasswordListID')]
+        [Parameter(Mandatory,ParameterSetName = 'PasswordID')]
         [String]$DocumentPath,
 
-        [parameter(Mandatory = $true,ParameterSetName = 'PasswordListID')]
-        [parameter(Mandatory = $true,ParameterSetName = 'PasswordID')]
+        [Parameter(Mandatory,ParameterSetName = 'PasswordListID')]
+        [Parameter(Mandatory,ParameterSetName = 'PasswordID')]
         [String]$DocumentName,
             
-        [parameter(Mandatory = $true,ParameterSetName = 'PasswordListID')]
-        [parameter(Mandatory = $true,ParameterSetName = 'PasswordID')]
+        [Parameter(Mandatory,ParameterSetName = 'PasswordListID')]
+        [Parameter(Mandatory,ParameterSetName = 'PasswordID')]
         [String]$DocumentDescription
     )
 

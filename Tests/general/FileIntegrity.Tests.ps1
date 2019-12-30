@@ -16,7 +16,7 @@ function Get-FileEncoding
 #>
 	[CmdletBinding()]
 	Param (
-		[Parameter(Mandatory = $True, ValueFromPipelineByPropertyName = $True)]
+		[Parameter(Mandatory, ValueFromPipelineByPropertyName = $True)]
 		[Alias('FullName')]
 		[string]
 		$Path

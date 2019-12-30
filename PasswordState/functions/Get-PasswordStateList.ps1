@@ -15,12 +15,12 @@ limitations under the License.
 #>
 
 function Get-PasswordStateList {
-    [cmdletbinding()]
+    [CmdletBinding()]
     param(
-        [parameter(mandatory = $true)]
+        [Parameter(Mandatory)]
         [pscredential]$ApiKey,
 
-        [parameter(mandatory = $true)]
+        [Parameter(Mandatory)]
         [int]$PasswordListId,
 
         [string]$Endpoint = (_GetDefault -Option 'api_endpoint'),

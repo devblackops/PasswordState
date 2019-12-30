@@ -15,7 +15,7 @@ limitations under the License.
 #>
 
 function Get-PasswordStateApiKey {
-    [cmdletbinding()]
+    [CmdletBinding()]
     param(
         [string]$Repository = (_GetDefault -Option 'credential_repository'),
 

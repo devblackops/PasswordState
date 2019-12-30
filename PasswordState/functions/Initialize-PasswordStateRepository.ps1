@@ -15,9 +15,9 @@ limitations under the License.
 #>
 
 function Initialize-PasswordStateRepository {
-    [cmdletbinding()]
+    [CmdletBinding()]
     param(
-        [parameter(Mandatory)]
+        [Parameter(Mandatory)]
         [string]$ApiEndpoint,
 
         [string]$RepositoryKey = (Join-Path -path $env:USERPROFILE -ChildPath '.passwordstate' -Verbose:$false)

@@ -15,9 +15,9 @@ limitations under the License.
 #>
 
 function Get-PasswordStateAllPassword {
-    [cmdletbinding()]
+    [CmdletBinding()]
     param(
-        [parameter(Mandatory = $true)]
+        [Parameter(Mandatory)]
         [pscredential]$SystemApiKey,
 
         [string]$Endpoint = (_GetDefault -Option 'api_endpoint'),

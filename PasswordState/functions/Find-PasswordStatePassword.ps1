@@ -17,21 +17,19 @@ limitations under the License.
 function Find-PasswordStatePassword {
     [cmdletbinding(DefaultParameterSetName='ListSearch')]
     param(
-        [Parameter(ParameterSetName='ListSearch', Mandatory=$true)]
-        #[Parameter(ParameterSetName='GeneralSearch', Mandatory=$true)]
+        [Parameter(ParameterSetName='ListSearch', Mandatory)]
         [pscredential]$ApiKey,
 
-        [Parameter(ParameterSetName='GlobalSearch', Mandatory=$true)]
-        #[Parameter(ParameterSetName='GeneralSearch', Mandatory=$true)]
+        [Parameter(ParameterSetName='GlobalSearch', Mandatory)]
         [pscredential]$SystemApiKey,
 
         [string]$Endpoint = (_GetDefault -Option 'api_endpoint'),
 
-        [Parameter(ParameterSetName='ListSearch', Mandatory=$true)]
-        [Parameter(ParameterSetName='GeneralSearch', Mandatory=$true)]
+        [Parameter(ParameterSetName='ListSearch', Mandatory)]
+        [Parameter(ParameterSetName='GeneralSearch', Mandatory)]
         [int]$PasswordListId,
 
-        [Parameter(ParameterSetName='GeneralSearch', Mandatory=$true)]
+        [Parameter(ParameterSetName='GeneralSearch', Mandatory)]
         [ValidateNotNullOrEmpty()]
         [string]$SearchString,
 

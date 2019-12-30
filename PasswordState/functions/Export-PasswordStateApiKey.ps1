@@ -15,11 +15,12 @@ limitations under the License.
 #>
 
 function Export-PasswordStateApiKey {
-    [cmdletbinding()]
+    [CmdletBinding()]
     param(
-        [parameter(Mandatory = $true, ValueFromPipeline = $true)]
+        [Parameter(Mandatory, ValueFromPipeline = $true)]
         [pscredential[]]$ApiKey,
 
+        [Parameter()]
         [string]$Repository = (_GetDefault -Option 'credential_repository')
     )
 
