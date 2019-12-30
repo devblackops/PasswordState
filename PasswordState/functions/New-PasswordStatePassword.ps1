@@ -16,7 +16,6 @@
 #>
 
 function New-PasswordStatePassword {
-    [Diagnostics.CodeAnalysis.SuppressMessageAttribute('PSAvoidUsingUserNameAndPassWordParams', '')]
     [cmdletbinding(SupportsShouldProcess = $true)]
     param(
         [parameter(Mandatory)]
