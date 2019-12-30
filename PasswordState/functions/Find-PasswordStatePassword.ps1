@@ -15,7 +15,6 @@ limitations under the License.
 #>
 
 function Find-PasswordStatePassword {
-    [Diagnostics.CodeAnalysis.SuppressMessageAttribute('PSAvoidUsingUserNameAndPassWordParams', '')]
     [cmdletbinding(DefaultParameterSetName='ListSearch')]
     param(
         [Parameter(ParameterSetName='ListSearch', Mandatory=$true)]
