@@ -19,11 +19,9 @@ function Find-PasswordStatePassword {
     [cmdletbinding(DefaultParameterSetName='ListSearch')]
     param(
         [Parameter(ParameterSetName='ListSearch', Mandatory)]
-        #[Parameter(ParameterSetName='GeneralSearch', Mandatory)]
         [pscredential]$ApiKey,
 
         [Parameter(ParameterSetName='GlobalSearch', Mandatory)]
-        #[Parameter(ParameterSetName='GeneralSearch', Mandatory)]
         [pscredential]$SystemApiKey,
 
         [string]$Endpoint = (_GetDefault -Option 'api_endpoint'),

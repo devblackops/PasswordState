@@ -86,7 +86,6 @@ function New-PasswordStateRandomPassword {
     )
 
     $headers = @{}
-    #$headers['Accept'] = "application/$Format"
     $params = "?Qty=$Quantity"
     if (-not $PsBoundParameters.ContainsKey('GeneratorId')) {
         $params += "&IncludeAlphaSpecial=$AlphaSpecial&IncludeWordPhrases=$WordPhrases&minLength=$MinLength&maxLength=$MaxLength"
