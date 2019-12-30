@@ -23,14 +23,14 @@ function Import-PasswordStateApiKey {
         [string]$Repository = (_GetDefault -Option 'credential_repository')
     )
 
-    begin {
+    Begin {
         if (-not (Test-Path -Path $Repository -Verbose:$false)) {
             Write-Error -Message "PasswordState key repository does not exist!"
             break
         }
     }
 
-    process {
+    Process {
         foreach ($item in $Name) {
             if ($Name -like "*.cred") {
                 $keyPath = Join-Path -Path $Repository -ChildPath "$Name"

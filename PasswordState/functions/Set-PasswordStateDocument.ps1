@@ -42,12 +42,12 @@ function Set-PasswordStateDocument {
         [String]$DocumentDescription
     )
 
-    begin {
+    Begin {
         $headers = @{}
         $headers['APIKey'] = $ApiKey.GetNetworkCredential().password
     }
 
-    process {          
+    Process {          
         if ($PasswordId) {
             $uri = "$Endpoint/document/password/$($PasswordID)?DocumentName=$([System.Web.HttpUtility]::UrlEncode($DocumentName))&DocumentDescription=$([System.Web.HttpUtility]::UrlEncode($DocumentDescription))"
             $id = "PasswordID [$PasswordId]"

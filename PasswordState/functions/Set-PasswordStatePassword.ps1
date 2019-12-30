@@ -88,12 +88,12 @@ function Set-PasswordStatePassword {
         [switch]$GenerateGenFieldPassword
     )
 
-    begin {
+    Begin {
         $headers = @{}
         $headers['Accept'] = "application/$Format"
     }
 
-    process {
+    Process {
         $request = "" | Select-Object -Property PasswordId, apikey
         $request.PasswordId = $PasswordId
         $request.apikey = $ApiKey.GetNetworkCredential().Password

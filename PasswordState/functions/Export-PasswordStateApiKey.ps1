@@ -24,14 +24,14 @@ function Export-PasswordStateApiKey {
         [string]$Repository = (_GetDefault -Option 'credential_repository')
     )
 
-    begin {
+    Begin {
         if (-not (Test-Path -Path $Repository -Verbose:$false)) {
             Write-Verbose -Message "Creating PasswordState key repository: $Repository"
             New-Item -ItemType Directory -Path $Repository -Verbose:$false | Out-Null
         }
     }
 
-    process {
+    Process {
         foreach ($item in $ApiKey) {
             $exportPath = Join-Path -path $Repository -ChildPath "$($item.Username).cred" -Verbose:$false
             Write-Verbose -Message "Exporting key [$($item.Username)] to $exportPath"
