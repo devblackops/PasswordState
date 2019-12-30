@@ -17,7 +17,7 @@ limitations under the License.
 function Import-PasswordStateApiKey {
     [CmdletBinding()]
     param(
-        [parameter(Mandatory, ValueFromPipeline, ValueFromPipelineByPropertyName)]
+        [Parameter(Mandatory, ValueFromPipeline, ValueFromPipelineByPropertyName)]
         [string[]]$Name,
 
         [string]$Repository = (_GetDefault -Option 'credential_repository')

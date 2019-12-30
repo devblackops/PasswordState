@@ -17,7 +17,7 @@ limitations under the License.
 function New-PasswordStateRandomPassword {
     [CmdletBinding(SupportsShouldProcess = $true)]
     param (
-        [parameter(Mandatory)]
+        [Parameter(Mandatory)]
         [pscredential]$ApiKey,
 
         [switch]$UseV6Api,
