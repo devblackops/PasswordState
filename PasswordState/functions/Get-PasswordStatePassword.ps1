@@ -17,10 +17,10 @@ limitations under the License.
 function Get-PasswordStatePassword {
     [CmdletBinding()]
     param(
-        [parameter(Mandatory = $true)]
+        [parameter(Mandatory)]
         [pscredential]$ApiKey,
 
-        [parameter(Mandatory = $true)]
+        [parameter(Mandatory)]
         [int]$PasswordId,
 
         [string]$Endpoint = (_GetDefault -Option 'api_endpoint'),

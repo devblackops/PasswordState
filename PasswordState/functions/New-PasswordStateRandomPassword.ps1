@@ -17,7 +17,7 @@ limitations under the License.
 function New-PasswordStateRandomPassword {
     [CmdletBinding(SupportsShouldProcess = $true)]
     param (
-        [parameter(Mandatory = $true)]
+        [parameter(Mandatory)]
         [pscredential]$ApiKey,
 
         [switch]$UseV6Api,
@@ -81,7 +81,7 @@ function New-PasswordStateRandomPassword {
         [ValidateSet('S','D','N')]
         [string]$SeperateWords = 'D',
 
-        [Parameter(ParameterSetName='UseGenerator', Mandatory = $true)]
+        [Parameter(ParameterSetName='UseGenerator', Mandatory)]
         [int]$GeneratorId
     )
 

@@ -18,10 +18,10 @@ function Set-PasswordStatePassword {
     [Diagnostics.CodeAnalysis.SuppressMessageAttribute('PSAvoidUsingUserNameAndPassWordParams', '')]
     [CmdletBinding(SupportsShouldProcess = $true)]
     param(
-        [parameter(Mandatory = $true)]
+        [parameter(Mandatory)]
         [pscredential]$ApiKey,
 
-        [parameter(Mandatory = $true)]
+        [parameter(Mandatory)]
         [int]$PasswordId,
 
         [string]$Endpoint = (_GetDefault -Option 'api_endpoint'),

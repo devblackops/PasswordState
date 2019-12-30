@@ -33,8 +33,8 @@ function New-PasswordStatePassword {
         [Parameter(Mandatory)]
         [string]$Title,
 
-        [Parameter(Mandatory = $true,ParameterSetName = 'UsePassword')]
-        [Parameter(Mandatory = $true,ParameterSetName = 'UsePasswordWithFile')]
+        [Parameter(Mandatory,ParameterSetName = 'UsePassword')]
+        [Parameter(Mandatory,ParameterSetName = 'UsePasswordWithFile')]
         [securestring]$Password,
 
         [string]$Username,
@@ -71,24 +71,24 @@ function New-PasswordStatePassword {
 
         [bool]$AllowExport,
 
-        [Parameter(Mandatory = $true,ParameterSetName = 'GenPassword')]
-        [Parameter(Mandatory = $true,ParameterSetName = 'GenPasswordWithFile')]
+        [Parameter(Mandatory,ParameterSetName = 'GenPassword')]
+        [Parameter(Mandatory,ParameterSetName = 'GenPasswordWithFile')]
         [switch]$GeneratePassword,
 
         [switch]$GenerateGenFieldPassword,
 
         [switch]$UseV6Api,
 
-        [Parameter(Mandatory = $true,ParameterSetName = 'GenPasswordWithFile')]
-        [Parameter(Mandatory = $true,ParameterSetName = 'UsePasswordWithFile')]
+        [Parameter(Mandatory,ParameterSetName = 'GenPasswordWithFile')]
+        [Parameter(Mandatory,ParameterSetName = 'UsePasswordWithFile')]
         [String]$DocumentPath,
 
-        [Parameter(Mandatory = $true,ParameterSetName = 'GenPasswordWithFile')]
-        [Parameter(Mandatory = $true,ParameterSetName = 'UsePasswordWithFile')]
+        [Parameter(Mandatory,ParameterSetName = 'GenPasswordWithFile')]
+        [Parameter(Mandatory,ParameterSetName = 'UsePasswordWithFile')]
         [String]$DocumentName,
             
-        [Parameter(Mandatory = $true,ParameterSetName = 'GenPasswordWithFile')]
-        [Parameter(Mandatory = $true,ParameterSetName = 'UsePasswordWithFile')]
+        [Parameter(Mandatory,ParameterSetName = 'GenPasswordWithFile')]
+        [Parameter(Mandatory,ParameterSetName = 'UsePasswordWithFile')]
         [String]$DocumentDescription
     )
 
