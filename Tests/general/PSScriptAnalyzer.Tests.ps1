@@ -4,11 +4,14 @@ Param (
 	$SkipTest,
 	
 	[string[]]
-	$CommandPath = @("$PSScriptRoot\..\..\PasswordState\functions", "$PSScriptRoot\..\..\PasswordState\internal\functions")
+	$CommandPath = @("$PSScriptRoot\..\..\PasswordState\functions", "$PSScriptRoot\..\..\PasswordState\internal\functions"),
+
+	[string]
+	$ExceptionsFile = "$PSScriptRoot\PSScriptAnalyzer.Exceptions.ps1"
 )
 
 if ($SkipTest) { return }
-
+. $ExceptionsFile
 $list = New-Object System.Collections.ArrayList
 
 Describe 'Invoking PSScriptAnalyzer against commandbase' {
@@ -18,7 +21,11 @@ Describe 'Invoking PSScriptAnalyzer against commandbase' {
 	foreach ($file in $commandFiles)
 	{
 		Context "Analyzing $($file.BaseName)" {
-			$analysis = Invoke-ScriptAnalyzer -Path $file.FullName -ExcludeRule PSAvoidTrailingWhitespace, PSShouldProcess
+			$ExcludeRules= @()
+			$ExcludeRules+='PSAvoidTrailingWhitespace'
+			$ExcludeRules+='PSShouldProcess'
+			if ($file.name -in $global:PSRulesException.keys) { $global:PSRulesException[$file.name] | ForEach-Object { $ExcludeRules += $_} }
+			$analysis = Invoke-ScriptAnalyzer -Path $file.FullName -ExcludeRule $ExcludeRules
 			
 			forEach ($rule in $scriptAnalyzerRules)
 			{

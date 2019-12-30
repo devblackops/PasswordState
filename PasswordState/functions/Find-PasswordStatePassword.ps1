@@ -15,8 +15,7 @@ limitations under the License.
 #>
 
 function Find-PasswordStatePassword {
-    [Diagnostics.CodeAnalysis.SuppressMessageAttribute('PSAvoidUsingUserNameAndPassWordParams', '')]
-    [CmdletBinding(DefaultParameterSetName='ListSearch')]
+    [cmdletbinding(DefaultParameterSetName='ListSearch')]
     param(
         [Parameter(ParameterSetName='ListSearch', Mandatory)]
         [pscredential]$ApiKey,
