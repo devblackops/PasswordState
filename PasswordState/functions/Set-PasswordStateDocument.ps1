@@ -56,8 +56,8 @@ function Set-PasswordStateDocument {
             $id = "PasswordListID [$PasswordListId]"
         }
         
-        Write-Verbose -Message $uri
-        Write-Verbose -Message $id
+        Write-PSMessage -Message $uri
+        Write-PSMessage -Message $id
               
 
         if ($PSCmdlet.ShouldProcess("Uploading document `nUpload Document.`nDocumentPath : $DocumentPath`nDocumentName : $DocumentName`nDocument Description : $DocumentDescription to $ID")) {

@@ -166,7 +166,7 @@ function New-PasswordStatePassword {
     }
 
     $json = ConvertTo-Json -InputObject $request
-    Write-Verbose -Message $json
+    Write-PSMessage -Message $json
 
     $output = @()
 
@@ -181,7 +181,7 @@ function New-PasswordStatePassword {
     
         if ($DocumentPath) {
             $uri = "$Endpoint/document/password/$($result.PasswordID)?DocumentName=$([System.Web.HttpUtility]::UrlEncode($DocumentName))&DocumentDescription=$([System.Web.HttpUtility]::UrlEncode($DocumentDescription))"
-            Write-Verbose -Message $uri 
+            Write-PSMessage -Message $uri 
 
             $result = Invoke-RestMethod -Uri $uri -Method Post -InFile $DocumentPath -ContentType 'multipart/form-data' -Headers $headers 
             $output += $result    
