@@ -17,7 +17,7 @@ task Init {
     "Build System Details:"
     Get-Item ENV:BH*
 
-    $modules = 'Pester', 'PSDeploy', 'PSScriptAnalyzer', 'platyPS'
+    $modules = 'Pester', 'PSDeploy', 'PSScriptAnalyzer', 'platyPS', 'PSFramework'
     Install-Module $modules -Repository PSGallery -Scope CurrentUser -Confirm:$false
     Import-Module $modules -Verbose:$false -Force
 }
@@ -33,11 +33,13 @@ task Analyze -Depends Init {
 }
 
 task Pester -Depends Init {
-    $testResults = Invoke-Pester -Path $tests -PassThru
+    cd $tests
+    $testResults = .\pester.ps1
     if ($testResults.FailedCount -gt 0) {
         $testResults | Format-List
         Write-Error -Message 'One or more Pester tests failed. Build cannot continue!'
     }
+    cd $sut
 }
 
 task UpdateHelpMarkdown -Depends Init {
