@@ -15,7 +15,7 @@ limitations under the License.
 #>
 
 function _GetDefault {
-    [cmdletbinding()]
+    [CmdletBinding()]
     param(
         [Parameter(Mandatory)]
         [ValidateNotNull()]

@@ -16,7 +16,7 @@
 #>
 
 function Set-PasswordStateDocument {
-    [cmdletbinding(SupportsShouldProcess = $true)]
+    [CmdletBinding(SupportsShouldProcess = $true)]
     param(
         [parameter(Mandatory = $true)]
         [pscredential]$ApiKey,

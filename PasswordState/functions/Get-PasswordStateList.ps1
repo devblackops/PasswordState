@@ -15,7 +15,7 @@ limitations under the License.
 #>
 
 function Get-PasswordStateList {
-    [cmdletbinding()]
+    [CmdletBinding()]
     param(
         [parameter(mandatory = $true)]
         [pscredential]$ApiKey,

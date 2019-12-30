@@ -15,7 +15,7 @@ limitations under the License.
 #>
 
 function Initialize-PasswordStateRepository {
-    [cmdletbinding()]
+    [CmdletBinding()]
     param(
         [parameter(Mandatory)]
         [string]$ApiEndpoint,

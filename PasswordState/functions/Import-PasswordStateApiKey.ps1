@@ -15,7 +15,7 @@ limitations under the License.
 #>
 
 function Import-PasswordStateApiKey {
-    [cmdletbinding()]
+    [CmdletBinding()]
     param(
         [parameter(Mandatory, ValueFromPipeline, ValueFromPipelineByPropertyName)]
         [string[]]$Name,
