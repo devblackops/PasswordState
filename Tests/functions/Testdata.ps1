@@ -1,17 +1,18 @@
 ﻿$JSONPath="$PSScriptRoot\json"
 $XMLPath="$PSScriptRoot\xml"
-$Global:TestJson=@{
-    'PasswordStateListResponse'= (Get-Content "$($JSONPath)\PasswordStateListResponse.json")
+$Global:TestJson=@{}
+$Global:TestXML=@{}
+foreach ($File in (Get-ChildItem -Path $JSONPath -Recurse -Filter '*.json')) {
+    $Global:TestJson[($File.name -replace '.json','')]=(Get-Content $File.Fullname)
 }
-
-$Global:TestXML=@{
-    'PasswordStateListResponse'=(Get-Content "$($XMLPath)\PasswordStateListResponse.xml")
+foreach ($File in (Get-ChildItem -Path $XMLPath -Recurse -Filter '*.xml')) {
+    $Global:TestXML[($File.name -replace '\.xml','')]=(Get-Content $File.Fullname)
 }
 
 $FailedJson=0
 foreach ($Jsonkey in $global:TestJson.Keys) {
     try {
-        ConvertFrom-Json $global:TestJson[$Jsonkey] | Out-Null
+        $global:TestJson[$Jsonkey] | ConvertFrom-Json | Out-Null
     } catch [System.ArgumentException] {
         Write-PSFMessage -Level Important -Message "The Json <c='em'>$Jsonkey</c> does not contain a correct json: '$($global:TestJson[$Jsonkey])'" -Target $Jsonkey
         $FailedJson+=1
