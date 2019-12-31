@@ -57,12 +57,14 @@ if ($TestGeneral)
 if ($TestFunctions)
 {
 Write-PSFMessage -Level Important -Message "Proceeding with individual tests"
+Write-PSFMessage -Level Important -Message '  Loading test data...'
+. '.\functions\TestData.ps1'
 	foreach ($file in (Get-ChildItem "$PSScriptRoot\functions" -Recurse -File -Filter "*Tests.ps1"))
 	{
 		if ($file.Name -notlike $Include) { continue }
 		if ($file.Name -like $Exclude) { continue }
 		
-		Write-PSFMessage -Level Significant -Message "  Executing $($file.Name)"
+		Write-PSFMessage -Level Significant -Message "  Executing <c='em'>$($file.Name)</c>"
 		$results = Invoke-Pester -Script $file.FullName -Show $Show -PassThru
 		foreach ($result in $results)
 		{
