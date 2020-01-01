@@ -60,7 +60,7 @@ InModuleScope 'PasswordState' {
             It 'Should return only pscredential Objects' {
                 Foreach ($Type in (Import-PasswordStateApiKey -Name '*.Cred' | ForEach-Object { $_.gettype().fullname})) {
                     $Type | should be 'System.Management.Automation.PSCredential'
-                } 
+                }
             }
             it 'Should call _GetDefault exactly 5 times' {
                 Assert-MockCalled -CommandName '_GetDefault' -Exactly 5

@@ -60,7 +60,7 @@ InModuleScope 'PasswordState' {
             It 'Should return only FileInfo Objects' {
                 Foreach ($Type in (Get-PasswordStateApiKey | ForEach-Object { $_.gettype().fullname})) {
                     $Type | should be 'System.IO.FileInfo'
-                } 
+                }
             }
             it 'Should call _GetDefault exactly 5 times' {
                 Assert-MockCalled -CommandName '_GetDefault' -Exactly 5
