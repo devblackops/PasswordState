@@ -44,7 +44,7 @@ function Import-PasswordStateApiKey {
             }
 
             $secPass = Get-Content -Path $keyPath | ConvertTo-SecureString
-            $cred = New-Object -TypeName System.Management.Automation.PSCredential -ArgumentList $Name, $secPass
+            $cred = New-Object -TypeName System.Management.Automation.PSCredential -ArgumentList @($Name, $secPass)
 
             return $cred
         }
