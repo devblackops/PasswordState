@@ -42,9 +42,10 @@ function Import-PasswordStateApiKey {
                 Write-Error -Message "Key file $keyPath not found!"
                 break
             }
-
-            $secPass = Get-Content -Path $keyPath | ConvertTo-SecureString
-            $cred = New-Object -TypeName System.Management.Automation.PSCredential -ArgumentList @($Name, $secPass)
+            $cred = foreach ($File in (Get-ChildItem -Path $keyPath)) {
+                $secPass = Get-Content -Path $File.Fullname | ConvertTo-SecureString
+                New-Object -TypeName System.Management.Automation.PSCredential -ArgumentList @($Name, $secPass)
+            }
 
             return $cred
         }
