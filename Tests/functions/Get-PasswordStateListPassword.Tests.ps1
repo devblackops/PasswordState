@@ -30,10 +30,10 @@ InModuleScope 'PasswordState' {
             } -ParameterFilter { $Option -and $Option -eq 'api_endpoint'}
 
             Mock -CommandName 'Invoke-RestMethod' -MockWith {
-                $global:TestJson['PasswordStateAllPasswordResponse'] | ConvertFrom-Json
+                $global:TestJson['PasswordStateListResponse'] | ConvertFrom-Json
             } -ParameterFilter { $uri -and $uri -match '/passwords/' -and $ContentType -match 'json'}
             Mock -CommandName 'Invoke-RestMethod' -MockWith {
-                [xml]($global:Testxml['PasswordStateAllPasswordResponse'])
+                [xml]($global:Testxml['PasswordStateListResponse'])
             } -ParameterFilter { $uri -and $uri -match '/passwords/' -and $ContentType -match 'xml'}
         }
         Context 'Analyzing Parameters' {
