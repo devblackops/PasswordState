@@ -17,7 +17,7 @@ function Resolve-Module {
     Process {
         foreach ($ModuleName in $Name) {
             $Module = Get-Module -Name $ModuleName -ListAvailable
-            Write-PSMessage -Message "Resolving Module [$($ModuleName)]"
+            Write-PSFMessage -Message "Resolving Module [$($ModuleName)]"
 
             if ($Module) {
                 $Version = $Module | Measure-Object -Property Version -Maximum | Select-Object -ExpandProperty Maximum
@@ -26,18 +26,18 @@ function Resolve-Module {
                     Select-Object -ExpandProperty Maximum
 
                 if ($Version -lt $GalleryVersion) {
-                    Write-PSMessage -Message "$($ModuleName) Installed Version [$($Version.tostring())] is outdated. Installing Gallery Version [$($GalleryVersion.tostring())]"
+                    Write-PSFMessage -Message "$($ModuleName) Installed Version [$($Version.tostring())] is outdated. Installing Gallery Version [$($GalleryVersion.tostring())]"
 
                     Install-Module -Name $ModuleName -Repository PSGallery -Verbose:$false -Force
                     Import-Module -Name $ModuleName -Verbose:$false -Force -RequiredVersion $GalleryVersion
                 }
                 else {
-                    Write-PSMessage -Message "Module Installed, Importing [$($ModuleName)]"
+                    Write-PSFMessage -Message "Module Installed, Importing [$($ModuleName)]"
                     Import-Module -Name $ModuleName -Verbose:$false -Force -RequiredVersion $Version
                 }
             }
             else {
-                Write-PSMessage -Message "[$($ModuleName)] Missing, installing Module"
+                Write-PSFMessage -Message "[$($ModuleName)] Missing, installing Module"
                 Install-Module -Name $ModuleName -Repository PSGallery -Verbose:$false -Force
                 Import-Module -Name $ModuleName -Verbose:$false -Force -RequiredVersion $Version
             }

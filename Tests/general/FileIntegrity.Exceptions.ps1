@@ -1,7 +1,7 @@
 ﻿# List of forbidden commands
 $global:BannedCommands = @(
 	'Write-Host',
-	'Write-PSMessage',
+	'Write-PSFMessage',
 	'Write-Warning',
 	'Write-Error',
 	'Write-Output',
@@ -18,7 +18,7 @@ $global:BannedCommands = @(
 #>
 $global:MayContainCommand = @{
 	"Write-Host"  = @()
-	"Write-PSMessage" = @()
+	"Write-PSFMessage" = @()
 	"Write-Warning" = @()
 	"Write-Error"  = @('Out-WebError.ps1')
 	"Write-Output" = @()
