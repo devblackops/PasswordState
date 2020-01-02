@@ -1,5 +1,10 @@
-﻿#Remove-Module -Name 'PasswordState' -Force
-#Import-Module "$PSScriptRoot\..\..\PasswordState\PasswordState.psd1"
+﻿if (!(get-module Passwordstate)) {
+    Remove-Module -Name 'PasswordState' -Force
+    Import-Module "$PSScriptRoot\..\..\PasswordState\PasswordState.psd1"
+}
+if (!($global:TestJson) -or (!($global:TestXML))) {
+    . .\Testdata.ps1
+}
 InModuleScope 'PasswordState' {
     Describe "Function New-PasswordStatePassword" {
         BeforeAll {
@@ -33,7 +38,21 @@ InModuleScope 'PasswordState' {
                 ,@{param='DocumentName';mandatory='True'}
                 ,@{param='DocumentDescription';mandatory='True'}
             )
-        }
+            $AllParameterFormatTests =$ValidParameterFormatTests+@{value='incorrecttype';works=$False}
+            $APIKey=@{
+                'GoodKey'=([pscredential]::new('A very good key indeed',(ConvertTo-SecureString -AsPlainText -Force -String 'Please continue, Jarvis')))
+                'BadKey'=([pscredential]::new('bad key, very bad key',(ConvertTo-SecureString -AsPlainText -Force -String 'Going to sleep now')))
+            }
+            Mock -CommandName '_GetDefault' -MockWith {
+                'https://IDoNotExists.com'
+            } -ParameterFilter { $Option -and $Option -eq 'api_endpoint'}
+
+            Mock -CommandName 'Invoke-RestMethod' -MockWith {
+                $global:TestJson['PasswordStatePasswordHistoryResponse'] | ConvertFrom-Json
+            } -ParameterFilter { $uri -and $uri -match '/passwordhistory/' -and $ContentType -match 'json'}
+            Mock -CommandName 'Invoke-RestMethod' -MockWith {
+                [xml]($global:Testxml['PasswordStatePasswordHistoryResponse'])
+            } -ParameterFilter { $uri -and $uri -match '/passwordhistory/' -and $ContentType -match 'xml'}        }
         Context 'Analyzing Parameters' {
             It 'Should ensure parameter <param> is declared'-TestCases $ParameterTests {
                 param($param)
@@ -42,6 +61,10 @@ InModuleScope 'PasswordState' {
             It "Should ensure that the mandatory property for Parameter <param> is set to <mandatory>" -TestCases $ParameterTests {
                 param($param,$mandatory)
                 "$((((Get-Command -Name 'New-PasswordStatePassword').Parameters[$param].Attributes | ? { $_.GetType().fullname -match 'ParameterAttribute'}) | select-object -first 1).Mandatory)" | should -be $mandatory
+            }
+            It "Should ensure that the format value <value> is accepted" -TestCases $AllParameterFormatTests {
+                param($value,$works)
+                $value -in ((get-command 'New-PasswordStatePassword').Parameters['Format'].Attributes | Where-Object { $_.gettype().fullname -eq 'System.Management.Automation.ValidateSetAttribute' }).ValidValues | should be $works
             }
         }
     }
