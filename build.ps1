@@ -1,4 +1,4 @@
-[cmdletbinding()]
+[CmdletBinding()]
 param(
     [string[]]$Task = 'default'
 )
@@ -8,7 +8,7 @@ $PSDefaultParameterValues = @{
 }
 
 function Resolve-Module {
-    [Cmdletbinding()]
+    [CmdletBinding()]
     param (
         [Parameter(Mandatory, ValueFromPipeline)]
         [string[]]$Name
