@@ -38,6 +38,7 @@ InModuleScope 'PasswordState' {
                 ,@{param='DocumentName';mandatory='True'}
                 ,@{param='DocumentDescription';mandatory='True'}
             )
+            $ValidParameterFormatTests=@(@{value='json';works=$True},@{value='xml';works=$True})
             $AllParameterFormatTests =$ValidParameterFormatTests+@{value='incorrecttype';works=$False}
             $APIKey=@{
                 'GoodKey'=([pscredential]::new('A very good key indeed',(ConvertTo-SecureString -AsPlainText -Force -String 'Please continue, Jarvis')))
@@ -48,11 +49,12 @@ InModuleScope 'PasswordState' {
             } -ParameterFilter { $Option -and $Option -eq 'api_endpoint'}
 
             Mock -CommandName 'Invoke-RestMethod' -MockWith {
-                $global:TestJson['PasswordStatePasswordHistoryResponse'] | ConvertFrom-Json
+                $global:TestJson['PasswordStatePasswordResponse'] | ConvertFrom-Json
             } -ParameterFilter { $uri -and $uri -match '/passwordhistory/' -and $ContentType -match 'json'}
             Mock -CommandName 'Invoke-RestMethod' -MockWith {
-                [xml]($global:Testxml['PasswordStatePasswordHistoryResponse'])
-            } -ParameterFilter { $uri -and $uri -match '/passwordhistory/' -and $ContentType -match 'xml'}        }
+                [xml]($global:Testxml['PasswordStatePasswordResponse'])
+            } -ParameterFilter { $uri -and $uri -match '/passwordhistory/' -and $ContentType -match 'xml'}
+        }
         Context 'Analyzing Parameters' {
             It 'Should ensure parameter <param> is declared'-TestCases $ParameterTests {
                 param($param)

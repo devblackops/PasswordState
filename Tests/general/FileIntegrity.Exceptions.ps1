@@ -18,7 +18,7 @@ $global:BannedCommands = @(
 #>
 $global:MayContainCommand = @{
 	"Write-Host"  = @()
-	"Write-PSFMessage" = @()
+	"Write-PSFMessage" = @('Testdata.ps1','pester.ps1')
 	"Write-Warning" = @()
 	"Write-Error"  = @('Out-WebError.ps1')
 	"Write-Output" = @()

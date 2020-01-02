@@ -22,7 +22,7 @@ task Init {
     Import-Module $modules -Verbose:$false -Force
 }
 
-task Test -Depends Init, Analyze, Pester
+task Test -Depends Init, Pester
 
 task Analyze -Depends Init {
     $saResults = Invoke-ScriptAnalyzer -Path $sut -Severity Error -Recurse -Verbose:$false
