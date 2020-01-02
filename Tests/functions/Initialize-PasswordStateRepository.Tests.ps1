@@ -1,5 +1,10 @@
-﻿#Remove-Module -Name 'PasswordState' -Force
-#Import-Module "$PSScriptRoot\..\..\PasswordState\PasswordState.psd1"
+﻿if (!(get-module Passwordstate)) {
+    Remove-Module -Name 'PasswordState' -Force
+    Import-Module "$PSScriptRoot\..\..\PasswordState\PasswordState.psd1"
+}
+if (!($global:TestJson) -or (!($global:TestXML))) {
+    . .\Testdata.ps1
+}
 InModuleScope 'PasswordState' {
     Describe 'Function Initialize-PasswordStateRepository' {
         BeforeAll {
